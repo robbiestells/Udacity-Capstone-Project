@@ -20,11 +20,15 @@ public class FeedItem {
     }
 
     public void setDescription(String description) {
+//        String find = "Episode Description";
+//        String first = description.substring(description.indexOf(find)+find.length(), find.length());
+        //String shortDescription = description.split(test);
+
         this.description = description;
     }
 
     public void setPubDate(String pubDate) {
-        this.pubDate = pubDate;
+        this.pubDate = pubDate.substring(0,17);
     }
 
     public void setAudioUrl(String audioUrl) {

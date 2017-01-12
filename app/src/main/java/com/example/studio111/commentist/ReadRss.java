@@ -3,8 +3,12 @@ package com.example.studio111.commentist;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ListView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -27,11 +31,24 @@ import javax.xml.parsers.DocumentBuilderFactory;
 public class ReadRss extends AsyncTask<Void, Void, Void> {
     Context context;
     String address = "http://thecommentist.com/feed/rolltohitshow";
+    FeedAdapter mAdapter;
+    ArrayList<FeedItem> feedItems;
+    RecyclerView recyclerView;
+    GridView gridView;
     //String address = "http://www.sciencemag.org/rss/news_current.xml";
     ProgressDialog dialog;
     URL url;
 
-    public ReadRss(Context context){
+//    public ReadRss(Context context, RecyclerView recyclerView){
+//        this.recyclerView = recyclerView;
+//        this.context = context;
+//        dialog = new ProgressDialog(context);
+//        dialog.setMessage("Retrieving feed");
+//
+//    }
+
+    public ReadRss(Context context, GridView gridView){
+        this.gridView = gridView;
         this.context = context;
         dialog = new ProgressDialog(context);
         dialog.setMessage("Retrieving feed");
@@ -48,6 +65,11 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         dialog.dismiss();
+        FeedAdapter feedAdapter = new FeedAdapter(context, feedItems);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//        recyclerView.setAdapter(feedAdapter);
+        gridView.setAdapter(feedAdapter);
+
     }
 
     @Override
@@ -58,7 +80,7 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
 
     private void ProcessXML(Document data) {
         if (data != null) {
-            ArrayList<FeedItem> feedItems = new ArrayList<>();
+           feedItems = new ArrayList<>();
             Element root = data.getDocumentElement();
             Node channel = root.getChildNodes().item(1);
             NodeList items = channel.getChildNodes();
@@ -83,7 +105,7 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
                         }
                     }
                     feedItems.add(item);
-                    Log.d("enclosure", item.getPubDate());
+                   // Log.d("enclosure", item.getPubDate());
                 }
             }
         }
