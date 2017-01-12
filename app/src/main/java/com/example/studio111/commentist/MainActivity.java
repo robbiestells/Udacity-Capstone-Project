@@ -1,8 +1,13 @@
 package com.example.studio111.commentist;
 
+import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.GridView;
 import android.widget.ListView;
 
@@ -14,20 +19,22 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    GridView gridView;
+    private Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        gridView = (GridView) findViewById(R.id.gridView);
-       // ReadRss readRss = new ReadRss(this, recyclerView);
-        ReadRss readRss = new ReadRss(this, gridView);
-        readRss.execute();
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
     }
 
+    public void rthClick(View v){
+        Intent intent = new Intent(MainActivity.this, FeedActivity.class);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, (View)findViewById(R.id.logo), "rthImage");
+        startActivity(intent, options.toBundle());
+    }
 
 }
