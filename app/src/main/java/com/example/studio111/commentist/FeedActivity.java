@@ -40,25 +40,17 @@ public class FeedActivity extends AppCompatActivity {
         TextView showDescription = (TextView) findViewById(R.id.showDescription);
         showDescription.setText(selectedShow.getDescription());
 
-        //recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        setTitle(selectedShow.getName());
+
+
         gridView = (GridView) findViewById(R.id.gridView);
-        // ReadRss readRss = new ReadRss(this, recyclerView);
+
         ReadRss readRss = new ReadRss(this, gridView);
-        readRss.execute();
+        readRss.execute(selectedShow.getFeed());
 
         playButton = (ImageButton) findViewById(R.id.playEpisode);
 
         controls = new PlayerControls();
-//        playButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //mediaPlayer = new MediaPlayer();
-////                String url = "http://thecommentist.com/wp-content/uploads/2016/12/RtH301.mp3";
-////                playMedia = new PlayMedia(url);
-//                Intent intent = new Intent(FeedActivity.this, EpisodePageActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
     }
     public void playEpisodeClick(View v){

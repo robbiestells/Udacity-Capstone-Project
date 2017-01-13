@@ -26,14 +26,13 @@ import Objects.FeedItem;
  * Created by rsteller on 1/11/2017.
  */
 
-public class ReadRss extends AsyncTask<Void, Void, Void> {
+public class ReadRss extends AsyncTask<String, Void, Void> {
     Context context;
-    String address = "http://thecommentist.com/feed/rolltohitshow";
+    //String address = "http://thecommentist.com/feed/rolltohitshow";
     FeedAdapter mAdapter;
     ArrayList<FeedItem> feedItems;
     RecyclerView recyclerView;
     GridView gridView;
-    //String address = "http://www.sciencemag.org/rss/news_current.xml";
     ProgressDialog dialog;
     URL url;
 
@@ -71,8 +70,9 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
-        ProcessXML(Getdata());
+    protected Void doInBackground(String... params) {
+       String url = params[0];
+        ProcessXML(Getdata(url));
         return null;
     }
 
@@ -112,9 +112,9 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    public Document Getdata(){
+    public Document Getdata(String feed){
         try {
-            url = new URL(address);
+            url = new URL(feed);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             InputStream inputStream = connection.getInputStream();

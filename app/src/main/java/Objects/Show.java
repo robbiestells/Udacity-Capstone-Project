@@ -11,16 +11,19 @@ public class Show implements Parcelable{
     String name;
     String description;
     int image;
+    String feed;
 
-    public Show(String name, String description, int image){
+    public Show(String name, String description, int image, String feed){
         this.name = name;
         this.description = description;
         this.image = image;
+        this.feed = feed;
     }
     private Show(Parcel in){
         name = in.readString();
         description = in.readString();
         image = in.readInt();
+        feed = in.readString();
     }
 
     public int describeContents(){
@@ -31,6 +34,7 @@ public class Show implements Parcelable{
         out.writeString(name);
         out.writeString(description);
         out.writeInt(image);
+        out.writeString(feed);
     }
 
     public static final Parcelable.Creator<Show> CREATOR = new Parcelable.Creator<Show>(){
@@ -70,5 +74,12 @@ public class Show implements Parcelable{
         this.image = image;
     }
 
+    public String getFeed() {
+        return feed;
+    }
+
+    public void setFeed(String feed) {
+        this.feed = feed;
+    }
 
 }

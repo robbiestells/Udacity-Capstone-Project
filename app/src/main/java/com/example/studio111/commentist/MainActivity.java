@@ -32,10 +32,10 @@ GridView gridView;
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         ArrayList<Show> shows = new ArrayList<Show>();
-        shows.add(new Show("Roll to Hit", "description of RtH", R.drawable.rth));
-        shows.add(new Show("Bearded Vegans", "description of BV", R.drawable.vegans));
-        shows.add(new Show("Unwind", "description of unwind", R.drawable.unwind));
-        shows.add(new Show("Sky on Fire", "description of sky", R.drawable.sky));
+        shows.add(new Show("Roll to Hit", "description of RtH", R.drawable.rth, "http://thecommentist.com/feed/rolltohitshow/"));
+        shows.add(new Show("Bearded Vegans", "description of BV", R.drawable.vegans, "http://thecommentist.com/feed/thebeardedvegans/"));
+        shows.add(new Show("Unwind", "description of unwind", R.drawable.unwind, "http://thecommentist.com/feed/theunwindpodcast/"));
+        shows.add(new Show("Sky on Fire", "description of sky", R.drawable.sky, "http://thecommentist.com/feed/skyonfire/"));
 
         ShowAdapter adapter = new ShowAdapter(this, shows);
         gridView = (GridView) findViewById(R.id.showGrid);
