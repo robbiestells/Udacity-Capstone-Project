@@ -1,0 +1,9 @@
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/showGrid"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:numColumns="2"
+    android:verticalSpacing="16dp"
+    tools:context="layout.ShowGrid" />

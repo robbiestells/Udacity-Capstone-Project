@@ -38,6 +38,8 @@ public class FeedActivity extends AppCompatActivity {
         Intent intent = getIntent();
         selectedShow = (Show) intent.getParcelableExtra("selectedShow");
 
+        ImageView imageView = (ImageView) findViewById(R.id.logo);
+        imageView.setTransitionName("test");
         TextView showDescription = (TextView) findViewById(R.id.showDescription);
         showDescription.setText(selectedShow.getDescription());
 

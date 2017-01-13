@@ -49,7 +49,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/arrow_right_drop_circle"
+            android:src="@drawable/play_circle"
             android:scaleType="fitCenter"
             android:id="@+id/playEpisode"
             android:clickable="true"

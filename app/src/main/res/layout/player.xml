@@ -34,7 +34,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/arrow_right_drop_circle"
+            android:src="@drawable/play_circle"
             android:background="@android:color/transparent"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"

@@ -1,6 +1,7 @@
 package Adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,9 +21,7 @@ import Objects.Show;
 
 public class ShowAdapter extends ArrayAdapter<Show> {
 
-    private int mColorResourceId;
-
-    public ShowAdapter(Activity context, ArrayList<Show> shows) {
+    public ShowAdapter(Context context, ArrayList<Show> shows) {
         // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
         // the second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
@@ -48,6 +47,7 @@ public class ShowAdapter extends ArrayAdapter<Show> {
         ImageView showImage = (ImageView) listItemView.findViewById(R.id.showLogo);
 
         showImage.setImageResource(currentShow.getImage());
+        showImage.setTransitionName("test");
 
         return listItemView;
 
