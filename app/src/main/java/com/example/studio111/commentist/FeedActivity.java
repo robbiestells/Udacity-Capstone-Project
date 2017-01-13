@@ -1,15 +1,16 @@
 package com.example.studio111.commentist;
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.MediaController;
+
+import Utilities.PlayMedia;
+import Utilities.PlayerControls;
+import Utilities.ReadRss;
 
 /**
  * Created by robbi on 1/11/2017.

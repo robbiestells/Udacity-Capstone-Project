@@ -1,14 +1,10 @@
-package com.example.studio111.commentist;
+package Utilities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.ListView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,12 +13,14 @@ import org.w3c.dom.NodeList;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import Adapters.FeedAdapter;
+import Objects.FeedItem;
 
 /**
  * Created by rsteller on 1/11/2017.

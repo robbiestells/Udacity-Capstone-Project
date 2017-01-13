@@ -2,22 +2,16 @@ package com.example.studio111.commentist;
 
 import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.ListView;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
+import Adapters.ShowAdapter;
+import Objects.Show;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/

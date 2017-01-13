@@ -1,4 +1,4 @@
-package com.example.studio111.commentist;
+package Utilities;
 
 import android.content.Context;
 import android.media.AudioManager;
@@ -11,13 +11,15 @@ import java.io.IOException;
  * Created by rsteller on 1/13/2017.
  */
 
-public class PlayMedia {
+public class PlayerControls {
     Context context;
     MediaPlayer mediaPlayer = new MediaPlayer();
-    PlayerControls controls = new PlayerControls();
 
-    public PlayMedia(String url){
-       // mediaPlayer.release();
+    public PlayerControls (){
+    }
+
+    public void LoadUrl(String url){
+        // mediaPlayer.release();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(url);
@@ -40,6 +42,14 @@ public class PlayMedia {
             Toast.makeText(context, "You might not set the URI correctly!", Toast.LENGTH_LONG).show();
         }
         //mediaPlayer.start();
-        controls.Play(mediaPlayer);
+        Play(mediaPlayer);
+    }
+
+    public void Play(MediaPlayer player) {
+    player.start();
+    }
+
+    public void Pause(MediaPlayer player) {
+        player.pause();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.studio111.commentist;
+package Objects;
 
 /**
  * Created by rsteller on 1/11/2017.
