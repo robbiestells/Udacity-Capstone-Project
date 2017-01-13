@@ -50,21 +50,21 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
     public ReadRss(Context context, GridView gridView){
         this.gridView = gridView;
         this.context = context;
-        dialog = new ProgressDialog(context);
-        dialog.setMessage("Retrieving feed");
+       // dialog = new ProgressDialog(context);
+       // dialog.setMessage("Retrieving feed");
 
     }
 
     @Override
     protected void onPreExecute() {
-        dialog.show();
+       // dialog.show();
         super.onPreExecute();
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        dialog.dismiss();
+      //  dialog.dismiss();
         FeedAdapter feedAdapter = new FeedAdapter(context, feedItems);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(context));
 //        recyclerView.setAdapter(feedAdapter);
@@ -102,10 +102,13 @@ public class ReadRss extends AsyncTask<Void, Void, Void> {
                         } else if (current.getNodeName().equalsIgnoreCase("enclosure")){
                             String url = current.getAttributes().item(0).getTextContent();
                             item.setAudioUrl(url);
+                        } else if (current.getNodeName().equalsIgnoreCase("itunes:duration")){
+                            //String url = current.getAttributes().item(1).getTextContent();
+                            item.setLength(current.getTextContent());
                         }
                     }
                     feedItems.add(item);
-                   // Log.d("enclosure", item.getPubDate());
+                   //Log.d("length", item.getLength());
                 }
             }
         }

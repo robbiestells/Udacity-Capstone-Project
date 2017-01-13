@@ -18,6 +18,9 @@
         <activity android:name=".FeedActivity">
 
         </activity>
+        <activity android:name=".EpisodePageActivity">
+
+        </activity>
     </application>
 
 </manifest>

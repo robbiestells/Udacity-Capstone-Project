@@ -11,6 +11,16 @@ public class FeedItem {
     String pubDate;
     String audioUrl;
 
+    public String getLength() {
+        return length;
+    }
+
+    public void setLength(String length) {
+        this.length = length;
+    }
+
+    String length;
+
     public void setTitle(String title) {
         this.title = title;
     }

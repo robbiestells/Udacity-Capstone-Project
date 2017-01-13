@@ -25,7 +25,7 @@
                     android:layout_height="wrap_content"
                     android:text="The Commentist"
                     android:textColor="@android:color/white"
-                    android:textSize="30dp"/>
+                    android:textSize="30dp" />
                 <!--<ImageView-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
@@ -35,126 +35,22 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <GridView
+            android:id="@+id/showGrid"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:numColumns="2"
             android:layout_margin="16dp"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
+            android:verticalSpacing="16dp"/>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="400dp"
-                android:layout_margin="4dp"
-                android:background="@android:color/white"
-                android:clickable="true"
-                android:elevation="8dp"
-                android:focusable="true"
-                android:foreground="?selectableItemBackground"
-                android:onClick="rthClick"
-                android:transitionName="rthImage"
-                android:id="@+id/logo">
+    </android.support.v4.widget.NestedScrollView>
 
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/rth" />
-
-                </FrameLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="400dp"
-                android:layout_margin="4dp"
-                android:background="@android:color/white"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:focusable="true"
-                android:foreground="?selectableItemBackground">
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/vegans" />
-
-                </FrameLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="400dp"
-                android:layout_margin="4dp"
-                android:background="@android:color/white"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:focusable="true"
-                android:foreground="?selectableItemBackground">
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/unwind" />
-
-                </FrameLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="400dp"
-                android:background="@android:color/white"
-                android:clickable="true"
-                android:elevation="4dp"
-                android:focusable="true"
-                android:layout_margin="4dp"
-                android:foreground="?selectableItemBackground">
-
-                <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/white">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/sky" />
-
-                </FrameLayout>
-
-            </android.support.v7.widget.CardView>
-
-
-        </LinearLayout>
-
-    </ScrollView>
-    <include
-        layout="@layout/player" />
+    <include layout="@layout/player" />
 
 </android.support.design.widget.CoordinatorLayout>

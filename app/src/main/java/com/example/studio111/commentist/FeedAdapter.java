@@ -50,6 +50,9 @@ public class FeedAdapter extends ArrayAdapter<FeedItem> {
         TextView descriptionTV = (TextView) gridItemView.findViewById(R.id.episodeDescription);
         descriptionTV.setText(currentItem.getDescription());
 
+        TextView lengthTV = (TextView) gridItemView.findViewById(R.id.episodeLength);
+        lengthTV.setText(currentItem.getLength());
+
         return gridItemView;
     }
 }
