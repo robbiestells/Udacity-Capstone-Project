@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.widget.GridView;
+import android.widget.ListView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -22,6 +23,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import Adapters.FeedAdapter;
 import Objects.FeedItem;
 
+
 /**
  * Created by rsteller on 1/11/2017.
  */
@@ -32,7 +34,7 @@ public class ReadRss extends AsyncTask<String, Void, Void> {
     FeedAdapter mAdapter;
     ArrayList<FeedItem> feedItems;
     RecyclerView recyclerView;
-    GridView gridView;
+    ListView listView;
     ProgressDialog dialog;
     URL url;
 
@@ -44,8 +46,8 @@ public class ReadRss extends AsyncTask<String, Void, Void> {
 //
 //    }
 
-    public ReadRss(Context context, GridView gridView){
-        this.gridView = gridView;
+    public ReadRss(Context context, ListView listView){
+        this.listView = listView;
         this.context = context;
        // dialog = new ProgressDialog(context);
        // dialog.setMessage("Retrieving feed");
@@ -65,7 +67,7 @@ public class ReadRss extends AsyncTask<String, Void, Void> {
         FeedAdapter feedAdapter = new FeedAdapter(context, feedItems);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(context));
 //        recyclerView.setAdapter(feedAdapter);
-        gridView.setAdapter(feedAdapter);
+        listView.setAdapter(feedAdapter);
 
     }
 

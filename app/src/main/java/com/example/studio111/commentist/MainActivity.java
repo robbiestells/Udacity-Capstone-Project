@@ -49,16 +49,11 @@ GridView gridView;
                 Show show = (Show) adapterView.getItemAtPosition(i);
                 intent.putExtra("selectedShow", show);
 
-                startActivity(intent);
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, (View)findViewById(R.id.showLogo), "logoImage");
+                startActivity(intent, options.toBundle());
 
             }
         });
-    }
-
-    public void rthClick(View v){
-        Intent intent = new Intent(MainActivity.this, FeedActivity.class);
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, (View)findViewById(R.id.logo), "rthImage");
-        startActivity(intent, options.toBundle());
     }
 
 }

@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -16,16 +18,15 @@ import Objects.Show;
 import Utilities.PlayerControls;
 import Utilities.ReadRss;
 
+
 /**
  * Created by robbi on 1/11/2017.
  */
 
 public class FeedActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    GridView gridView;
+    ListView listView;
     ImageButton playButton;
-    MediaPlayer mediaPlayer;
     PlayerControls controls;
     Show selectedShow;
 
@@ -42,10 +43,12 @@ public class FeedActivity extends AppCompatActivity {
 
         setTitle(selectedShow.getName());
 
+        ImageView showLogo = (ImageView) findViewById(R.id.logo);
+        showLogo.setImageResource(selectedShow.getImage());
 
-        gridView = (GridView) findViewById(R.id.gridView);
+        listView = (ListView) findViewById(R.id.listView);
 
-        ReadRss readRss = new ReadRss(this, gridView);
+        ReadRss readRss = new ReadRss(this, listView);
         readRss.execute(selectedShow.getFeed());
 
         playButton = (ImageButton) findViewById(R.id.playEpisode);
