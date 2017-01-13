@@ -1,5 +1,6 @@
 package com.example.studio111.commentist;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
-import Utilities.PlayMedia;
+import org.w3c.dom.Text;
+
+import Objects.Show;
 import Utilities.PlayerControls;
 import Utilities.ReadRss;
 
@@ -21,14 +25,20 @@ public class FeedActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     GridView gridView;
     ImageButton playButton;
-    PlayMedia playMedia;
     MediaPlayer mediaPlayer;
     PlayerControls controls;
+    Show selectedShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+
+        Intent intent = getIntent();
+        selectedShow = (Show) intent.getParcelableExtra("selectedShow");
+
+        TextView showDescription = (TextView) findViewById(R.id.showDescription);
+        showDescription.setText(selectedShow.getDescription());
 
         //recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         gridView = (GridView) findViewById(R.id.gridView);

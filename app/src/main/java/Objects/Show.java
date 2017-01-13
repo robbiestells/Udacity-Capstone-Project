@@ -1,10 +1,13 @@
 package Objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by rsteller on 1/13/2017.
  */
 
-public class Show {
+public class Show implements Parcelable{
     String name;
     String description;
     int image;
@@ -14,6 +17,34 @@ public class Show {
         this.description = description;
         this.image = image;
     }
+    private Show(Parcel in){
+        name = in.readString();
+        description = in.readString();
+        image = in.readInt();
+    }
+
+    public int describeContents(){
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags){
+        out.writeString(name);
+        out.writeString(description);
+        out.writeInt(image);
+    }
+
+    public static final Parcelable.Creator<Show> CREATOR = new Parcelable.Creator<Show>(){
+
+        @Override
+        public Show createFromParcel(Parcel parcel) {
+            return new Show(parcel);
+        }
+
+        @Override
+        public Show[] newArray(int i) {
+            return new Show[i];
+        }
+    };
 
     public String getName() {
         return name;
