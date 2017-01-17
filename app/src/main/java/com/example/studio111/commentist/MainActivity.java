@@ -1,8 +1,11 @@
 package com.example.studio111.commentist;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +21,7 @@ import java.util.ArrayList;
 import Adapters.ShowAdapter;
 import Objects.Show;
 import layout.ShowGrid;
+import layout.ShowPage;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/
@@ -33,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         setContentView(R.layout.activity_main);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        Fragment fragment = new ShowGrid();
+
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, fragment).commit();
+
 
 //        ArrayList<Show> shows = new ArrayList<Show>();
 //        shows.add(new Show("Roll to Hit", "description of RtH", R.drawable.rth, "http://thecommentist.com/feed/rolltohitshow/"));
@@ -60,7 +70,21 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     }
 
     @Override
-    public void OnShowSelected(int position) {
-        Log.d("Working", "OnShowSelected: " + position);
+    public void OnShowSelected(Show show) {
+        Log.d("Working", "OnShowSelected: " + show.getName());
+
+        //replace fragment
+        ShowPage showFragment = new ShowPage();
+        Bundle args = new Bundle();
+        args.putParcelable("show", show);
+        showFragment.setArguments(args);
+
+        android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.fragment_container, showFragment);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
+
     }
 }

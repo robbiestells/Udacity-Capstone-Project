@@ -31,7 +31,7 @@ public class ShowGrid extends Fragment {
 
     //change this to pass a Show object, then tell the Main activity to load the show page fragment
     public interface OnShowSelectedListener {
-        public void OnShowSelected(int position);
+        public void OnShowSelected(Show show);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ShowGrid extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myFragmentView = inflater.inflate(R.layout.fragment_show_grid, container, false);
-        ArrayList<Show> shows = new ArrayList<Show>();
+        final ArrayList<Show> shows = new ArrayList<Show>();
         shows.add(new Show("Roll to Hit", "description of RtH", R.drawable.rth, "http://thecommentist.com/feed/rolltohitshow/"));
         shows.add(new Show("Bearded Vegans", "description of BV", R.drawable.vegans, "http://thecommentist.com/feed/thebeardedvegans/"));
         shows.add(new Show("Unwind", "description of unwind", R.drawable.unwind, "http://thecommentist.com/feed/theunwindpodcast/"));
@@ -54,14 +54,14 @@ public class ShowGrid extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                Intent intent = new Intent(context, FeedActivity.class);
 //
-//                Show show = (Show) adapterView.getItemAtPosition(i);
-//                intent.putExtra("selectedShow", show);
+                Show show = (Show) adapterView.getItemAtPosition(i);
+                //intent.putExtra("selectedShow", show);
 //
 //                //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(ShowGrid.this, (View) findViewById(R.id.showLogo), "logoImage");
 //                // startActivity(intent, options.toBundle());
 //                startActivity(intent);
 
-                mCallback.OnShowSelected(i);
+                mCallback.OnShowSelected(show);
 
             }
         });
