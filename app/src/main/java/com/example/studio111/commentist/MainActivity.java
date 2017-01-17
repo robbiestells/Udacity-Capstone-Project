@@ -3,7 +3,10 @@ package com.example.studio111.commentist;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Parcelable;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,6 +27,9 @@ import Objects.Show;
 import layout.ShowGrid;
 import layout.ShowPage;
 
+import static android.R.attr.fragment;
+import static android.view.View.GONE;
+
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/
 
@@ -30,19 +37,27 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
     private Toolbar mToolbar;
    // GridView gridView;
+    ImageView logoImage;
+    AppBarLayout appbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        appbar = (AppBarLayout) findViewById(R.id.appbar);
+
+
+        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         Fragment fragment = new ShowGrid();
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, fragment).commit();
 
+
+
+        logoImage = (ImageView) findViewById(R.id.logo);
 
 //        ArrayList<Show> shows = new ArrayList<Show>();
 //        shows.add(new Show("Roll to Hit", "description of RtH", R.drawable.rth, "http://thecommentist.com/feed/rolltohitshow/"));
@@ -73,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     public void OnShowSelected(Show show) {
         Log.d("Working", "OnShowSelected: " + show.getName());
 
+        logoImage.setImageResource(show.getImage());
+
+
+       logoImage.setMinimumHeight(400);
         //replace fragment
         ShowPage showFragment = new ShowPage();
         Bundle args = new Bundle();

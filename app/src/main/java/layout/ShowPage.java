@@ -17,9 +17,6 @@ import Objects.Show;
 import Utilities.PlayerControls;
 import Utilities.ReadRss;
 
-import static com.example.studio111.commentist.R.id.listView;
-import static com.example.studio111.commentist.R.id.showLogo;
-
 /**
  * Created by rsteller on 1/17/2017.
  */
@@ -27,6 +24,8 @@ import static com.example.studio111.commentist.R.id.showLogo;
 public class ShowPage extends Fragment {
     View myFragmentView;
     Show selectedShow;
+    ListView listView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,22 +35,29 @@ public class ShowPage extends Fragment {
         Bundle bundle = this.getArguments();
         selectedShow = bundle.getParcelable("show");
 
-        ImageView imageView = (ImageView) myFragmentView.findViewById(R.id.logo);
-       // imageView.setTransitionName("test");
-         imageView.setImageResource(selectedShow.getImage());
+//        ImageView imageView = (ImageView) myFragmentView.findViewById(R.id.logo);
+//       // imageView.setTransitionName("test");
+//         imageView.setImageResource(selectedShow.getImage());
 
         TextView showDescription = (TextView) myFragmentView.findViewById(R.id.showDescription);
         showDescription.setText(selectedShow.getDescription());
 
-//
-//        listView = (ListView) findViewById(listView);
-//
-//        ReadRss readRss = new ReadRss(this, listView);
-//        readRss.execute(selectedShow.getFeed());
-//
+
+        listView = (ListView) myFragmentView.findViewById(R.id.showListView);
+
+        ReadRss readRss = new ReadRss(this.getContext(), listView);
+        readRss.execute(selectedShow.getFeed());
+
 
 
         return myFragmentView;
     }
+
+//    public void playEpisodeClick(View v){
+//
+//        String url = "http://thecommentist.com/wp-content/uploads/2016/12/RtH301.mp3";
+//        //playMedia = new PlayMedia(url);
+//        controls.LoadUrl(url);
+//    }
 }
 

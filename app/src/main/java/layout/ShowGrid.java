@@ -2,11 +2,7 @@ package layout;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.example.studio111.commentist.FeedActivity;
-import com.example.studio111.commentist.MainActivity;
 import com.example.studio111.commentist.R;
 
 import java.util.ArrayList;
