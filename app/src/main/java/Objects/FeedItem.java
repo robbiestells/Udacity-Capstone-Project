@@ -1,15 +1,21 @@
 package Objects;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import static android.R.attr.name;
+
 /**
  * Created by rsteller on 1/11/2017.
  */
 
-public class FeedItem {
+public class FeedItem implements Parcelable {
     String title;
     String link;
     String description;
     String pubDate;
     String audioUrl;
+    String length;
 
     public String getLength() {
         return length;
@@ -18,8 +24,6 @@ public class FeedItem {
     public void setLength(String length) {
         this.length = length;
     }
-
-    String length;
 
     public void setTitle(String title) {
         this.title = title;
@@ -30,10 +34,6 @@ public class FeedItem {
     }
 
     public void setDescription(String description) {
-//        String find = "Episode Description";
-//        String first = description.substring(description.indexOf(find)+find.length(), find.length());
-        //String shortDescription = description.split(test);
-
         this.description = description;
     }
 
@@ -64,4 +64,49 @@ public class FeedItem {
     public String getAudioUrl() {
         return audioUrl;
     }
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int i) {
+        out.writeString(title);
+        out.writeString(description);
+        out.writeString(link);
+        out.writeString(pubDate);
+        out.writeString(audioUrl);
+        out.writeString(length);
+    }
+    public FeedItem(){
+//
+    }
+//    public FeedItem(String title, String description, String link, String pubDate, String audioUrl, String length){
+//        this.title = title;
+//        this.description = description;
+//        this.link = link;
+//        this.pubDate = pubDate;
+//        this.audioUrl = audioUrl;
+//        this.length = length;
+//    }
+    private FeedItem(Parcel in){
+        title = in.readString();
+        description = in.readString();
+        link = in.readString();
+        pubDate = in.readString();
+        audioUrl = in.readString();
+        length = in.readString();
+    }
+
+    public static final Parcelable.Creator<FeedItem> CREATOR = new Parcelable.Creator<FeedItem>(){
+
+        @Override
+        public FeedItem createFromParcel(Parcel parcel) {
+            return new FeedItem(parcel);
+        }
+
+        @Override
+        public FeedItem[] newArray(int i) {
+            return new FeedItem[i];
+        }
+    };
 }

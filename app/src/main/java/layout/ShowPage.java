@@ -1,21 +1,20 @@
 package layout;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.studio111.commentist.R;
 
+import java.util.ArrayList;
+
+import Objects.FeedItem;
 import Objects.Show;
-import Utilities.PlayerControls;
 import Utilities.ReadRss;
 
 /**
@@ -25,8 +24,13 @@ import Utilities.ReadRss;
 public class ShowPage extends Fragment {
     View myFragmentView;
     Show selectedShow;
-    //ListView listView;
-    RecyclerView listView;
+    RecyclerView recyclerView;
+    OnEpisodeSelectedListener episodeCallback;
+
+   // change this to pass a Show object, then tell the Main activity to load the show page fragment
+    public interface OnEpisodeSelectedListener {
+        public void OnEpisodeSelected(FeedItem feedItem);
+    }
 
 
     @Override
@@ -45,15 +49,31 @@ public class ShowPage extends Fragment {
         showDescription.setText(selectedShow.getDescription());
 
 
-//        listView = (ListView) myFragmentView.findViewById(R.id.showListView);
-        listView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
+        recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
 
-        ReadRss readRss = new ReadRss(this.getContext(), listView);
+        ReadRss readRss = new ReadRss(this.getContext(), recyclerView);
         readRss.execute(selectedShow.getFeed());
 
         return myFragmentView;
+
+    }
+    public void selectEpisode(FeedItem feedItem){
+        //do something
+//        FeedItem test = new FeedItem();
+//        test = feedItem;
+
+        episodeCallback.OnEpisodeSelected(feedItem);
     }
 
-
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            episodeCallback = (OnEpisodeSelectedListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnShowSelectedListener");
+        }
+    }
 }
 

@@ -2,8 +2,10 @@ package Adapters;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +21,11 @@ import java.util.ArrayList;
 
 import Objects.FeedItem;
 import Objects.Show;
+import layout.EpisodePage;
+import layout.ShowPage;
 
 import static android.os.Build.VERSION_CODES.M;
+import static com.example.studio111.commentist.R.id.logo;
 import static com.example.studio111.commentist.R.id.playEpisode;
 
 /**
@@ -53,6 +58,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         //holder.Link.setText(current.getLink());
 
         //Picasso.with(context).load(current.getThumbnailUrl()).into(holder.Thumbnail);
+
         holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,25 +69,52 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         });
     }
 
-
-
     @Override
     public int getItemCount() {
         return feedItems.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView Title,Description,Date,Length,Url,Link;
         ImageView Thumbnail;
         ImageButton playButton;
         CardView cardView;
         public MyViewHolder(View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(this);
+
             Title= (TextView) itemView.findViewById(R.id.episodeName);
             Description= (TextView) itemView.findViewById(R.id.episodeDescription);
             Date= (TextView) itemView.findViewById(R.id.episodeDate);
             playButton = (ImageButton) itemView.findViewById(playEpisode);
             cardView= (CardView) itemView.findViewById(R.id.episodeCard);
+        }
+
+        @Override
+        public void onClick(View view) {
+            //get episode that was clicked on
+            FeedItem selected = feedItems.get(getPosition());
+
+
+            //pass this episode to Episode Page fragment
+            Log.d("Recycler Click", "clicked on" + selected.getTitle());
+
+            ShowPage page = new ShowPage();
+
+            page.selectEpisode(feedItems.get(getPosition()));
+//            EpisodePage episodeFragment = new EpisodePage();
+//            Bundle args = new Bundle();
+//            args.putParcelable("episode", selected);
+//            episodeFragment.setArguments(args);
+//
+//            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//
+//            transaction.replace(R.id.fragment_container, episodeFragment);
+//            transaction.addToBackStack(null);
+//
+//            transaction.commit();
+
         }
     }
 }

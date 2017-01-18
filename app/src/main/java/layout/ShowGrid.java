@@ -19,7 +19,6 @@ import Objects.Show;
 
 public class ShowGrid extends Fragment {
     GridView gridView;
-    Context context;
     View myFragmentView;
     OnShowSelectedListener mCallback;
 
@@ -46,22 +45,13 @@ public class ShowGrid extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(context, FeedActivity.class);
-//
                 Show show = (Show) adapterView.getItemAtPosition(i);
-                //intent.putExtra("selectedShow", show);
-//
-//                //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(ShowGrid.this, (View) findViewById(R.id.showLogo), "logoImage");
-//                // startActivity(intent, options.toBundle());
-//                startActivity(intent);
 
                 mCallback.OnShowSelected(show);
-
             }
         });
 
         return myFragmentView;
-
     }
 
     @Override
