@@ -70,6 +70,7 @@ public ReadRss(Context context, RecyclerView listView){
         //FeedAdapter feedAdapter = new FeedAdapter(context, feedItems);
         RecyclerAdapter feedAdapter = new RecyclerAdapter(context, feedItems);
         listView.setLayoutManager(new LinearLayoutManager(context));
+        listView.getLayoutManager().isSmoothScrolling();
         listView.setAdapter(feedAdapter);
 
     }

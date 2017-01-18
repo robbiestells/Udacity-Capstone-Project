@@ -1,19 +1,27 @@
 package Adapters;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.studio111.commentist.MainActivity;
 import com.example.studio111.commentist.R;
 
 import java.util.ArrayList;
 
 import Objects.FeedItem;
+import Objects.Show;
+
+import static android.os.Build.VERSION_CODES.M;
+import static com.example.studio111.commentist.R.id.playEpisode;
 
 /**
  * Created by robbi on 1/17/2017.
@@ -21,6 +29,7 @@ import Objects.FeedItem;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
     ArrayList<FeedItem> feedItems;
     Context context;
+
     public RecyclerAdapter(Context context,ArrayList<FeedItem>feedItems){
         this.feedItems=feedItems;
         this.context=context;
@@ -35,16 +44,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //YoYo.with(Techniques.FadeIn).playOn(holder.cardView);
-        FeedItem current=feedItems.get(position);
+        final FeedItem current=feedItems.get(position);
         holder.Title.setText(current.getTitle());
         holder.Description.setText(current.getDescription());
         holder.Date.setText(current.getPubDate());
         //holder.Length.setText(current.getLength());
        // holder.Url.setText(current.getAudioUrl());
         //holder.Link.setText(current.getLink());
-        
-        //Picasso.with(context).load(current.getThumbnailUrl()).into(holder.Thumbnail);
 
+        //Picasso.with(context).load(current.getThumbnailUrl()).into(holder.Thumbnail);
+        holder.playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity activity = new MainActivity();
+               activity.playEpisode(current.getAudioUrl());
+
+            }
+        });
     }
 
 
@@ -57,12 +73,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView Title,Description,Date,Length,Url,Link;
         ImageView Thumbnail;
+        ImageButton playButton;
         CardView cardView;
         public MyViewHolder(View itemView) {
             super(itemView);
             Title= (TextView) itemView.findViewById(R.id.episodeName);
             Description= (TextView) itemView.findViewById(R.id.episodeDescription);
             Date= (TextView) itemView.findViewById(R.id.episodeDate);
+            playButton = (ImageButton) itemView.findViewById(playEpisode);
             cardView= (CardView) itemView.findViewById(R.id.episodeCard);
         }
     }

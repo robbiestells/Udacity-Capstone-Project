@@ -54,11 +54,6 @@ public class ShowPage extends Fragment {
         return myFragmentView;
     }
 
-//    public void playEpisodeClick(View v){
-//
-//        String url = "http://thecommentist.com/wp-content/uploads/2016/12/RtH301.mp3";
-//        //playMedia = new PlayMedia(url);
-//        controls.LoadUrl(url);
-//    }
+
 }
 

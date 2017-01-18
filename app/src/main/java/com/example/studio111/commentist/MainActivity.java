@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.media.Image;
+import android.media.MediaPlayer;
 import android.os.Parcelable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 import Adapters.ShowAdapter;
 import Objects.Show;
+import Utilities.PlayerControls;
 import layout.ShowGrid;
 import layout.ShowPage;
 
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
    // GridView gridView;
     ImageView logoImage;
     AppBarLayout appbar;
+    PlayerControls controls;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
         appbar = (AppBarLayout) findViewById(R.id.appbar);
 
-
+         mediaPlayer = new MediaPlayer();
+         controls = new PlayerControls();
         //mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         Fragment fragment = new ShowGrid();
@@ -104,6 +109,16 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         transaction.addToBackStack(null);
 
         transaction.commit();
+
+
+    }
+
+    public void playEpisode(String url){
+        //controls.Pause(mediaPlayer);
+
+
+        controls.LoadUrl(url);
+        controls.Play(mediaPlayer);
 
     }
 }

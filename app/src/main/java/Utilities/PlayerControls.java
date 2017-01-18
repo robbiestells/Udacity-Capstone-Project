@@ -16,6 +16,7 @@ public class PlayerControls {
     MediaPlayer mediaPlayer = new MediaPlayer();
 
     public PlayerControls (){
+
     }
 
     public void LoadUrl(String url){
