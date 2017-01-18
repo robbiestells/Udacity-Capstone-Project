@@ -27,16 +27,13 @@ public class FeedAdapter extends ArrayAdapter<FeedItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        //get the current movie
-        FeedItem currentItem = getItem(position);
-
         //Check if the existing view is being reused, otherwise inflate the view
         View gridItemView = convertView;
         if (gridItemView == null) {
             gridItemView = LayoutInflater.from(getContext()).inflate(R.layout.feed_item, parent, false);
         }
 
-
+        FeedItem currentItem = getItem(position);
         //attach poster to the gridview
        // ImageView posterIV = (ImageView) gridItemView.findViewById(R.id.posterImage);
         //Picasso.with(getContext()).load(currentMovieObject.getPosterUrl()).into(posterIV);

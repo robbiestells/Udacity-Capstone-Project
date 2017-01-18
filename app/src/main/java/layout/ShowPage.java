@@ -3,6 +3,7 @@ package layout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,8 @@ import Utilities.ReadRss;
 public class ShowPage extends Fragment {
     View myFragmentView;
     Show selectedShow;
-    ListView listView;
+    //ListView listView;
+    RecyclerView listView;
 
 
     @Override
@@ -43,12 +45,11 @@ public class ShowPage extends Fragment {
         showDescription.setText(selectedShow.getDescription());
 
 
-        listView = (ListView) myFragmentView.findViewById(R.id.showListView);
+//        listView = (ListView) myFragmentView.findViewById(R.id.showListView);
+        listView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
 
         ReadRss readRss = new ReadRss(this.getContext(), listView);
         readRss.execute(selectedShow.getFeed());
-
-
 
         return myFragmentView;
     }

@@ -3,6 +3,7 @@ package Utilities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -21,6 +22,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import Adapters.FeedAdapter;
+import Adapters.RecyclerAdapter;
 import Objects.FeedItem;
 
 
@@ -33,8 +35,8 @@ public class ReadRss extends AsyncTask<String, Void, Void> {
     //String address = "http://thecommentist.com/feed/rolltohitshow";
     FeedAdapter mAdapter;
     ArrayList<FeedItem> feedItems;
-    RecyclerView recyclerView;
-    ListView listView;
+    RecyclerView listView;
+    //ListView listView;
     ProgressDialog dialog;
     URL url;
 
@@ -46,7 +48,8 @@ public class ReadRss extends AsyncTask<String, Void, Void> {
 //
 //    }
 
-    public ReadRss(Context context, ListView listView){
+//    public ReadRss(Context context, ListView listView){
+public ReadRss(Context context, RecyclerView listView){
         this.listView = listView;
         this.context = context;
        // dialog = new ProgressDialog(context);
@@ -64,9 +67,9 @@ public class ReadRss extends AsyncTask<String, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
       //  dialog.dismiss();
-        FeedAdapter feedAdapter = new FeedAdapter(context, feedItems);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-//        recyclerView.setAdapter(feedAdapter);
+        //FeedAdapter feedAdapter = new FeedAdapter(context, feedItems);
+        RecyclerAdapter feedAdapter = new RecyclerAdapter(context, feedItems);
+        listView.setLayoutManager(new LinearLayoutManager(context));
         listView.setAdapter(feedAdapter);
 
     }
