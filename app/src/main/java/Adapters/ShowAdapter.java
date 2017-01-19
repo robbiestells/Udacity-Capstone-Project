@@ -22,17 +22,12 @@ import Objects.Show;
 public class ShowAdapter extends ArrayAdapter<Show> {
 
     public ShowAdapter(Context context, ArrayList<Show> shows) {
-        // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
-        // the second argument is used when the ArrayAdapter is populating a single TextView.
-        // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
-        // going to use this second argument, so it can be any value. Here, we used 0.
         super(context, 0, shows);
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // return super.getView(position, convertView, parent);
 
         // Check if the existing view is being reused, otherwise inflate the view
         View listItemView = convertView;
@@ -41,7 +36,7 @@ public class ShowAdapter extends ArrayAdapter<Show> {
                     R.layout.show_item, parent, false);
         }
 
-        // Get the {@link AndroidFlavor} object located at this position in the list
+        // Get the Show and load the image
         Show currentShow = getItem(position);
 
         ImageView showImage = (ImageView) listItemView.findViewById(R.id.showLogo);
@@ -50,6 +45,5 @@ public class ShowAdapter extends ArrayAdapter<Show> {
         showImage.setTransitionName("test");
 
         return listItemView;
-
     }
 }

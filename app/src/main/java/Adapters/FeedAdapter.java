@@ -33,10 +33,8 @@ public class FeedAdapter extends ArrayAdapter<FeedItem> {
             gridItemView = LayoutInflater.from(getContext()).inflate(R.layout.feed_item, parent, false);
         }
 
+        //get current item and load info
         FeedItem currentItem = getItem(position);
-        //attach poster to the gridview
-       // ImageView posterIV = (ImageView) gridItemView.findViewById(R.id.posterImage);
-        //Picasso.with(getContext()).load(currentMovieObject.getPosterUrl()).into(posterIV);
 
         TextView titleTV = (TextView) gridItemView.findViewById(R.id.episodeName);
         titleTV.setText(currentItem.getTitle());

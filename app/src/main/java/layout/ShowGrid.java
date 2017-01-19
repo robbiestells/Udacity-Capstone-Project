@@ -22,7 +22,7 @@ public class ShowGrid extends Fragment {
     View myFragmentView;
     OnShowSelectedListener mCallback;
 
-    //change this to pass a Show object, then tell the Main activity to load the show page fragment
+    //Passes Show object to MainActivity
     public interface OnShowSelectedListener {
         public void OnShowSelected(Show show);
     }
@@ -32,21 +32,24 @@ public class ShowGrid extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myFragmentView = inflater.inflate(R.layout.fragment_show_grid, container, false);
+
+        //create the list of shows on network
         final ArrayList<Show> shows = new ArrayList<Show>();
         shows.add(new Show("Roll to Hit", "description of RtH", R.drawable.rth, "http://thecommentist.com/feed/rolltohitshow/"));
         shows.add(new Show("Bearded Vegans", "description of BV", R.drawable.vegans, "http://thecommentist.com/feed/thebeardedvegans/"));
         shows.add(new Show("Unwind", "description of unwind", R.drawable.unwind, "http://thecommentist.com/feed/theunwindpodcast/"));
         shows.add(new Show("Sky on Fire", "description of sky", R.drawable.sky, "http://thecommentist.com/feed/skyonfire/"));
 
+        //put shows in grid adapter
         ShowAdapter adapter = new ShowAdapter(this.getActivity(), shows);
         gridView = (GridView) myFragmentView.findViewById(R.id.showGrid);
         gridView.setAdapter(adapter);
 
+        //send selected show back to MainActivity when clicked
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Show show = (Show) adapterView.getItemAtPosition(i);
-
                 mCallback.OnShowSelected(show);
             }
         });
@@ -54,6 +57,7 @@ public class ShowGrid extends Fragment {
         return myFragmentView;
     }
 
+    //set up connection to MainActivity for select show callback
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

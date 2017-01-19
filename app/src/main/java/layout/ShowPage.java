@@ -28,7 +28,7 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
     RecyclerView recyclerView;
     OnEpisodeSelectedListener episodeCallback;
 
-   // change this to pass a Show object, then tell the Main activity to load the show page fragment
+   // connects fragment to MainPage to pass selected episode
     public interface OnEpisodeSelectedListener {
         public void OnEpisodeSelected(FeedItem feedItem);
     }
@@ -39,6 +39,7 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
                              Bundle savedInstanceState) {
         myFragmentView = inflater.inflate(R.layout.fragment_show_page, container, false);
 
+        //gets selected show
         Bundle bundle = this.getArguments();
         selectedShow = bundle.getParcelable("show");
 
@@ -49,31 +50,22 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         TextView showDescription = (TextView) myFragmentView.findViewById(R.id.showDescription);
         showDescription.setText(selectedShow.getDescription());
 
-
         recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
 
+        //kicks off getting RSS feed for show
         ReadRss readRss = new ReadRss(this.getContext(), recyclerView, ShowPage.this);
         readRss.execute(selectedShow.getFeed());
 
         return myFragmentView;
-
     }
 
+    //passes episode to MainActivity
     @Override
     public void onItemClicked(FeedItem feedItem){
-//        FeedItem item = new FeedItem();
-//        item = feedItem;
         episodeCallback.OnEpisodeSelected(feedItem);
     }
 
-    public void selectEpisode(FeedItem feedItem){
-        //do something
-//        FeedItem test = new FeedItem();
-//        test = feedItem;
-
-
-    }
-
+    //attaches callback to OnEpisodeSelected in MainActivity
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

@@ -1,15 +1,12 @@
 package Adapters;
 
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,12 +17,7 @@ import com.example.studio111.commentist.R;
 import java.util.ArrayList;
 
 import Objects.FeedItem;
-import Objects.Show;
-import layout.EpisodePage;
-import layout.ShowPage;
 
-import static android.os.Build.VERSION_CODES.M;
-import static com.example.studio111.commentist.R.id.logo;
 import static com.example.studio111.commentist.R.id.playEpisode;
 
 /**
@@ -34,23 +26,19 @@ import static com.example.studio111.commentist.R.id.playEpisode;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
     ArrayList<FeedItem> feedItems;
     Context context;
-
-
     AdapterCallback callback;
 
+    //create interface to pass selected episode
     public interface AdapterCallback{
         void onItemClicked(FeedItem item);
     }
 
-
-
     public RecyclerAdapter(Context context,ArrayList<FeedItem>feedItems, AdapterCallback callback){
         this.feedItems=feedItems;
         this.context=context;
-
         this.callback = callback;
-
     }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.feed_item,parent,false);
@@ -76,7 +64,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             public void onClick(View view) {
                 MainActivity activity = new MainActivity();
                activity.playEpisode(current.getAudioUrl());
-
             }
         });
     }
@@ -108,30 +95,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             //get episode that was clicked on
             FeedItem selected = feedItems.get(getPosition());
 
-
+            //pass this episode to Episode Page fragment
             if (callback != null){
                 callback.onItemClicked(selected);
             }
-
-
-
-            //pass this episode to Episode Page fragment
-            Log.d("Recycler Click", "clicked on" + selected.getTitle());
-
-//            ShowPage page = new ShowPage();
-//
-//            page.selectEpisode(feedItems.get(getPosition()));
-//            EpisodePage episodeFragment = new EpisodePage();
-//            Bundle args = new Bundle();
-//            args.putParcelable("episode", selected);
-//            episodeFragment.setArguments(args);
-//
-//            android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//
-//            transaction.replace(R.id.fragment_container, episodeFragment);
-//            transaction.addToBackStack(null);
-//
-//            transaction.commit();
 
         }
     }

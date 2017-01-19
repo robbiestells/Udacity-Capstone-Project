@@ -34,15 +34,15 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
          controls = new PlayerControls();
         //mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        //load Show listing and load fragment
         Fragment fragment = new ShowGrid();
-
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, fragment).commit();
 
         logoImage = (ImageView) findViewById(R.id.logo);
-
     }
 
+    //pass Show object and change fragment when show selected
     @Override
     public void OnShowSelected(Show show) {
         Log.d("Working", "OnShowSelected: " + show.getName());
@@ -50,23 +50,20 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         logoImage.setImageResource(show.getImage());
         logoImage.setMinimumHeight(400);
 
-        //replace fragment
+        //replace fragment and send Show object
         ShowPage showFragment = new ShowPage();
         Bundle args = new Bundle();
         args.putParcelable("show", show);
         showFragment.setArguments(args);
 
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
         transaction.replace(R.id.fragment_container, showFragment);
         transaction.addToBackStack(null);
 
         transaction.commit();
-
-
     }
 
-
+    //when episode is selected, load fragment with selected episode information
     @Override
     public void OnEpisodeSelected(FeedItem feedItem) {
 
@@ -84,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         transaction.commit();
 
     }
-
 
 
     public void playEpisode(String url){
