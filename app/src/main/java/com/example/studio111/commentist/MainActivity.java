@@ -96,7 +96,11 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     //when episode is selected, load fragment with selected episode information
     @Override
     public void OnEpisodePlay(String audioUrl) {
-
+        if (mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+              mediaPlayer.release();
+            mediaPlayer = new MediaPlayer();
+        }
         controls.LoadUrl(mediaPlayer, audioUrl);
        // controls.Play(mediaPlayer);
     }

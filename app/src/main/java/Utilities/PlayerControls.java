@@ -21,13 +21,8 @@ public class PlayerControls {
     }
 
     public void LoadUrl(MediaPlayer mediaPlayer, String url){
-     if (mediaPlayer.isPlaying()){
-       //  mediaPlayer.pause();
-         mediaPlayer.stop();
-      //   mediaPlayer.release();
-     }
 
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(url);
         } catch (IllegalArgumentException e) {
