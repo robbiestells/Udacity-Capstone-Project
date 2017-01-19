@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import Objects.FeedItem;
 import Objects.Show;
@@ -18,6 +21,7 @@ import layout.ShowGrid;
 import layout.ShowPage;
 
 import static android.R.attr.fragment;
+import static com.example.studio111.commentist.R.id.totalTime;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/
@@ -29,6 +33,11 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     MediaPlayer mediaPlayer;
     Show selectedShow;
     FeedItem selectedEpisode;
+
+    SeekBar seekBar;
+    TextView totalTimeTV;
+
+    ImageButton playpauseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,22 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
                 .add(R.id.fragment_container, fragment).commit();
 
         logoImage = (ImageView) findViewById(R.id.logo);
+
+        totalTimeTV = (TextView) findViewById(totalTime);
+        playpauseButton = (ImageButton) findViewById(R.id.playpause);
+
+        playpauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mediaPlayer.isPlaying()) {
+                    controls.Pause(mediaPlayer);
+                    playpauseButton.setImageResource(R.drawable.play_circle);
+                } else {
+                    controls.Play(mediaPlayer);
+                    playpauseButton.setImageResource(R.drawable.pause_circle);
+                }
+            }
+        });
 
     }
 
@@ -95,14 +120,17 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
     //when episode is selected, load fragment with selected episode information
     @Override
-    public void OnEpisodePlay(String audioUrl) {
+    public void OnEpisodePlay(FeedItem feedItem) {
         if (mediaPlayer.isPlaying()){
             mediaPlayer.stop();
               mediaPlayer.release();
             mediaPlayer = new MediaPlayer();
         }
-        controls.LoadUrl(mediaPlayer, audioUrl);
-       // controls.Play(mediaPlayer);
-    }
+        controls.LoadUrl(mediaPlayer, feedItem.getAudioUrl());
+        playpauseButton.setImageResource(R.drawable.pause_circle);
 
+        totalTimeTV.setText(feedItem.getLength());
+
+        seekBar.setMax(mediaPlayer.getDuration());
+    }
 }

@@ -35,7 +35,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     public interface EpisodeCallback{
-        void onEpisodePlay(String audioUrl);
+        void onEpisodePlay(FeedItem feedItem);
     }
 
     public RecyclerAdapter(Context context, ArrayList<FeedItem>feedItems, AdapterCallback callback, EpisodeCallback episodeCallback){
@@ -69,7 +69,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(View view) {
                 if (episodeCallback != null){
-                    episodeCallback.onEpisodePlay(current.getAudioUrl());
+                    episodeCallback.onEpisodePlay(current);
                 }
             }
         });
@@ -107,7 +107,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             if (callback != null){
                 callback.onItemClicked(selected);
             }
-
         }
     }
 }

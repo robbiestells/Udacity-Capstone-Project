@@ -1,81 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:elevation="16dp"
         android:gravity="center_horizontal"
-        android:elevation="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/time"
-            android:text="1:04:05"
-            android:layout_gravity="center"
-            android:textColor="@android:color/black"/>
+        android:paddingBottom="16dp">
 
         <ImageButton
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/skip_previous"
-            android:background="@android:color/transparent"
             android:layout_gravity="center"
-            android:scaleType="fitCenter"
             android:layout_marginLeft="32dp"
-            />
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/skip_previous" />
 
         <ImageButton
             android:id="@+id/playpause"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/play_circle"
-            android:background="@android:color/transparent"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/play_circle" />
 
         <ImageButton
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/skip_next"
-            android:background="@android:color/transparent"
             android:layout_gravity="center"
-            android:scaleType="fitCenter"
             android:layout_marginRight="32dp"
-            />
-
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/volume_high"
             android:background="@android:color/transparent"
-            android:layout_gravity="right|center_vertical"
             android:scaleType="fitCenter"
-            />
+            android:src="@drawable/skip_next" />
+
+        <!--<ImageButton-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_gravity="right|center_vertical"-->
+            <!--android:background="@android:color/transparent"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--android:src="@drawable/volume_high" />-->
 
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:gravity="bottom"
         android:background="@android:color/white">
- <TextView
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:layout_gravity="bottom"
-     android:text="Text for the episode title will go here"
-     android:textColor="@android:color/black"
-     android:layout_marginLeft="16dp"
-     android:layout_marginRight="16dp"
-     android:gravity="center_horizontal"/>
-    </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="2dp">
+
+            <TextView
+                android:id="@+id/currentTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="1:04:05"
+                android:textColor="@android:color/black" />
+
+            <SeekBar
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBar"
+
+                />
+
+            <TextView
+                android:id="@+id/totalTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="1:04:05"
+                android:textColor="@android:color/black"
+                android:layout_marginRight="16dp"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center_horizontal"
+            android:text="Text for the episode title will go here"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
 </RelativeLayout>

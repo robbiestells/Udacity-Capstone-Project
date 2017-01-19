@@ -41,15 +41,6 @@ public class ReadRss extends AsyncTask<String, Void, Void> {
     URL url;
     ShowPage page;
 
-//    public ReadRss(Context context, RecyclerView recyclerView){
-//        this.recyclerView = recyclerView;
-//        this.context = context;
-//        dialog = new ProgressDialog(context);
-//        dialog.setMessage("Retrieving feed");
-//
-//    }
-
-//    public ReadRss(Context context, ListView listView){
 public ReadRss(Context context, RecyclerView recyclerView, ShowPage page){
         this.recyclerView = recyclerView;
         this.context = context;

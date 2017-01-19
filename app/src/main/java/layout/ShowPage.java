@@ -36,7 +36,7 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
 
     // connects fragment to MainPage to play selected episode
     public interface OnEpisodePlay {
-        public void OnEpisodePlay(String audioUrl);
+        public void OnEpisodePlay(FeedItem feedItem);
     }
 
 
@@ -85,8 +85,8 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
     }
 
     @Override
-    public void onEpisodePlay(String audioUrl) {
-        playEpisodeCallback.OnEpisodePlay(audioUrl);
+    public void onEpisodePlay(FeedItem feedItem) {
+        playEpisodeCallback.OnEpisodePlay(feedItem);
     }
 }
 
