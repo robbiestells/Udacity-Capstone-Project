@@ -13,14 +13,20 @@ import java.io.IOException;
 
 public class PlayerControls {
     Context context;
-    MediaPlayer mediaPlayer = new MediaPlayer();
+//    MediaPlayer mediaPlayer = new MediaPlayer();
+
 
     public PlayerControls (){
 
     }
 
-    public void LoadUrl(String url){
-        // mediaPlayer.release();
+    public void LoadUrl(MediaPlayer mediaPlayer, String url){
+     if (mediaPlayer.isPlaying()){
+       //  mediaPlayer.pause();
+         mediaPlayer.stop();
+      //   mediaPlayer.release();
+     }
+
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(url);

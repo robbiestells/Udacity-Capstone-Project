@@ -22,15 +22,21 @@ import Utilities.ReadRss;
  * Created by rsteller on 1/17/2017.
  */
 
-public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallback {
+public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallback, RecyclerAdapter.EpisodeCallback {
     View myFragmentView;
     Show selectedShow;
     RecyclerView recyclerView;
     OnEpisodeSelectedListener episodeCallback;
+    OnEpisodePlay playEpisodeCallback;
 
-   // connects fragment to MainPage to pass selected episode
+    // connects fragment to MainPage to pass selected episode
     public interface OnEpisodeSelectedListener {
         public void OnEpisodeSelected(FeedItem feedItem);
+    }
+
+    // connects fragment to MainPage to play selected episode
+    public interface OnEpisodePlay {
+        public void OnEpisodePlay(String audioUrl);
     }
 
 
@@ -71,10 +77,16 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         super.onAttach(activity);
         try {
             episodeCallback = (OnEpisodeSelectedListener) activity;
+            playEpisodeCallback = (OnEpisodePlay) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnShowSelectedListener");
         }
+    }
+
+    @Override
+    public void onEpisodePlay(String audioUrl) {
+        playEpisodeCallback.OnEpisodePlay(audioUrl);
     }
 }
 

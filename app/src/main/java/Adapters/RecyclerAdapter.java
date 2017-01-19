@@ -27,16 +27,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     ArrayList<FeedItem> feedItems;
     Context context;
     AdapterCallback callback;
+    EpisodeCallback episodeCallback;
 
     //create interface to pass selected episode
     public interface AdapterCallback{
         void onItemClicked(FeedItem item);
     }
 
-    public RecyclerAdapter(Context context,ArrayList<FeedItem>feedItems, AdapterCallback callback){
+    public interface EpisodeCallback{
+        void onEpisodePlay(String audioUrl);
+    }
+
+    public RecyclerAdapter(Context context, ArrayList<FeedItem>feedItems, AdapterCallback callback, EpisodeCallback episodeCallback){
         this.feedItems=feedItems;
         this.context=context;
         this.callback = callback;
+        this.episodeCallback = episodeCallback;
     }
 
     @Override
@@ -62,10 +68,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity activity = new MainActivity();
-               activity.playEpisode(current.getAudioUrl());
+                if (episodeCallback != null){
+                    episodeCallback.onEpisodePlay(current.getAudioUrl());
+                }
             }
         });
+
     }
 
     @Override

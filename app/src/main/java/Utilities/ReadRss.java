@@ -70,7 +70,7 @@ public ReadRss(Context context, RecyclerView recyclerView, ShowPage page){
         super.onPostExecute(aVoid);
       //  dialog.dismiss();
         //FeedAdapter feedAdapter = new FeedAdapter(context, feedItems);
-        RecyclerAdapter feedAdapter = new RecyclerAdapter(context, feedItems, page);
+        RecyclerAdapter feedAdapter = new RecyclerAdapter(context, feedItems, page, page);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.getLayoutManager().isSmoothScrolling();
         recyclerView.setAdapter(feedAdapter);

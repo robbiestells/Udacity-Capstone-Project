@@ -40,14 +40,6 @@
         android:text="Roll to hit is a weekly show about "
         android:textSize="20sp" />
 
-    <!--<ListView-->
-        <!--android:id="@+id/showListView"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_margin="16dp"-->
-        <!--android:divider="@null"-->
-        <!--android:focusable="true"-->
-        <!--android:numColumns="1" />-->
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/showListView"
