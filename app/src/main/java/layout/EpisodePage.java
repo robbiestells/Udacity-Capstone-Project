@@ -29,7 +29,7 @@ public class EpisodePage extends Fragment {
         myFragmentView = inflater.inflate(R.layout.fragment_episode_page, container, false);
 
         Bundle bundle = this.getArguments();
-        selectedEpisode = bundle.getParcelable("episdoe");
+        selectedEpisode = bundle.getParcelable("episode");
 
 //        ImageView imageView = (ImageView) myFragmentView.findViewById(R.id.logo);
 //       // imageView.setTransitionName("test");

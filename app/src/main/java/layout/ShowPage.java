@@ -13,6 +13,7 @@ import com.example.studio111.commentist.R;
 
 import java.util.ArrayList;
 
+import Adapters.RecyclerAdapter;
 import Objects.FeedItem;
 import Objects.Show;
 import Utilities.ReadRss;
@@ -21,7 +22,7 @@ import Utilities.ReadRss;
  * Created by rsteller on 1/17/2017.
  */
 
-public class ShowPage extends Fragment {
+public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallback {
     View myFragmentView;
     Show selectedShow;
     RecyclerView recyclerView;
@@ -51,18 +52,26 @@ public class ShowPage extends Fragment {
 
         recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
 
-        ReadRss readRss = new ReadRss(this.getContext(), recyclerView);
+        ReadRss readRss = new ReadRss(this.getContext(), recyclerView, ShowPage.this);
         readRss.execute(selectedShow.getFeed());
 
         return myFragmentView;
 
     }
+
+    @Override
+    public void onItemClicked(FeedItem feedItem){
+//        FeedItem item = new FeedItem();
+//        item = feedItem;
+        episodeCallback.OnEpisodeSelected(feedItem);
+    }
+
     public void selectEpisode(FeedItem feedItem){
         //do something
 //        FeedItem test = new FeedItem();
 //        test = feedItem;
 
-        episodeCallback.OnEpisodeSelected(feedItem);
+
     }
 
     @Override

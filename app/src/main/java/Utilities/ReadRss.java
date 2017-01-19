@@ -24,6 +24,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import Adapters.FeedAdapter;
 import Adapters.RecyclerAdapter;
 import Objects.FeedItem;
+import layout.ShowPage;
 
 
 /**
@@ -38,6 +39,7 @@ public class ReadRss extends AsyncTask<String, Void, Void> {
     RecyclerView recyclerView;
     ProgressDialog dialog;
     URL url;
+    ShowPage page;
 
 //    public ReadRss(Context context, RecyclerView recyclerView){
 //        this.recyclerView = recyclerView;
@@ -48,9 +50,10 @@ public class ReadRss extends AsyncTask<String, Void, Void> {
 //    }
 
 //    public ReadRss(Context context, ListView listView){
-public ReadRss(Context context, RecyclerView recyclerView){
+public ReadRss(Context context, RecyclerView recyclerView, ShowPage page){
         this.recyclerView = recyclerView;
         this.context = context;
+        this.page = page;
        // dialog = new ProgressDialog(context);
        // dialog.setMessage("Retrieving feed");
 
@@ -67,7 +70,7 @@ public ReadRss(Context context, RecyclerView recyclerView){
         super.onPostExecute(aVoid);
       //  dialog.dismiss();
         //FeedAdapter feedAdapter = new FeedAdapter(context, feedItems);
-        RecyclerAdapter feedAdapter = new RecyclerAdapter(context, feedItems);
+        RecyclerAdapter feedAdapter = new RecyclerAdapter(context, feedItems, page);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.getLayoutManager().isSmoothScrolling();
         recyclerView.setAdapter(feedAdapter);

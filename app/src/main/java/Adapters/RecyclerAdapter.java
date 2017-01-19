@@ -35,9 +35,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     ArrayList<FeedItem> feedItems;
     Context context;
 
-    public RecyclerAdapter(Context context,ArrayList<FeedItem>feedItems){
+
+    AdapterCallback callback;
+
+    public interface AdapterCallback{
+        void onItemClicked(FeedItem item);
+    }
+
+
+
+    public RecyclerAdapter(Context context,ArrayList<FeedItem>feedItems, AdapterCallback callback){
         this.feedItems=feedItems;
         this.context=context;
+
+        this.callback = callback;
+
     }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -97,12 +109,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             FeedItem selected = feedItems.get(getPosition());
 
 
+            if (callback != null){
+                callback.onItemClicked(selected);
+            }
+
+
+
             //pass this episode to Episode Page fragment
             Log.d("Recycler Click", "clicked on" + selected.getTitle());
 
-            ShowPage page = new ShowPage();
-
-            page.selectEpisode(feedItems.get(getPosition()));
+//            ShowPage page = new ShowPage();
+//
+//            page.selectEpisode(feedItems.get(getPosition()));
 //            EpisodePage episodeFragment = new EpisodePage();
 //            Bundle args = new Bundle();
 //            args.putParcelable("episode", selected);
