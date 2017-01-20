@@ -80,13 +80,14 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             playpauseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (mediaPlayer.isPlaying()) {
-                        controls.Pause(mediaPlayer);
-                        playpauseButton.setImageResource(R.drawable.play_circle);
-                    } else {
-                        controls.Play(mediaPlayer);
-                        playpauseButton.setImageResource(R.drawable.pause_circle);
-                    }
+//                    if (mediaPlayer.isPlaying()) {
+//                        controls.Pause(mediaPlayer);
+//                        playpauseButton.setImageResource(R.drawable.play_circle);
+//                    } else {
+//                        controls.Play(mediaPlayer);
+//                        playpauseButton.setImageResource(R.drawable.pause_circle);
+//                    }
+                    playerService.Pause();
                 }
             });
 
@@ -150,31 +151,31 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 ////        }
 ////
 ////        controls.LoadUrl(mediaPlayer, feedItem.getAudioUrl());
-////        playpauseButton.setImageResource(R.drawable.pause_circle);
-////
-////        final FeedItem selectedItem = feedItem;
-////        playerEpisodeName.setText(feedItem.getTitle());
-////        playerEpisodeName.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View view) {
-////                //replace fragment
-////                EpisodePage episodeFragment = new EpisodePage();
-////                Bundle args = new Bundle();
-////                args.putParcelable("episode", selectedItem);
-////                episodeFragment.setArguments(args);
-////
-////                selectedEpisode = selectedItem;
-////
-////                android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-////
-////                transaction.replace(R.id.fragment_container, episodeFragment);
-////                transaction.addToBackStack(null);
-////
-////                transaction.commit();
-////            }
-//        });
+        playpauseButton.setImageResource(R.drawable.pause_circle);
+
+        final FeedItem selectedItem = feedItem;
+        playerEpisodeName.setText(feedItem.getTitle());
+        playerEpisodeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //replace fragment
+                EpisodePage episodeFragment = new EpisodePage();
+                Bundle args = new Bundle();
+                args.putParcelable("episode", selectedItem);
+                episodeFragment.setArguments(args);
+
+                selectedEpisode = selectedItem;
+
+                android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.fragment_container, episodeFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
 //
-//        totalTimeTV.setText(feedItem.getLength());
+        totalTimeTV.setText(feedItem.getLength());
 //
 //        seekBar = (SeekBar) findViewById(R.id.seekBar);
 

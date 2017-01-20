@@ -10,21 +10,29 @@ import android.support.annotation.Nullable;
 import android.support.v4.media.MediaBrowserServiceCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.studio111.commentist.R;
 
 import java.io.IOException;
 
 import static android.media.session.PlaybackState.ACTION_PLAY;
 import static android.os.Build.VERSION_CODES.M;
+import static com.example.studio111.commentist.R.id.playerEpisodeName;
+import static com.example.studio111.commentist.R.id.totalTime;
 import static com.example.studio111.commentist.R.layout.player;
 
 /**
  * Created by rsteller on 1/20/2017.
  */
 
-public class PlayerService extends Service  {
+public class PlayerService extends Service {
 
     MediaPlayer mediaPlayer = null;
+    ImageButton playPauseButton;
 
     @Override
     public void onCreate() {
@@ -39,9 +47,9 @@ public class PlayerService extends Service  {
     }
 
 
-    public void LoadUrl(String url){
+    public void LoadUrl(String url) {
 
-        if (mediaPlayer != null){
+        if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();
 
@@ -57,7 +65,7 @@ public class PlayerService extends Service  {
 
         try {
             mediaPlayer.prepare();
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         mediaPlayer.start();
@@ -68,7 +76,13 @@ public class PlayerService extends Service  {
     }
 
     public void Pause() {
-        mediaPlayer.pause();
+
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        } else {
+           mediaPlayer.start();
+        }
+
     }
 
 }
