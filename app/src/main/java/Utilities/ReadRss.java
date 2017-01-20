@@ -90,7 +90,7 @@ public ReadRss(Context context, RecyclerView recyclerView, ShowPage page){
                         Node current = itemchilds.item(j);
                         if (current.getNodeName().equalsIgnoreCase("title")){
                             item.setTitle(current.getTextContent());
-                        } else if (current.getNodeName().equalsIgnoreCase("description")){
+                        } else if (current.getNodeName().equalsIgnoreCase("itunes:summary")){
                             item.setDescription(current.getTextContent());
                         } else if (current.getNodeName().equalsIgnoreCase("pubDate")){
                             item.setPubDate(current.getTextContent());

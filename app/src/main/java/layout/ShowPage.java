@@ -2,6 +2,7 @@ package layout;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -44,6 +45,8 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         myFragmentView = inflater.inflate(R.layout.fragment_show_page, container, false);
+
+        setRetainInstance(true);
 
         //gets selected show
         Bundle bundle = this.getArguments();
@@ -88,5 +91,19 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
     public void onEpisodePlay(FeedItem feedItem) {
         playEpisodeCallback.OnEpisodePlay(feedItem);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null){
+
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
 }
 

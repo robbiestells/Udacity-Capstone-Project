@@ -107,6 +107,7 @@
             android:layout_marginRight="16dp"
             android:gravity="center_horizontal"
             android:text="Text for the episode title will go here"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:id="@+id/playerEpisodeName"/>
     </LinearLayout>
 </RelativeLayout>
