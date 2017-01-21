@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
     PlayerService playerService;
 
+    boolean isPlaying = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         setContentView(R.layout.activity_main);
 
         if(savedInstanceState != null){
-            //get media player, logo image, player fragment
+            //get PlayerService, media player, logo image, player fragment
 
 
         } else {
@@ -80,13 +82,13 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             playpauseButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    if (mediaPlayer.isPlaying()) {
-//                        controls.Pause(mediaPlayer);
-//                        playpauseButton.setImageResource(R.drawable.play_circle);
-//                    } else {
-//                        controls.Play(mediaPlayer);
-//                        playpauseButton.setImageResource(R.drawable.pause_circle);
-//                    }
+                    if (isPlaying){
+                        playpauseButton.setImageResource(R.drawable.play_circle);
+                        isPlaying = false;
+                    } else {
+                        playpauseButton.setImageResource(R.drawable.pause_circle);
+                        isPlaying = true;
+                    }
                     playerService.Pause();
                 }
             });
@@ -144,13 +146,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     //when episode is selected, load fragment with selected episode information
     @Override
     public void OnEpisodePlay(FeedItem feedItem) {
-////        if (mediaPlayer.isPlaying()){
-////            mediaPlayer.stop();
-////              mediaPlayer.release();
-////            mediaPlayer = new MediaPlayer();
-////        }
-////
-////        controls.LoadUrl(mediaPlayer, feedItem.getAudioUrl());
         playpauseButton.setImageResource(R.drawable.pause_circle);
 
         final FeedItem selectedItem = feedItem;
@@ -180,5 +175,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 //        seekBar = (SeekBar) findViewById(R.id.seekBar);
 
         playerService.LoadUrl(feedItem.getAudioUrl());
+        isPlaying = true;
     }
 }
