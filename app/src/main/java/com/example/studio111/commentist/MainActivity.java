@@ -2,6 +2,7 @@ package com.example.studio111.commentist;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -33,8 +34,6 @@ import static com.example.studio111.commentist.R.id.totalTime;
 public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSelectedListener, ShowPage.OnEpisodeSelectedListener, ShowPage.OnEpisodePlay {
 
     ImageView logoImage;
-    PlayerControls controls;
-    MediaPlayer mediaPlayer;
     Show selectedShow;
     FeedItem selectedEpisode;
     TextView playerEpisodeName;
@@ -48,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
     boolean isPlaying = false;
 
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +55,10 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         setContentView(R.layout.activity_main);
 
         if(savedInstanceState != null){
-            //get PlayerService, media player, logo image, player fragment
+            //get PlayerService,  logo image, player fragment
 
 
         } else {
-           // mediaPlayer = new MediaPlayer();
-          //  controls = new PlayerControls();
-
              playerService = new PlayerService();
             Intent startPlayer = new Intent(this, PlayerService.class);
             startService(startPlayer);
@@ -92,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
                     playerService.Pause();
                 }
             });
-
     }
 
     @Override
@@ -169,12 +165,13 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
                 transaction.commit();
             }
         });
-//
-        totalTimeTV.setText(feedItem.getLength());
-//
-//        seekBar = (SeekBar) findViewById(R.id.seekBar);
 
-        playerService.LoadUrl(feedItem.getAudioUrl());
+        totalTimeTV.setText(feedItem.getLength());
+
+       seekBar = (SeekBar) findViewById(R.id.seekBar);
+
+        playerService.LoadUrl(feedItem.getAudioUrl(), seekBar, MainActivity.this);
         isPlaying = true;
+
     }
 }
