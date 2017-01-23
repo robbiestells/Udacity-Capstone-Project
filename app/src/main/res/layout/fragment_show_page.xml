@@ -20,6 +20,7 @@
     xmlns:spp="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     spp:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -40,6 +41,13 @@
         android:text="Roll to hit is a weekly show about "
         android:textSize="20sp" />
 
+    <GridView
+        android:id="@+id/hostGrid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:numColumns="2"
+        android:verticalSpacing="16dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/showListView"

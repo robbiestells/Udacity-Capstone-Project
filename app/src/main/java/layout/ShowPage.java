@@ -8,16 +8,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import com.example.studio111.commentist.R;
 
 import java.util.ArrayList;
 
+import Adapters.HostAdapter;
 import Adapters.RecyclerAdapter;
+import Adapters.ShowAdapter;
 import Objects.FeedItem;
+import Objects.Host;
 import Objects.Show;
 import Utilities.ReadRss;
+
+import static android.R.attr.host;
 
 /**
  * Created by rsteller on 1/17/2017.
@@ -26,6 +32,7 @@ import Utilities.ReadRss;
 public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallback, RecyclerAdapter.EpisodeCallback {
     View myFragmentView;
     Show selectedShow;
+    GridView hostGrid;
     RecyclerView recyclerView;
     OnEpisodeSelectedListener episodeCallback;
     OnEpisodePlay playEpisodeCallback;
@@ -58,6 +65,17 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
 
         TextView showDescription = (TextView) myFragmentView.findViewById(R.id.showDescription);
         showDescription.setText(selectedShow.getDescription());
+
+        final ArrayList<Host> hosts = new ArrayList<Host>();
+
+        hosts.add(new Host("Rob", R.drawable.rob));
+        hosts.add(new Host("Paul", R.drawable.paul));
+
+        //put shows in grid adapter
+        HostAdapter adapter = new HostAdapter(this.getActivity(), hosts);
+        hostGrid = (GridView) myFragmentView.findViewById(R.id.hostGrid);
+        hostGrid.setAdapter(adapter);
+
 
         recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
 
