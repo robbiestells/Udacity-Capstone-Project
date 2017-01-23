@@ -36,10 +36,15 @@ public class ShowGrid extends Fragment {
 
         //create the list of shows on network
         final ArrayList<Show> shows = new ArrayList<Show>();
-        shows.add(new Show("Roll to Hit", "description of RtH", R.drawable.rth, "http://thecommentist.com/feed/rolltohitshow/"));
-        shows.add(new Show("Bearded Vegans", "description of BV", R.drawable.vegans, "http://thecommentist.com/feed/thebeardedvegans/"));
-        shows.add(new Show("Unwind", "description of unwind", R.drawable.unwind, "http://thecommentist.com/feed/theunwindpodcast/"));
-        shows.add(new Show("Sky on Fire", "description of sky", R.drawable.sky, "http://thecommentist.com/feed/skyonfire/"));
+//        shows.add(new Show("Roll to Hit", "description of RtH", R.drawable.rth, "http://thecommentist.com/feed/rolltohitshow/"));
+//        shows.add(new Show("Bearded Vegans", "description of BV", R.drawable.vegans, "http://thecommentist.com/feed/thebeardedvegans/"));
+//        shows.add(new Show("Unwind", "description of unwind", R.drawable.unwind, "http://thecommentist.com/feed/theunwindpodcast/"));
+//        shows.add(new Show("Sky on Fire", "description of sky", R.drawable.sky, "http://thecommentist.com/feed/skyonfire/"));
+
+        shows.add(new Show(getString(R.string.RollName), getString(R.string.RollDes), R.drawable.rth, getString(R.string.RollLink)));
+        shows.add(new Show(getString(R.string.BVName), getString(R.string.BVDes), R.drawable.vegans, getString(R.string.BVLink)));
+        shows.add(new Show(getString(R.string.UnwindName), getString(R.string.UnwindDes), R.drawable.unwind, getString(R.string.UnwindLink)));
+        shows.add(new Show(getString(R.string.SkyName), getString(R.string.SkyDes), R.drawable.sky, getString(R.string.SkyLink)));
 
         //put shows in grid adapter
         ShowAdapter adapter = new ShowAdapter(this.getActivity(), shows);
