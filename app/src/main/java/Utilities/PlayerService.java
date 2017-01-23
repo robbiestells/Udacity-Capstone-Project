@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.media.MediaBrowserServiceCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -21,8 +22,13 @@ import android.widget.Toast;
 import com.example.studio111.commentist.MainActivity;
 import com.example.studio111.commentist.R;
 
-import java.io.IOException;
+import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+import static android.R.attr.max;
 import static android.media.session.PlaybackState.ACTION_PLAY;
 import static android.os.Build.VERSION_CODES.M;
 import static com.example.studio111.commentist.R.id.playerEpisodeName;
@@ -39,6 +45,7 @@ public class PlayerService extends Service {
     ImageButton playPauseButton;
     SeekBar mSeekBar;
     Handler mHandler = new Handler();
+    TextView currentTimeText;
 
     @Override
     public void onCreate() {
@@ -53,7 +60,7 @@ public class PlayerService extends Service {
     }
 
 
-    public void LoadUrl(String url, SeekBar seekBar, Activity activity) {
+    public void LoadUrl(String url, final SeekBar seekBar, Activity activity) {
 
         if (mediaPlayer != null) {
             mediaPlayer.stop();
@@ -76,15 +83,28 @@ public class PlayerService extends Service {
         }
         mediaPlayer.start();
         mSeekBar = seekBar;
-        seekBar.setMax(mediaPlayer.getDuration() / 1000);
+//        seekBar.setMax(mediaPlayer.getDuration() / 1000);
+        seekBar.setMax(100);
 
         Activity mainActivity = activity;
+        currentTimeText  = (TextView) activity.findViewById(R.id.currentTime);
         mainActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (mediaPlayer != null){
-                    int mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
-                    mSeekBar.setProgress(mCurrentPosition);
+                    long mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
+                    long maxPosition = mediaPlayer.getDuration() / 1000;
+
+                    BigDecimal max = new BigDecimal(maxPosition);
+                    BigDecimal mult = new BigDecimal(100);
+                    BigDecimal current = new BigDecimal(mCurrentPosition);
+                    BigDecimal progress = current.divide(max, 3, RoundingMode.CEILING);
+                    BigDecimal percent = progress.multiply(mult);
+
+                    mSeekBar.setProgress(percent.intValue());
+
+                    currentTimeText.setText(getTimeString(mCurrentPosition * 1000));
+
                 }
                 mHandler.postDelayed(this, 1000);
             }
@@ -123,6 +143,30 @@ public class PlayerService extends Service {
            mediaPlayer.start();
         }
 
+    }
+
+    private String getTimeString(long millis){
+        StringBuffer buf = new StringBuffer();
+
+        int hours = (int) (millis / (1000 * 60 * 60));
+        int minutes = (int) ((millis % (1000 * 60 * 60)) / (1000 * 60));
+        int seconds = (int) (((millis % (1000 * 60 * 60)) % (1000 * 60)) / 1000);
+
+        if (hours != 0) {
+            buf
+                    .append(hours)
+                    .append(":")
+                    .append(String.format("%02d", minutes))
+                    .append(":")
+                    .append(String.format("%02d", seconds));
+        }
+        else  {
+            buf
+                    .append(String.format("%02d", minutes))
+                    .append(":")
+                    .append(String.format("%02d", seconds));
+        }
+        return buf.toString();
     }
 
 }
