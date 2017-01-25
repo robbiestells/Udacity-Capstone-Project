@@ -70,14 +70,12 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/playEpisode"
-        layout_anchor="@id/topCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="@android:color/transparent"
-        android:clickable="true"
-        android:src="@drawable/arrow_right_drop_circle"
-        spp:layout_anchorGravity="bottom|right|end"
-        />
+        spp:layout_anchor="@id/topCard"
+        android:src="@drawable/play"
+        android:id="@+id/playEpisodeButton"
+        android:background="@color/colorAccent"
+        spp:layout_anchorGravity="bottom|right|end"/>
 </android.support.design.widget.CoordinatorLayout>

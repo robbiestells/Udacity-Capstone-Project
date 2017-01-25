@@ -31,7 +31,7 @@ import static com.example.studio111.commentist.R.id.totalTime;
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/
 
-public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSelectedListener, ShowPage.OnEpisodeSelectedListener, ShowPage.OnEpisodePlay {
+public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSelectedListener, ShowPage.OnEpisodeSelectedListener, ShowPage.OnEpisodePlay, EpisodePage.PlayEpisode {
 
     ImageView logoImage;
     Show selectedShow;
@@ -169,10 +169,44 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
         totalTimeTV.setText(feedItem.getLength());
 
-       seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
 
         playerService.LoadUrl(feedItem.getAudioUrl(), seekBar, MainActivity.this);
         isPlaying = true;
 
+    }
+
+    @Override
+    public void PlayEpisode(FeedItem feedItem) {
+        playpauseButton.setImageResource(R.drawable.pause_circle);
+
+        final FeedItem selectedItem = feedItem;
+        playerEpisodeName.setText(feedItem.getTitle());
+        playerEpisodeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //replace fragment
+                EpisodePage episodeFragment = new EpisodePage();
+                Bundle args = new Bundle();
+                args.putParcelable("episode", selectedItem);
+                episodeFragment.setArguments(args);
+
+                selectedEpisode = selectedItem;
+
+                android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.fragment_container, episodeFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+
+        totalTimeTV.setText(feedItem.getLength());
+
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
+
+        playerService.LoadUrl(feedItem.getAudioUrl(), seekBar, MainActivity.this);
+        isPlaying = true;
     }
 }
