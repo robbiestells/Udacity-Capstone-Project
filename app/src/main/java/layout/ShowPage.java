@@ -1,6 +1,7 @@
 package layout;
 
 import android.app.Activity;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.studio111.commentist.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import Adapters.HostAdapter;
@@ -66,16 +68,22 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         TextView showDescription = (TextView) myFragmentView.findViewById(R.id.showDescription);
         showDescription.setText(selectedShow.getDescription());
 
-        final ArrayList<Host> hosts = new ArrayList<Host>();
-
-        hosts.add(new Host("Rob", R.drawable.rob));
-        hosts.add(new Host("Paul", R.drawable.paul));
-
+        ArrayList<Host> hosts = new ArrayList<Host>();
+        if (selectedShow.getName() == getResources().getString(R.string.UnwindName)) {
+            hosts.add(new Host("Rob", R.drawable.rob));
+            hosts.add(new Host("Paul", R.drawable.paul));
+        } else if (selectedShow.getName() == getResources().getString(R.string.BVName)) {
+            hosts.add(new Host("Paul", R.drawable.paul));
+        }  else if (selectedShow.getName() == getResources().getString(R.string.RollName)) {
+            hosts.add(new Host("Rob", R.drawable.rob));
+        } else {
+            hosts.add(new Host("Paul", R.drawable.paul));
+            hosts.add(new Host("Paul", R.drawable.paul));
+        }
         //put shows in grid adapter
         HostAdapter adapter = new HostAdapter(this.getActivity(), hosts);
         hostGrid = (GridView) myFragmentView.findViewById(R.id.hostGrid);
         hostGrid.setAdapter(adapter);
-
 
         recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
 
@@ -86,9 +94,10 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         return myFragmentView;
     }
 
+
     //passes episode to MainActivity
     @Override
-    public void onItemClicked(FeedItem feedItem){
+    public void onItemClicked(FeedItem feedItem) {
         episodeCallback.OnEpisodeSelected(feedItem);
     }
 
@@ -113,7 +122,7 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
 
         }
     }

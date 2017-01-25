@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="UnwindHost">
+        <item>Rob</item>
+        <item>Shawn</item>
+    </array>
+    <array name="UnwindImages">
+        <item>R.drawable.rob</item>
+        <item>R.drawable.paul</item>
+    </array>
+</resources>

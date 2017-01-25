@@ -8,6 +8,8 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.media.MediaBrowserServiceCompat;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -39,7 +41,7 @@ import static com.example.studio111.commentist.R.layout.player;
  * Created by rsteller on 1/20/2017.
  */
 
-public class PlayerService extends Service {
+public class PlayerService extends Service implements Parcelable {
 
     MediaPlayer mediaPlayer = null;
     ImageButton playPauseButton;
@@ -169,4 +171,13 @@ public class PlayerService extends Service {
         return buf.toString();
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+    }
 }

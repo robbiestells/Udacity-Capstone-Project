@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
     }
 
     //pass Show object and change fragment when show selected
