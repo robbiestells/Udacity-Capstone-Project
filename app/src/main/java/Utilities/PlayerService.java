@@ -30,10 +30,13 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import Objects.FeedItem;
+
 import static android.R.attr.max;
 import static android.media.session.PlaybackState.ACTION_PLAY;
 import static android.os.Build.VERSION_CODES.M;
 import static com.example.studio111.commentist.R.id.playerEpisodeName;
+import static com.example.studio111.commentist.R.id.seekBar;
 import static com.example.studio111.commentist.R.id.totalTime;
 import static com.example.studio111.commentist.R.layout.player;
 
@@ -41,18 +44,19 @@ import static com.example.studio111.commentist.R.layout.player;
  * Created by rsteller on 1/20/2017.
  */
 
-public class PlayerService extends Service implements Parcelable {
+public class PlayerService extends Service {
 
     MediaPlayer mediaPlayer = null;
     ImageButton playPauseButton;
     SeekBar mSeekBar;
     Handler mHandler = new Handler();
     TextView currentTimeText;
+    TextView totalTimeTV;
+    ImageButton playpauseButton;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
     }
 
     @Nullable
@@ -62,8 +66,8 @@ public class PlayerService extends Service implements Parcelable {
     }
 
 
-    public void LoadUrl(String url, final SeekBar seekBar, Activity activity) {
-
+    //public void LoadUrl(String url, final SeekBar seekBar, Activity activity) {
+    public void LoadUrl(FeedItem feedItem, Activity activity) {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();
@@ -73,7 +77,8 @@ public class PlayerService extends Service implements Parcelable {
 
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
-            mediaPlayer.setDataSource(url);
+            //mediaPlayer.setDataSource(url);
+            mediaPlayer.setDataSource(feedItem.getAudioUrl());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,11 +89,15 @@ public class PlayerService extends Service implements Parcelable {
             e.printStackTrace();
         }
         mediaPlayer.start();
-        mSeekBar = seekBar;
-//        seekBar.setMax(mediaPlayer.getDuration() / 1000);
-        seekBar.setMax(100);
 
         Activity mainActivity = activity;
+
+        mSeekBar = (SeekBar) activity.findViewById(seekBar);
+        mSeekBar.setMax(100);
+
+        totalTimeTV = (TextView) activity.findViewById(R.id.totalTime);
+        totalTimeTV.setText(feedItem.getLength());
+
         currentTimeText  = (TextView) activity.findViewById(R.id.currentTime);
         mainActivity.runOnUiThread(new Runnable() {
             @Override
@@ -131,18 +140,24 @@ public class PlayerService extends Service implements Parcelable {
             }
         });
 
-    }
-
-    public void Play() {
-        mediaPlayer.start();
+        playpauseButton = (ImageButton) activity.findViewById(R.id.playpause);
+        playpauseButton.setImageResource(R.drawable.pause_circle);
+        playpauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Pause();
+            }
+        });
     }
 
     public void Pause() {
 
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
+            playpauseButton.setImageResource(R.drawable.play_circle);
         } else {
            mediaPlayer.start();
+            playpauseButton.setImageResource(R.drawable.pause_circle);
         }
 
     }
@@ -169,15 +184,5 @@ public class PlayerService extends Service implements Parcelable {
                     .append(String.format("%02d", seconds));
         }
         return buf.toString();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
     }
 }

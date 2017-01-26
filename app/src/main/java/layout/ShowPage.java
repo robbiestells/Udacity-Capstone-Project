@@ -1,7 +1,6 @@
 package layout;
 
 import android.app.Activity;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,18 +13,15 @@ import android.widget.TextView;
 
 import com.example.studio111.commentist.R;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import Adapters.HostAdapter;
 import Adapters.RecyclerAdapter;
-import Adapters.ShowAdapter;
 import Objects.FeedItem;
 import Objects.Host;
 import Objects.Show;
 import Utilities.ReadRss;
 
-import static android.R.attr.host;
 
 /**
  * Created by rsteller on 1/17/2017.

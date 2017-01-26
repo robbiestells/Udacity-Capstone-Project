@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import android.widget.TextView;
 import com.example.studio111.commentist.R;
 
 import Objects.FeedItem;
-import Objects.Show;
-import Utilities.ReadRss;
 
 /**
  * Created by rsteller on 1/18/2017.
@@ -65,7 +62,7 @@ public class EpisodePage extends Fragment {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PlayEpisode(selectedEpisode);
+              //  PlayEpisode(selectedEpisode);
             }
         });
 
@@ -84,11 +81,11 @@ public class EpisodePage extends Fragment {
         }
     }
 
-    @Override
-    public void PlayEpisode(FeedItem feedItem) {
-        playEpisodeCallback.PlayEpisode(feedItem);
-    }
-
+//    @Override
+//    public void PlayEpisode(FeedItem feedItem) {
+//        playEpisodeCallback.PlayEpisode(feedItem);
+//    }
+//
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
