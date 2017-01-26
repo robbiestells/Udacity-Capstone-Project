@@ -47,7 +47,6 @@ import static com.example.studio111.commentist.R.layout.player;
 public class PlayerService extends Service {
 
     MediaPlayer mediaPlayer = null;
-    ImageButton playPauseButton;
     SeekBar mSeekBar;
     Handler mHandler = new Handler();
     TextView currentTimeText;

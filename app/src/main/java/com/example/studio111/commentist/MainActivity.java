@@ -1,15 +1,11 @@
 package com.example.studio111.commentist;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import Objects.FeedItem;
@@ -24,23 +20,14 @@ import static com.example.studio111.commentist.R.id.totalTime;
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/
 
-public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSelectedListener, ShowPage.OnEpisodeSelectedListener, ShowPage.OnEpisodePlay {
+public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSelectedListener, ShowPage.OnEpisodeSelectedListener, ShowPage.OnEpisodePlay, EpisodePage.OnEpisodePlayListener {
 
     ImageView logoImage;
     Show selectedShow;
     FeedItem selectedEpisode;
     TextView playerEpisodeName;
 
-    SeekBar seekBar;
-    TextView totalTimeTV;
-
-    //ImageButton playpauseButton;
-
     PlayerService playerService;
-
-    boolean isPlaying = false;
-
-    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +51,12 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         }
 
             logoImage = (ImageView) findViewById(R.id.logo);
-
-            totalTimeTV = (TextView) findViewById(totalTime);
             playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
-
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
     }
 
     //pass Show object and change fragment when show selected
@@ -123,6 +106,32 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     @Override
     public void OnEpisodePlay(FeedItem feedItem) {
 
+        final FeedItem selectedItem = feedItem;
+        playerEpisodeName.setText(feedItem.getTitle());
+        playerEpisodeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //replace fragment
+                EpisodePage episodeFragment = new EpisodePage();
+                Bundle args = new Bundle();
+                args.putParcelable("episode", selectedItem);
+                episodeFragment.setArguments(args);
+
+                selectedEpisode = selectedItem;
+
+                android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.fragment_container, episodeFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+        playerService.LoadUrl(selectedItem, MainActivity.this);
+    }
+
+    @Override
+    public void onEpisodeSelected(FeedItem feedItem) {
         final FeedItem selectedItem = feedItem;
         playerEpisodeName.setText(feedItem.getTitle());
         playerEpisodeName.setOnClickListener(new View.OnClickListener() {

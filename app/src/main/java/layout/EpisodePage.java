@@ -1,6 +1,7 @@
 package layout;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -21,13 +22,26 @@ import Objects.FeedItem;
 public class EpisodePage extends Fragment {
     View myFragmentView;
     FeedItem selectedEpisode;
-    PlayEpisode playEpisodeCallback;
+    OnEpisodePlayListener mCallback;
 
-    // connects fragment to MainPage to play selected episode
-    public interface PlayEpisode {
-        public void PlayEpisode(FeedItem feedItem);
+    public interface OnEpisodePlayListener {
+        public void onEpisodeSelected(FeedItem feedItem);
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mCallback = (OnEpisodePlayListener) activity;
+        } catch (ClassCastException e){
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnEpisodePlayListener");
+        }
+    }
+
+    public void onEpisodeSelected(FeedItem feedItem){
+        mCallback.onEpisodeSelected(feedItem);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,38 +76,14 @@ public class EpisodePage extends Fragment {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              //  PlayEpisode(selectedEpisode);
+                onEpisodeSelected(selectedEpisode);
             }
         });
 
         return myFragmentView;
     }
 
-    //attaches callback to OnEpisodeSelected in MainActivity
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            playEpisodeCallback = (PlayEpisode) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnShowSelectedListener");
-        }
-    }
 
-//    @Override
-//    public void PlayEpisode(FeedItem feedItem) {
-//        playEpisodeCallback.PlayEpisode(feedItem);
-//    }
-//
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null){
-
-        }
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
