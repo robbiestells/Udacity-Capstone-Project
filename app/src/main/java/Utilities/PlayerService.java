@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.media.MediaBrowserServiceCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -51,7 +52,7 @@ public class PlayerService extends Service {
     Handler mHandler = new Handler();
     TextView currentTimeText;
     TextView totalTimeTV;
-    ImageButton playpauseButton;
+    FloatingActionButton playpauseButton;
 
     @Override
     public void onCreate() {
@@ -139,8 +140,8 @@ public class PlayerService extends Service {
             }
         });
 
-        playpauseButton = (ImageButton) activity.findViewById(R.id.playpause);
-        playpauseButton.setImageResource(R.drawable.pause_circle);
+        playpauseButton = (FloatingActionButton) activity.findViewById(R.id.playpause);
+        playpauseButton.setImageResource(R.drawable.pause);
         playpauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,10 +154,10 @@ public class PlayerService extends Service {
 
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
-            playpauseButton.setImageResource(R.drawable.play_circle);
+            playpauseButton.setImageResource(R.drawable.play);
         } else {
            mediaPlayer.start();
-            playpauseButton.setImageResource(R.drawable.pause_circle);
+            playpauseButton.setImageResource(R.drawable.pause);
         }
 
     }

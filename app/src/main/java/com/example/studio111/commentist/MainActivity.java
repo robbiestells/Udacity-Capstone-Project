@@ -1,6 +1,8 @@
 package com.example.studio111.commentist;
 
 import android.content.Intent;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import layout.EpisodePage;
 import layout.ShowGrid;
 import layout.ShowPage;
 
+import static android.view.View.GONE;
 import static com.example.studio111.commentist.R.id.totalTime;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
@@ -29,17 +32,22 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
     PlayerService playerService;
 
+    FloatingActionButton playPauseButton;
+
+    View bottomSheet;
+    BottomSheetBehavior bottomSheetBehavior;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(savedInstanceState != null){
+        if (savedInstanceState != null) {
             //get PlayerService,  logo image, player fragment
 
 
         } else {
-             playerService = new PlayerService();
+            playerService = new PlayerService();
             Intent startPlayer = new Intent(this, PlayerService.class);
             startService(startPlayer);
             //mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -50,8 +58,17 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
                     .add(R.id.fragment_container, fragment).commit();
         }
 
-            logoImage = (ImageView) findViewById(R.id.logo);
-            playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
+        logoImage = (ImageView) findViewById(R.id.logo);
+        playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
+        playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
+
+        bottomSheet = findViewById(R.id.bottom_sheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        bottomSheetBehavior.setPeekHeight(0);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        playPauseButton.setVisibility(GONE);
+
     }
 
     @Override
@@ -128,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             }
         });
         playerService.LoadUrl(selectedItem, MainActivity.this);
+
+        playPauseButton.setVisibility(View.VISIBLE);
+        bottomSheetBehavior.setPeekHeight(350);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
     @Override
@@ -154,5 +175,14 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             }
         });
         playerService.LoadUrl(selectedItem, MainActivity.this);
+
+        if (playPauseButton.getVisibility() == GONE){
+            playPauseButton.setVisibility(View.VISIBLE);
+        }
+        if (bottomSheetBehavior.getPeekHeight() == 0){
+            bottomSheetBehavior.setPeekHeight(350);
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+
     }
 }
