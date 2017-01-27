@@ -27,7 +27,8 @@
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin">
+                app:layout_collapseMode="pin"
+                android:id="@+id/toolBar">
 
             </android.support.v7.widget.Toolbar>
 
@@ -54,11 +55,12 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
+        android:layout_gravity="center"
         android:layout_height="match_parent"
         android:clipToPadding="true"
         android:background="@android:color/white"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
-       >
+        >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -90,18 +92,6 @@
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/skip_previous" />
-
-                <!--<ImageButton-->
-                    <!--android:id="@+id/playpause"-->
-                    <!--android:layout_width="80dp"-->
-                    <!--android:layout_height="80dp"-->
-                    <!--android:layout_gravity="center_horizontal"-->
-                    <!--android:layout_marginBottom="10dp"-->
-                    <!--android:layout_marginLeft="16dp"-->
-                    <!--android:layout_marginRight="16dp"-->
-                    <!--android:background="@android:color/transparent"-->
-                    <!--android:scaleType="fitCenter"-->
-                    <!--android:src="@drawable/play_circle" />-->
 
                 <ImageButton
                     android:layout_width="30dp"
@@ -171,6 +161,14 @@
                     android:text="Text for the episode title will go here"
                     android:textColor="@android:color/black"
                     android:id="@+id/playerEpisodeName"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:layout_margin="16dp"
+                    android:id="@+id/playerEpisodeDesc"
+                    android:text="test text to see how this will show up"/>
             </LinearLayout>
 
         <!--</RelativeLayout>-->

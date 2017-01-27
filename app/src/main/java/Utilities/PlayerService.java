@@ -52,7 +52,9 @@ public class PlayerService extends Service {
     Handler mHandler = new Handler();
     TextView currentTimeText;
     TextView totalTimeTV;
+    TextView playerEpisodeDesc;
     FloatingActionButton playpauseButton;
+
 
     @Override
     public void onCreate() {
@@ -97,6 +99,9 @@ public class PlayerService extends Service {
 
         totalTimeTV = (TextView) activity.findViewById(R.id.totalTime);
         totalTimeTV.setText(feedItem.getLength());
+
+        playerEpisodeDesc = (TextView) activity.findViewById(R.id.playerEpisodeDesc);
+        playerEpisodeDesc.setText(feedItem.getDescription());
 
         currentTimeText  = (TextView) activity.findViewById(R.id.currentTime);
         mainActivity.runOnUiThread(new Runnable() {

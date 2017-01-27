@@ -16,6 +16,15 @@ public class FeedItem implements Parcelable {
     String pubDate;
     String audioUrl;
     String length;
+    String show;
+
+    public String getShow() {
+        return show;
+    }
+
+    public void setShow(String show) {
+        this.show = show;
+    }
 
     public String getLength() {
         return length;
@@ -70,6 +79,7 @@ public class FeedItem implements Parcelable {
     }
 
     public void writeToParcel(Parcel out, int i) {
+        out.writeString(show);
         out.writeString(title);
         out.writeString(description);
         out.writeString(link);
@@ -80,15 +90,17 @@ public class FeedItem implements Parcelable {
     public FeedItem(){
 //
     }
-//    public FeedItem(String title, String description, String link, String pubDate, String audioUrl, String length){
-//        this.title = title;
-//        this.description = description;
-//        this.link = link;
-//        this.pubDate = pubDate;
-//        this.audioUrl = audioUrl;
-//        this.length = length;
-//    }
+    public FeedItem(String show, String title, String description, String link, String pubDate, String audioUrl, String length){
+        this.show = show;
+        this.title = title;
+        this.description = description;
+        this.link = link;
+        this.pubDate = pubDate;
+        this.audioUrl = audioUrl;
+        this.length = length;
+    }
     private FeedItem(Parcel in){
+        show = in.readString();
         title = in.readString();
         description = in.readString();
         link = in.readString();

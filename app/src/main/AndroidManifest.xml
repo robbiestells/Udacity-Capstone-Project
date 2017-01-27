@@ -19,6 +19,10 @@
         <service android:name="Utilities.PlayerService">
 
         </service>
+        <provider
+            android:authorities="com.example.studio111.commentist"
+            android:name="Data.FeedProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>

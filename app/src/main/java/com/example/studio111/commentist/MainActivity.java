@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
     View bottomSheet;
     BottomSheetBehavior bottomSheetBehavior;
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             playerService = new PlayerService();
             Intent startPlayer = new Intent(this, PlayerService.class);
             startService(startPlayer);
-            //mToolbar = (Toolbar) findViewById(R.id.toolbar);
+            mToolbar = (Toolbar) findViewById(R.id.toolBar);
 
             //load Show listing and load fragment
             Fragment fragment = new ShowGrid();
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         transaction.addToBackStack(null);
 
         transaction.commit();
+        mToolbar.setVisibility(GONE);
     }
 
     //when episode is selected, load fragment with selected episode information
@@ -183,6 +186,5 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             bottomSheetBehavior.setPeekHeight(350);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
-
     }
 }
