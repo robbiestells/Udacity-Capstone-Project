@@ -11,9 +11,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Objects.FeedItem;
+import Objects.Host;
 import Objects.Show;
 import Utilities.PlayerService;
+import Utilities.ReadRss;
+import Utilities.Rss;
 import layout.EpisodePage;
 import layout.ShowGrid;
 import layout.ShowPage;
@@ -59,6 +65,16 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, fragment).commit();
         }
+
+        final ArrayList<Show> shows = new ArrayList<Show>();
+
+        shows.add(new Show(getString(R.string.RollName), getString(R.string.RollDes), R.drawable.rth, getString(R.string.RollLink)));
+        shows.add(new Show(getString(R.string.BVName), getString(R.string.BVDes), R.drawable.vegans, getString(R.string.BVLink)));
+        shows.add(new Show(getString(R.string.UnwindName), getString(R.string.UnwindDes), R.drawable.unwind, getString(R.string.UnwindLink)));
+        shows.add(new Show(getString(R.string.SkyName), getString(R.string.SkyDes), R.drawable.sky, getString(R.string.SkyLink)));
+
+        Rss rss = new Rss(this);
+        rss.execute(shows);
 
         logoImage = (ImageView) findViewById(R.id.logo);
         playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);

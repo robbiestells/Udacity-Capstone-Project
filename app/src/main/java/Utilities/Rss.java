@@ -1,16 +1,16 @@
 package Utilities;
 
-import android.app.ProgressDialog;
+/**
+ * Created by rsteller on 1/27/2017.
+ */
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.GridView;
-import android.widget.ListView;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -25,34 +25,27 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import Adapters.FeedAdapter;
-import Adapters.RecyclerAdapter;
 import Data.FeedContract;
-import Data.FeedContract.FeedEntry;
 import Data.FeedDbHelper;
 import Objects.FeedItem;
+import Objects.Show;
 import layout.ShowPage;
 
-import static android.R.attr.id;
+import static android.R.attr.x;
 
 
 /**
  * Created by rsteller on 1/11/2017.
  */
 
-public class ReadRss extends AsyncTask<String, Void, Void> {
+public class Rss extends AsyncTask<ArrayList<Show>, Void, Void> {
     Context context;
     //String address = "http://thecommentist.com/feed/rolltohitshow";
     ArrayList<FeedItem> feedItems;
-    RecyclerView recyclerView;
     URL url;
-    ShowPage page;
 
-
-public ReadRss(Context context, RecyclerView recyclerView, ShowPage page){
-        this.recyclerView = recyclerView;
+    public Rss(Context context){
         this.context = context;
-        this.page = page;
     }
 
     @Override
@@ -64,24 +57,23 @@ public ReadRss(Context context, RecyclerView recyclerView, ShowPage page){
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-       // RecyclerAdapter feedAdapter = new RecyclerAdapter(context, feedItems, page, page);
-      //  recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      //  recyclerView.getLayoutManager().isSmoothScrolling();
-      //  recyclerView.setAdapter(feedAdapter);
-
         saveFeedItems(feedItems);
     }
 
     @Override
-    protected Void doInBackground(String... params) {
-       String url = params[0];
-        ProcessXML(Getdata(url));
+    protected Void doInBackground(ArrayList<Show>... params) {
+        ArrayList<Show> shows = new ArrayList<>();
+        //Show show2 = params[0].get(1);
+        for (int i = 0; i < params.length; i++){
+            Show show = params[0].get(i);
+            ProcessXML(Getdata(show.getFeed()));
+        }
         return null;
     }
 
     private void ProcessXML(Document data) {
         if (data != null) {
-           feedItems = new ArrayList<>();
+            feedItems = new ArrayList<>();
             String showTitle = new String();
             Element root = data.getDocumentElement();
             Node channel = root.getChildNodes().item(1);
@@ -141,7 +133,7 @@ public ReadRss(Context context, RecyclerView recyclerView, ShowPage page){
         FeedDbHelper mDbHelper = new FeedDbHelper(context);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
-        String query = "SELECT * FROM " + FeedEntry.TABLE_NAME + " WHERE " + FeedEntry.COLUMN_EPIOSDE_AUDIO
+        String query = "SELECT * FROM " + FeedContract.FeedEntry.TABLE_NAME + " WHERE " + FeedContract.FeedEntry.COLUMN_EPIOSDE_AUDIO
                 + " =?";
 
         for (FeedItem item:feedItems) {
@@ -151,16 +143,16 @@ public ReadRss(Context context, RecyclerView recyclerView, ShowPage page){
             if (cursor.getCount() <= 0){
                 //get values
                 ContentValues values = new ContentValues();
-                values.put(FeedEntry.COLUMN_SHOW_NAME, item.getShow());
-                values.put(FeedEntry.COLUMN_EPISODE_TITLE, item.getTitle());
-                values.put(FeedEntry.COLUMN_EPIOSDE_LINK, item.getLink());
-                values.put(FeedEntry.COLUMN_EPISODE_DESCRIPTION, item.getDescription());
-                values.put(FeedEntry.COLUMN_EPISODE_DATE, item.getPubDate());
-                values.put(FeedEntry.COLUMN_EPIOSDE_LENGTH, item.getLength());
-                values.put(FeedEntry.COLUMN_EPIOSDE_AUDIO, item.getAudioUrl());
+                values.put(FeedContract.FeedEntry.COLUMN_SHOW_NAME, item.getShow());
+                values.put(FeedContract.FeedEntry.COLUMN_EPISODE_TITLE, item.getTitle());
+                values.put(FeedContract.FeedEntry.COLUMN_EPIOSDE_LINK, item.getLink());
+                values.put(FeedContract.FeedEntry.COLUMN_EPISODE_DESCRIPTION, item.getDescription());
+                values.put(FeedContract.FeedEntry.COLUMN_EPISODE_DATE, item.getPubDate());
+                values.put(FeedContract.FeedEntry.COLUMN_EPIOSDE_LENGTH, item.getLength());
+                values.put(FeedContract.FeedEntry.COLUMN_EPIOSDE_AUDIO, item.getAudioUrl());
 
                 //insert a new entry with the data above
-                long newRowId = db.insert(FeedEntry.TABLE_NAME, null, values);
+                long newRowId = db.insert(FeedContract.FeedEntry.TABLE_NAME, null, values);
                 Log.v("Insert Feed item", "New row ID: " + newRowId);
             }
             cursor.close();
