@@ -49,8 +49,6 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
     RecyclerView recyclerView;
     OnEpisodeSelectedListener episodeCallback;
     OnEpisodePlay playEpisodeCallback;
-    FeedAdapter feedAdapter;
-    ShowPage page;
 
     // connects fragment to MainPage to pass selected episode
     public interface OnEpisodeSelectedListener {
@@ -104,11 +102,13 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         feedItems = getSavedFeed(selectedShow);
 
         if (feedItems != null) {
-            RecyclerAdapter feedAdapter = new RecyclerAdapter(getContext(), feedItems, this.page, this.page);
+            RecyclerAdapter feedAdapter = new RecyclerAdapter(getContext(), feedItems, ShowPage.this, ShowPage.this);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.getLayoutManager().isSmoothScrolling();
             recyclerView.setAdapter(feedAdapter);
         }
+
+
         //kicks off getting RSS feed for show
       // ReadRss readRss = new ReadRss(this.getContext(), recyclerView, ShowPage.this);
       //  readRss.execute(selectedShow.getFeed());

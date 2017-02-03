@@ -64,10 +64,10 @@ public ReadRss(Context context, RecyclerView recyclerView, ShowPage page){
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-       // RecyclerAdapter feedAdapter = new RecyclerAdapter(context, feedItems, page, page);
-      //  recyclerView.setLayoutManager(new LinearLayoutManager(context));
-      //  recyclerView.getLayoutManager().isSmoothScrolling();
-      //  recyclerView.setAdapter(feedAdapter);
+        RecyclerAdapter feedAdapter = new RecyclerAdapter(context, feedItems, page, page);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.getLayoutManager().isSmoothScrolling();
+        recyclerView.setAdapter(feedAdapter);
 
         saveFeedItems(feedItems);
     }
