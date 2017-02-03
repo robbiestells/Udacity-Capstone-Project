@@ -4,19 +4,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="RollName">Roll to Hit</string>
+    <string name="RollName">Roll to Hit (5th Ed. Dungeons and Dragons)</string>
     <string name="RollDes">Roll to Hit is a live play, 5th edition Dungeons and Dragons podcast. Join in on the adventure as our heroes go on epic quests, battle fierce monsters, level up, and find sweet loot.</string>
     <string name="RollLink">http://thecommentist.com/feed/rolltohitshow/</string>
 
-    <string name="BVName">Bearded Vegans</string>
+    <string name="BVName">The Bearded Vegans</string>
     <string name="BVDes">The Bearded Vegans finds hosts Paul and Andy in a discussion dissecting all things vegan. News, reviews, interviews and in depth discussion of issues within the vegan community are regular features of the show.</string>
     <string name="BVLink">http://thecommentist.com/feed/thebeardedvegans/</string>
 
-    <string name="UnwindName">The Unwind</string>
+    <string name="UnwindName">The Unwind (Tech, Games, Gadgets, and Geek Culture)</string>
     <string name="UnwindDes">The Unwind is a discussion about topics related to tech, games, gadgets, and other aspects of geek culture. Rob, Shawn, and Josiah each bring a topic they find important to the show every week. </string>
     <string name="UnwindLink">http://thecommentist.com/feed/theunwindpodcast/</string>
 
-    <string name="SkyName">Sky on Fire</string>
+    <string name="SkyName">Sky on Fire: A Star Wars RPG</string>
     <string name="SkyDes">Set starting two years after the battle of Yavin, join the crew of the Daring Escape as they travel the galaxy dodging pirates, swindling the Hutts, learning about themselves, and generally trying not to get blown up. This homebrew Star Wars RPG issues the Fantasy Flight Games Edge of the Empire, Age of Rebellion, and Force and Destiny systems. It uses the Star Wars canon as a backdrop and some of the Characters and setting come into the game as cameos.</string>
     <string name="SkyLink">http://thecommentist.com/feed/skyonfire/</string>
 

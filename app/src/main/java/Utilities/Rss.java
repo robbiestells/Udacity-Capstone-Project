@@ -57,14 +57,14 @@ public class Rss extends AsyncTask<ArrayList<Show>, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        saveFeedItems(feedItems);
+       // saveFeedItems(feedItems);
     }
 
     @Override
     protected Void doInBackground(ArrayList<Show>... params) {
         ArrayList<Show> shows = new ArrayList<>();
         //Show show2 = params[0].get(1);
-        for (int i = 0; i < params.length; i++){
+        for (int i = 0; i < params[0].size(); i++){
             Show show = params[0].get(i);
             ProcessXML(Getdata(show.getFeed()));
         }
@@ -110,6 +110,7 @@ public class Rss extends AsyncTask<ArrayList<Show>, Void, Void> {
                     feedItems.add(item);
                 }
             }
+            saveFeedItems(feedItems);
         }
     }
 

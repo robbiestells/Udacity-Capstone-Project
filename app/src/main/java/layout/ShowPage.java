@@ -110,8 +110,8 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
             recyclerView.setAdapter(feedAdapter);
         }
         //kicks off getting RSS feed for show
-        ReadRss readRss = new ReadRss(this.getContext(), recyclerView, ShowPage.this);
-        readRss.execute(selectedShow.getFeed());
+      // ReadRss readRss = new ReadRss(this.getContext(), recyclerView, ShowPage.this);
+      //  readRss.execute(selectedShow.getFeed());
 
         return myFragmentView;
     }
