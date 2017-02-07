@@ -11,21 +11,21 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import Objects.FeedItem;
-import Objects.Host;
 import Objects.Show;
 import Utilities.PlayerService;
-import Utilities.ReadRss;
 import Utilities.Rss;
 import layout.EpisodePage;
 import layout.ShowGrid;
 import layout.ShowPage;
 
 import static android.view.View.GONE;
-import static com.example.studio111.commentist.R.id.totalTime;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/
@@ -45,10 +45,17 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     BottomSheetBehavior bottomSheetBehavior;
     Toolbar mToolbar;
 
+    AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         if (savedInstanceState != null) {
             //get PlayerService,  logo image, player fragment

@@ -20,4 +20,7 @@
     <string name="SkyDes">Set starting two years after the battle of Yavin, join the crew of the Daring Escape as they travel the galaxy dodging pirates, swindling the Hutts, learning about themselves, and generally trying not to get blown up. This homebrew Star Wars RPG issues the Fantasy Flight Games Edge of the Empire, Age of Rebellion, and Force and Destiny systems. It uses the Star Wars canon as a backdrop and some of the Characters and setting come into the game as cameos.</string>
     <string name="SkyLink">http://thecommentist.com/feed/skyonfire/</string>
 
+    <!--<string name="banner_ad_unit_id">ca-app-pub-2351555591155691/9178246064</string>-->
+    <!--preview ad-->
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>
