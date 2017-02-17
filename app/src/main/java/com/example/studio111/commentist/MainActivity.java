@@ -21,30 +21,41 @@ import Objects.FeedItem;
 import Objects.Show;
 import Utilities.PlayerService;
 import Utilities.Rss;
+import butterknife.BindView;
+import butterknife.OnClick;
 import layout.EpisodePage;
 import layout.ShowGrid;
 import layout.ShowPage;
 
 import static android.view.View.GONE;
+import static com.example.studio111.commentist.R.layout.player;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/
 
 public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSelectedListener, ShowPage.OnEpisodeSelectedListener, ShowPage.OnEpisodePlay, EpisodePage.OnEpisodePlayListener {
 
+    @BindView(R.id.logo)
     ImageView logoImage;
+
     Show selectedShow;
     FeedItem selectedEpisode;
-    TextView playerEpisodeName;
-
     PlayerService playerService;
-
-    FloatingActionButton playPauseButton;
-
-    View bottomSheet;
     BottomSheetBehavior bottomSheetBehavior;
+
+    @BindView(R.id.toolBar)
     Toolbar mToolbar;
 
+    @BindView(R.id.playerEpisodeName)
+    TextView playerEpisodeName;
+
+    @BindView(R.id.playpause)
+    FloatingActionButton playPauseButton;
+
+    @BindView(R.id.bottom_sheet)
+    View bottomSheet;
+
+    @BindView(R.id.adView)
     AdView mAdView;
 
     @Override
@@ -53,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         setContentView(R.layout.activity_main);
 
 
-        mAdView = (AdView) findViewById(R.id.adView);
+        //mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
@@ -65,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             playerService = new PlayerService();
             Intent startPlayer = new Intent(this, PlayerService.class);
             startService(startPlayer);
-            mToolbar = (Toolbar) findViewById(R.id.toolBar);
+            //mToolbar = (Toolbar) findViewById(R.id.toolBar);
 
             //load Show listing and load fragment
             Fragment fragment = new ShowGrid();
@@ -83,11 +94,11 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         Rss rss = new Rss(this);
         rss.execute(shows);
 
-        logoImage = (ImageView) findViewById(R.id.logo);
-        playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
-        playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
+        //logoImage = (ImageView) findViewById(R.id.logo);
+//        playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
+//        playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
 
-        bottomSheet = findViewById(R.id.bottom_sheet);
+//        bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setPeekHeight(0);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);

@@ -14,12 +14,14 @@ import android.widget.TextView;
 import com.example.studio111.commentist.R;
 
 import Objects.FeedItem;
+import butterknife.BindView;
 
 /**
  * Created by rsteller on 1/18/2017.
  */
 
 public class EpisodePage extends Fragment {
+
     View myFragmentView;
     FeedItem selectedEpisode;
     OnEpisodePlayListener mCallback;
@@ -57,6 +59,7 @@ public class EpisodePage extends Fragment {
 //         imageView.setImageResource(selectedShow.getImage());
 
         //set description
+
         TextView showDescription = (TextView) myFragmentView.findViewById(R.id.episodeDescription);
         showDescription.setText(selectedEpisode.getDescription());
 
