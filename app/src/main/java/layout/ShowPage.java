@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.studio111.commentist.MainActivity;
@@ -79,22 +80,35 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         TextView showDescription = (TextView) myFragmentView.findViewById(R.id.showDescription);
         showDescription.setText(selectedShow.getDescription());
 
+        hostGrid = (GridView) myFragmentView.findViewById(R.id.hostGrid);
+
         ArrayList<Host> hosts = new ArrayList<Host>();
         if (selectedShow.getName() == getResources().getString(R.string.UnwindName)) {
-            hosts.add(new Host("Rob", R.drawable.rob));
-            hosts.add(new Host("Paul", R.drawable.paul));
+            hosts.add(new Host(getResources().getString(R.string.rob), R.drawable.rob));
+            hosts.add(new Host(getResources().getString(R.string.shawn), R.drawable.shawn));
+            hosts.add(new Host(getResources().getString(R.string.josiah), R.drawable.josiah));
         } else if (selectedShow.getName() == getResources().getString(R.string.BVName)) {
-            hosts.add(new Host("Paul", R.drawable.paul));
+            hosts.add(new Host(getResources().getString(R.string.andy), R.drawable.andy));
+            hosts.add(new Host(getResources().getString(R.string.paul), R.drawable.paul));
         } else if (selectedShow.getName() == getResources().getString(R.string.RollName)) {
-            hosts.add(new Host("Rob", R.drawable.rob));
+            hosts.add(new Host(getResources().getString(R.string.rob), R.drawable.rob));
+            hosts.add(new Host(getResources().getString(R.string.shawn), R.drawable.shawn));
+            hosts.add(new Host(getResources().getString(R.string.paul), R.drawable.paul));
+            hosts.add(new Host(getResources().getString(R.string.josiah), R.drawable.josiah));
+            hosts.add(new Host(getResources().getString(R.string.david), R.drawable.david));
         } else {
-            hosts.add(new Host("Paul", R.drawable.paul));
-            hosts.add(new Host("Paul", R.drawable.paul));
+            hosts.add(new Host(getResources().getString(R.string.wren), R.drawable.wren));
+            hosts.add(new Host(getResources().getString(R.string.zem), R.drawable.zem));
+            hosts.add(new Host(getResources().getString(R.string.scrapper), R.drawable.scrapper));
+            hosts.add(new Host(getResources().getString(R.string.hulo), R.drawable.hulo));
+            hosts.add(new Host(getResources().getString(R.string.dewethar), R.drawable.dewie));
+            hosts.add(new Host(getResources().getString(R.string.afagella), R.drawable.afagella));
+            hosts.add(new Host(getResources().getString(R.string.sollar), R.drawable.sollar));
         }
         //put shows in grid adapter
         HostAdapter adapter = new HostAdapter(this.getActivity(), hosts);
-        hostGrid = (GridView) myFragmentView.findViewById(R.id.hostGrid);
         hostGrid.setAdapter(adapter);
+
 
         recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
 

@@ -23,4 +23,17 @@
     <!--<string name="banner_ad_unit_id">ca-app-pub-2351555591155691/9178246064</string>-->
     <!--preview ad-->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="rob">Rob</string>
+    <string name="shawn">Shawn</string>
+    <string name="josiah">Josiah</string>
+    <string name="andy">Andy</string>
+    <string name="paul">Paul</string>
+    <string name="david">David</string>
+    <string name="wren">Wren</string>
+    <string name="zem">Zem</string>
+    <string name="scrapper">Scrapper</string>
+    <string name="hulo">Hulo</string>
+    <string name="dewethar">Dewethar</string>
+    <string name="afagella">Afagella</string>
+    <string name="sollar">Sollar</string>
 </resources>

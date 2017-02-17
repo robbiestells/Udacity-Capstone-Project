@@ -2,9 +2,9 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -28,10 +28,11 @@
     <GridView
         android:id="@+id/hostGrid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:numColumns="2"
-        android:verticalSpacing="16dp"/>
+        android:layout_height="240dp"
+        android:numColumns="auto_fit"
+        android:columnWidth="100dp"
+        android:layout_gravity="center"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/showListView"
@@ -39,9 +40,6 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:focusable="true"
-        android:numColumns="1"
-        />
+        android:numColumns="1" />
 
-</LinearLayout><!--</android.support.v4.widget.NestedScrollView>-->
-
-    <!--</android.support.design.widget.CoordinatorLayout>-->
+</LinearLayout>
