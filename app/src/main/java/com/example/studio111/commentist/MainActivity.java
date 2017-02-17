@@ -35,27 +35,23 @@ import static com.example.studio111.commentist.R.layout.player;
 
 public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSelectedListener, ShowPage.OnEpisodeSelectedListener, ShowPage.OnEpisodePlay, EpisodePage.OnEpisodePlayListener {
 
-    @BindView(R.id.logo)
-    ImageView logoImage;
+//    @BindView(R.id.logo)
+//    ImageView logoImage;
 
     Show selectedShow;
     FeedItem selectedEpisode;
     PlayerService playerService;
     BottomSheetBehavior bottomSheetBehavior;
 
-    @BindView(R.id.toolBar)
-    Toolbar mToolbar;
+   // Toolbar mToolbar;
 
     @BindView(R.id.playerEpisodeName)
     TextView playerEpisodeName;
 
-    @BindView(R.id.playpause)
     FloatingActionButton playPauseButton;
 
-    @BindView(R.id.bottom_sheet)
     View bottomSheet;
 
-    @BindView(R.id.adView)
     AdView mAdView;
 
     @Override
@@ -64,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         setContentView(R.layout.activity_main);
 
 
-        //mAdView = (AdView) findViewById(R.id.adView);
+        mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
@@ -76,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             playerService = new PlayerService();
             Intent startPlayer = new Intent(this, PlayerService.class);
             startService(startPlayer);
-            //mToolbar = (Toolbar) findViewById(R.id.toolBar);
+         //   mToolbar = (Toolbar) findViewById(R.id.toolBar);
 
             //load Show listing and load fragment
             Fragment fragment = new ShowGrid();
@@ -94,11 +90,11 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         Rss rss = new Rss(this);
         rss.execute(shows);
 
-        //logoImage = (ImageView) findViewById(R.id.logo);
-//        playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
+     //   logoImage = (ImageView) findViewById(R.id.logo);
+       playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
 //        playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
 
-//        bottomSheet = findViewById(R.id.bottom_sheet);
+        bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setPeekHeight(0);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
@@ -116,9 +112,9 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     @Override
     public void OnShowSelected(Show show) {
 
-        logoImage.setImageResource(show.getImage());
-        logoImage.setMinimumHeight(400);
-        logoImage.setVisibility(View.VISIBLE);
+//        logoImage.setImageResource(show.getImage());
+//        logoImage.setMinimumHeight(400);
+//        logoImage.setVisibility(View.VISIBLE);
         //replace fragment and send Show object
         ShowPage showFragment = new ShowPage();
         Bundle args = new Bundle();
@@ -132,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         transaction.addToBackStack(null);
 
         transaction.commit();
-        mToolbar.setVisibility(GONE);
+    //    mToolbar.setVisibility(GONE);
     }
 
     //when episode is selected, load fragment with selected episode information
