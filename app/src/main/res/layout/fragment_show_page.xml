@@ -12,19 +12,11 @@
     <ImageView
     android:id="@+id/logo"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="370dp"
     android:scaleType="centerCrop"
-    android:src="@drawable/rth"
     android:transitionName="logoImage"
     app:layout_collapseMode="parallax"
     app:layout_collapseParallaxMultiplier="0.7" />
-    <TextView
-        android:id="@+id/showDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Roll to hit is a weekly show about "
-        android:textSize="20sp" />
 
     <GridView
         android:id="@+id/hostGrid"
@@ -34,6 +26,14 @@
         android:columnWidth="100dp"
         android:layout_gravity="center"
         />
+
+    <TextView
+        android:id="@+id/showDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Roll to hit is a weekly show about "
+        android:textSize="20sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/showListView"

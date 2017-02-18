@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,6 +51,7 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
     RecyclerView recyclerView;
     OnEpisodeSelectedListener episodeCallback;
     OnEpisodePlay playEpisodeCallback;
+    ImageView imageView;
 
     // connects fragment to MainPage to pass selected episode
     public interface OnEpisodeSelectedListener {
@@ -73,9 +75,9 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         Bundle bundle = this.getArguments();
         selectedShow = bundle.getParcelable("show");
 
-//        ImageView imageView = (ImageView) myFragmentView.findViewById(R.id.logo);
-//       // imageView.setTransitionName("test");
-//         imageView.setImageResource(selectedShow.getImage());
+        imageView = (ImageView) myFragmentView.findViewById(R.id.logo);
+       // imageView.setTransitionName("test");
+         imageView.setImageResource(selectedShow.getImage());
 
         TextView showDescription = (TextView) myFragmentView.findViewById(R.id.showDescription);
         showDescription.setText(selectedShow.getDescription());
@@ -124,8 +126,8 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
 
 
         //kicks off getting RSS feed for show
-      // ReadRss readRss = new ReadRss(this.getContext(), recyclerView, ShowPage.this);
-      //  readRss.execute(selectedShow.getFeed());
+        // ReadRss readRss = new ReadRss(this.getContext(), recyclerView, ShowPage.this);
+        //  readRss.execute(selectedShow.getFeed());
 
         return myFragmentView;
     }
@@ -138,7 +140,7 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         String query = "SELECT * FROM " + FeedEntry.TABLE_NAME + " WHERE " + FeedEntry.COLUMN_SHOW_NAME
                 + " =?";
 
-        Cursor cursor = db.rawQuery(query, new String[] {selectedShow.getName()});
+        Cursor cursor = db.rawQuery(query, new String[]{selectedShow.getName()});
 
         int nameColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_TITLE);
         int linkColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_LINK);
