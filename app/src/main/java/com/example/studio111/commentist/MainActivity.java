@@ -45,24 +45,18 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
    // Toolbar mToolbar;
 
-    @BindView(R.id.playerEpisodeName)
     TextView playerEpisodeName;
 
     FloatingActionButton playPauseButton;
 
     View bottomSheet;
 
-    AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
 
         if (savedInstanceState != null) {
             //get PlayerService,  logo image, player fragment
@@ -92,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
      //   logoImage = (ImageView) findViewById(R.id.logo);
        playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
-//        playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
+       playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
 
         bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);

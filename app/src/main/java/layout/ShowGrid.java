@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.studio111.commentist.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class ShowGrid extends Fragment {
     GridView gridView;
     View myFragmentView;
     OnShowSelectedListener mCallback;
+    AdView mAdView;
 
     //Passes Show object to MainActivity
     public interface OnShowSelectedListener {
@@ -33,6 +36,11 @@ public class ShowGrid extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myFragmentView = inflater.inflate(R.layout.fragment_show_grid, container, false);
+
+
+        mAdView = (AdView) myFragmentView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         //create the list of shows on network
         final ArrayList<Show> shows = new ArrayList<Show>();
