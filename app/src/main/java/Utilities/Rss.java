@@ -4,6 +4,7 @@ package Utilities;
  * Created by rsteller on 1/27/2017.
  */
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -43,6 +44,7 @@ public class Rss extends AsyncTask<ArrayList<Show>, Void, Void> {
     //String address = "http://thecommentist.com/feed/rolltohitshow";
     ArrayList<FeedItem> feedItems;
     URL url;
+    ProgressDialog progressDialog;
 
     public Rss(Context context){
         this.context = context;
@@ -51,19 +53,30 @@ public class Rss extends AsyncTask<ArrayList<Show>, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+
+        //start loading dialog
+        //display loading screen
+        progressDialog = new ProgressDialog(context);
+        //Set the progress dialog to display a horizontal progress bar
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        //Set the dialog title to 'Loading...'
+        progressDialog.setTitle("Looking for new episodes...");
+        //This dialog can't be canceled by pressing the back key
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-       // saveFeedItems(feedItems);
+        //kill loading dialog
+        progressDialog.dismiss();
     }
 
     @Override
     protected Void doInBackground(ArrayList<Show>... params) {
         ArrayList<Show> shows = new ArrayList<>();
-        //Show show2 = params[0].get(1);
         for (int i = 0; i < params[0].size(); i++){
             Show show = params[0].get(i);
             ProcessXML(Getdata(show.getFeed()));

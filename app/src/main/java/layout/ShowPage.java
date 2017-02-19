@@ -34,7 +34,6 @@ import Data.FeedDbHelper;
 import Objects.FeedItem;
 import Objects.Host;
 import Objects.Show;
-import Utilities.ReadRss;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 import static android.view.View.GONE;
@@ -123,11 +122,6 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
             recyclerView.getLayoutManager().isSmoothScrolling();
             recyclerView.setAdapter(feedAdapter);
         }
-
-
-        //kicks off getting RSS feed for show
-        // ReadRss readRss = new ReadRss(this.getContext(), recyclerView, ShowPage.this);
-        //  readRss.execute(selectedShow.getFeed());
 
         return myFragmentView;
     }

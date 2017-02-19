@@ -1,5 +1,6 @@
 package com.example.studio111.commentist;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
@@ -57,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         if (savedInstanceState != null) {
             //get PlayerService,  logo image, player fragment
 
@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             playerService = new PlayerService();
             Intent startPlayer = new Intent(this, PlayerService.class);
             startService(startPlayer);
-         //   mToolbar = (Toolbar) findViewById(R.id.toolBar);
 
             //load Show listing and load fragment
             Fragment fragment = new ShowGrid();
@@ -84,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         Rss rss = new Rss(this);
         rss.execute(shows);
 
-     //   logoImage = (ImageView) findViewById(R.id.logo);
        playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
        playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
 
