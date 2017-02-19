@@ -194,6 +194,7 @@ public class PlayerService extends Service {
 
     public void Pause() {
 
+
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             playpauseButton.setImageResource(R.drawable.play);
