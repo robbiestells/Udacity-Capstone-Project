@@ -89,7 +89,7 @@
                     android:layout_marginRight="60dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/skip_previous" />
+                    android:src="@drawable/rotate_left" />
 
                 <ImageButton
                     android:id="@+id/seekForwardButton"
@@ -100,7 +100,7 @@
                     android:layout_marginLeft="60dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/skip_next" />
+                    android:src="@drawable/rotate_right" />
 
             </LinearLayout>
 
