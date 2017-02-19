@@ -129,9 +129,9 @@ public class PlayerService extends Service {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if (mediaPlayer != null && b){
-                    mediaPlayer.seekTo(i * 1000);
-                }
+//                if (mediaPlayer != null && b){
+//                    mediaPlayer.seekTo(i * 1000);
+//                }
             }
 
             @Override
@@ -141,7 +141,16 @@ public class PlayerService extends Service {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                if (mediaPlayer != null){
+                    //get percentage seeked
+                    int i = seekBar.getProgress();
+                    double maxPosition =  mediaPlayer.getDuration() * .01;
+                    //figure out new percentage and progress
+                    double newPercentage = maxPosition * i;
+                    int newPosition = (int)newPercentage;
+                    //seek to new progress
+                    mediaPlayer.seekTo(newPosition);
+                }
             }
         });
 
