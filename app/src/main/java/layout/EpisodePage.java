@@ -1,9 +1,7 @@
 package layout;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,8 +11,7 @@ import android.widget.TextView;
 
 import com.example.studio111.commentist.R;
 
-import Objects.FeedItem;
-import butterknife.BindView;
+import com.example.studio111.commentist.Objects.FeedItem;
 
 /**
  * Created by rsteller on 1/18/2017.

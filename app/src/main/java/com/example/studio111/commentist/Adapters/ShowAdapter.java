@@ -1,6 +1,5 @@
-package Adapters;
+package com.example.studio111.commentist.Adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
@@ -13,7 +12,7 @@ import com.example.studio111.commentist.R;
 
 import java.util.ArrayList;
 
-import Objects.Show;
+import com.example.studio111.commentist.Objects.Show;
 
 /**
  * Created by rsteller on 1/13/2017.

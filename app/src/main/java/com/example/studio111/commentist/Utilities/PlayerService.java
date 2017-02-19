@@ -1,42 +1,26 @@
-package Utilities;
+package com.example.studio111.commentist.Utilities;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.MediaPlayer;
-import android.media.session.MediaSession;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.media.MediaBrowserServiceCompat;
-import android.support.v4.media.session.MediaSessionCompat;
-import android.support.v4.media.session.PlaybackStateCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.studio111.commentist.MainActivity;
 import com.example.studio111.commentist.R;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import Objects.FeedItem;
+import com.example.studio111.commentist.Objects.FeedItem;
 
 import static com.example.studio111.commentist.R.id.seekBar;
 
@@ -188,7 +172,9 @@ public class PlayerService extends Service {
 
         //update widget
         Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
-        this.sendBroadcast(dataUpdatedIntent);
+        activity.sendBroadcast(dataUpdatedIntent);
+
+
 
     }
 

@@ -1,29 +1,22 @@
 package com.example.studio111.commentist;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import java.util.ArrayList;
 
-import Objects.FeedItem;
-import Objects.Show;
-import Utilities.PlayerService;
-import Utilities.Rss;
-import butterknife.BindView;
-import butterknife.OnClick;
+import com.example.studio111.commentist.Objects.FeedItem;
+import com.example.studio111.commentist.Objects.Show;
+import com.example.studio111.commentist.Utilities.PlayerService;
+import com.example.studio111.commentist.Utilities.Rss;
+
 import layout.EpisodePage;
 import layout.ShowGrid;
 import layout.ShowPage;

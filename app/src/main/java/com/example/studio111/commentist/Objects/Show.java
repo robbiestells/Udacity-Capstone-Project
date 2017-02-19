@@ -1,4 +1,4 @@
-package Objects;
+package com.example.studio111.commentist.Objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;

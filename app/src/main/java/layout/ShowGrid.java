@@ -1,7 +1,6 @@
 package layout;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,8 +16,8 @@ import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 
-import Adapters.ShowAdapter;
-import Objects.Show;
+import com.example.studio111.commentist.Adapters.ShowAdapter;
+import com.example.studio111.commentist.Objects.Show;
 
 public class ShowGrid extends Fragment {
     GridView gridView;

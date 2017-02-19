@@ -1,4 +1,4 @@
-package Adapters;
+package com.example.studio111.commentist.Adapters;
 
 /**
  * Created by rsteller on 1/23/2017.
@@ -16,7 +16,7 @@ import com.example.studio111.commentist.R;
 
 import java.util.ArrayList;
 
-import Objects.Host;
+import com.example.studio111.commentist.Objects.Host;
 
 import android.widget.TextView;
 

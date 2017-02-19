@@ -17,11 +17,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="Utilities.PlayerService">
+        <service android:name="com.example.studio111.commentist.Utilities.PlayerService">
 
         </service>
 
-        <receiver android:name="AppWidgetProvider" >
+        <receiver android:name=".CommentistWidgetProvider" >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.example.studio111.commentist.ACTION_DATA_UPDATED" />
@@ -48,7 +48,7 @@
         </service>
         <provider
             android:authorities="com.example.studio111.commentist"
-            android:name="Data.FeedProvider"
+            android:name="com.example.studio111.commentist.Data.FeedProvider"
             android:exported="false"/>
     </application>
 

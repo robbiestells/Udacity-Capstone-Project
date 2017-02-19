@@ -3,15 +3,12 @@ package com.example.studio111.commentist;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.RemoteViews;
-
-import Utilities.PlayerService;
 
 /**
  * Created by robbi on 2/19/2017.
  */
 
-public class AppWidgetProvider extends android.appwidget.AppWidgetProvider {
+public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);

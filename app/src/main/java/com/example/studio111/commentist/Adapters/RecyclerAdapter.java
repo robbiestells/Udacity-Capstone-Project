@@ -1,9 +1,8 @@
-package Adapters;
+package com.example.studio111.commentist.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +10,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.studio111.commentist.MainActivity;
 import com.example.studio111.commentist.R;
 
 import java.util.ArrayList;
 
-import Objects.FeedItem;
+import com.example.studio111.commentist.Objects.FeedItem;
 
 import static com.example.studio111.commentist.R.id.playEpisode;
 

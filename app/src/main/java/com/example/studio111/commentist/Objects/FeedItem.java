@@ -1,9 +1,7 @@
-package Objects;
+package com.example.studio111.commentist.Objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import static android.R.attr.name;
 
 /**
  * Created by rsteller on 1/11/2017.

@@ -1,7 +1,6 @@
 package layout;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,34 +8,24 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.studio111.commentist.MainActivity;
 import com.example.studio111.commentist.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import Adapters.FeedAdapter;
-import Adapters.HostAdapter;
-import Adapters.RecyclerAdapter;
-import Data.FeedContract;
-import Data.FeedContract.FeedEntry;
-import Data.FeedDbHelper;
-import Objects.FeedItem;
-import Objects.Host;
-import Objects.Show;
-
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
-import static android.view.View.GONE;
+import com.example.studio111.commentist.Adapters.HostAdapter;
+import com.example.studio111.commentist.Adapters.RecyclerAdapter;
+import com.example.studio111.commentist.Data.FeedContract.FeedEntry;
+import com.example.studio111.commentist.Data.FeedDbHelper;
+import com.example.studio111.commentist.Objects.FeedItem;
+import com.example.studio111.commentist.Objects.Host;
+import com.example.studio111.commentist.Objects.Show;
 
 
 /**

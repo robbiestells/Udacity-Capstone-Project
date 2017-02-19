@@ -1,4 +1,4 @@
-package Utilities;
+package com.example.studio111.commentist.Utilities;
 
 /**
  * Created by rsteller on 1/27/2017.
@@ -10,7 +10,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import org.w3c.dom.Document;
@@ -26,13 +25,10 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import Data.FeedContract;
-import Data.FeedDbHelper;
-import Objects.FeedItem;
-import Objects.Show;
-import layout.ShowPage;
-
-import static android.R.attr.x;
+import com.example.studio111.commentist.Data.FeedContract;
+import com.example.studio111.commentist.Data.FeedDbHelper;
+import com.example.studio111.commentist.Objects.FeedItem;
+import com.example.studio111.commentist.Objects.Show;
 
 
 /**

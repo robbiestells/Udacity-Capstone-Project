@@ -1,4 +1,4 @@
-package Data;
+package com.example.studio111.commentist.Data;
 
 import android.content.ContentResolver;
 import android.net.Uri;
