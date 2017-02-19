@@ -52,7 +52,13 @@ public class PlayerService extends Service {
     ImageButton forwardButton;
     ImageButton backButton;
 
-    @Override
+    MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            episodeEnding();
+        }
+    };
+
     public void onCreate() {
         super.onCreate();
     }
@@ -73,6 +79,7 @@ public class PlayerService extends Service {
         }
         mediaPlayer = new MediaPlayer();
 
+
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             //mediaPlayer.setDataSource(url);
@@ -87,6 +94,7 @@ public class PlayerService extends Service {
             e.printStackTrace();
         }
         mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(mCompletionListener);
 
         Activity mainActivity = activity;
 
@@ -233,5 +241,14 @@ public class PlayerService extends Service {
                     .append(String.format("%02d", seconds));
         }
         return buf.toString();
+    }
+
+    private void episodeEnding() {
+        if (mediaPlayer != null) {
+            mediaPlayer.pause();
+            mediaPlayer.seekTo(0);
+            playpauseButton.setImageResource(R.drawable.play);
+           
+        }
     }
 }
