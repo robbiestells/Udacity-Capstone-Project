@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.IBinder;
@@ -33,13 +34,7 @@ import java.math.RoundingMode;
 
 import Objects.FeedItem;
 
-import static android.R.attr.max;
-import static android.media.session.PlaybackState.ACTION_PLAY;
-import static android.os.Build.VERSION_CODES.M;
-import static com.example.studio111.commentist.R.id.playerEpisodeName;
 import static com.example.studio111.commentist.R.id.seekBar;
-import static com.example.studio111.commentist.R.id.totalTime;
-import static com.example.studio111.commentist.R.layout.player;
 
 /**
  * Created by rsteller on 1/20/2017.
@@ -54,7 +49,8 @@ public class PlayerService extends Service {
     TextView totalTimeTV;
     TextView playerEpisodeDesc;
     FloatingActionButton playpauseButton;
-
+    ImageButton forwardButton;
+    ImageButton backButton;
 
     @Override
     public void onCreate() {
@@ -103,11 +99,11 @@ public class PlayerService extends Service {
         playerEpisodeDesc = (TextView) activity.findViewById(R.id.playerEpisodeDesc);
         playerEpisodeDesc.setText(feedItem.getDescription());
 
-        currentTimeText  = (TextView) activity.findViewById(R.id.currentTime);
+        currentTimeText = (TextView) activity.findViewById(R.id.currentTime);
         mainActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if (mediaPlayer != null){
+                if (mediaPlayer != null) {
                     long mCurrentPosition = mediaPlayer.getCurrentPosition() / 1000;
                     long maxPosition = mediaPlayer.getDuration() / 1000;
 
@@ -129,9 +125,7 @@ public class PlayerService extends Service {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-//                if (mediaPlayer != null && b){
-//                    mediaPlayer.seekTo(i * 1000);
-//                }
+
             }
 
             @Override
@@ -141,13 +135,13 @@ public class PlayerService extends Service {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (mediaPlayer != null){
+                if (mediaPlayer != null) {
                     //get percentage seeked
                     int i = seekBar.getProgress();
-                    double maxPosition =  mediaPlayer.getDuration() * .01;
+                    double maxPosition = mediaPlayer.getDuration() * .01;
                     //figure out new percentage and progress
                     double newPercentage = maxPosition * i;
-                    int newPosition = (int)newPercentage;
+                    int newPosition = (int) newPercentage;
                     //seek to new progress
                     mediaPlayer.seekTo(newPosition);
                 }
@@ -159,7 +153,23 @@ public class PlayerService extends Service {
         playpauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Pause();
+                Pause();
+            }
+        });
+
+        forwardButton = (ImageButton) activity.findViewById(R.id.seekForwardButton);
+        forwardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SkipForward();
+            }
+        });
+
+        backButton = (ImageButton) activity.findViewById(R.id.seekBackButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SkipBack();
             }
         });
     }
@@ -170,13 +180,39 @@ public class PlayerService extends Service {
             mediaPlayer.pause();
             playpauseButton.setImageResource(R.drawable.play);
         } else {
-           mediaPlayer.start();
+            mediaPlayer.start();
             playpauseButton.setImageResource(R.drawable.pause);
         }
 
     }
 
-    private String getTimeString(long millis){
+    public void SkipForward() {
+        if (mediaPlayer != null) {
+            //find current position
+            int currentPosition = mediaPlayer.getCurrentPosition();
+
+            //add 30 seconds
+            int newPosition = currentPosition + 30000;
+
+            //seek to new progress
+            mediaPlayer.seekTo(newPosition);
+        }
+    }
+
+    public void SkipBack() {
+        if (mediaPlayer != null) {
+            //find current position
+            int currentPosition = mediaPlayer.getCurrentPosition();
+
+            //go back 10 seconds
+            int newPosition = currentPosition - 10000;
+
+            //seek to new progress
+            mediaPlayer.seekTo(newPosition);
+        }
+    }
+
+    private String getTimeString(long millis) {
         StringBuffer buf = new StringBuffer();
 
         int hours = (int) (millis / (1000 * 60 * 60));
@@ -190,8 +226,7 @@ public class PlayerService extends Service {
                     .append(String.format("%02d", minutes))
                     .append(":")
                     .append(String.format("%02d", seconds));
-        }
-        else  {
+        } else {
             buf
                     .append(String.format("%02d", minutes))
                     .append(":")

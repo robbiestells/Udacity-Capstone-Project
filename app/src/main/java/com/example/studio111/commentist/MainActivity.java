@@ -29,7 +29,6 @@ import layout.ShowGrid;
 import layout.ShowPage;
 
 import static android.view.View.GONE;
-import static com.example.studio111.commentist.R.layout.player;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/
