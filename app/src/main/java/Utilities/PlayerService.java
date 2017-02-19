@@ -1,18 +1,22 @@
 package Utilities;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.Image;
 import android.media.MediaPlayer;
+import android.media.session.MediaSession;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.media.MediaBrowserServiceCompat;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.media.session.PlaybackStateCompat;
@@ -82,7 +86,6 @@ public class PlayerService extends Service {
 
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
-            //mediaPlayer.setDataSource(url);
             mediaPlayer.setDataSource(feedItem.getAudioUrl());
         } catch (IOException e) {
             e.printStackTrace();
@@ -180,6 +183,7 @@ public class PlayerService extends Service {
                 SkipBack();
             }
         });
+
     }
 
     public void Pause() {
@@ -248,7 +252,8 @@ public class PlayerService extends Service {
             mediaPlayer.pause();
             mediaPlayer.seekTo(0);
             playpauseButton.setImageResource(R.drawable.play);
-           
+
         }
     }
+
 }
