@@ -56,6 +56,8 @@ public class PlayerService extends Service {
     ImageButton forwardButton;
     ImageButton backButton;
 
+    public static final String ACTION_DATA_UPDATED = "com.example.studio111.commentist.ACTION_DATA_UPDATED";
+
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
@@ -183,6 +185,10 @@ public class PlayerService extends Service {
                 SkipBack();
             }
         });
+
+        //update widget
+        Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+        this.sendBroadcast(dataUpdatedIntent);
 
     }
 
