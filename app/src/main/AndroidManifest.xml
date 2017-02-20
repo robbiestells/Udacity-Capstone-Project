@@ -29,7 +29,7 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/appwidget" />
         </receiver>
-
+        <service android:name=".AppWidgetIntentService"/>
         <service
             android:name=".MyFirebaseMessagingService">
             <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
