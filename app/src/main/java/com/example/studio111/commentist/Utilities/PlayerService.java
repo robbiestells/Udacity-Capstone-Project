@@ -172,15 +172,14 @@ public class PlayerService extends Service {
 
         //update widget
         Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
+        dataUpdatedIntent.putExtra("showTitle", feedItem.getTitle());
+        dataUpdatedIntent.putExtra("show", feedItem.getShow());
         activity.sendBroadcast(dataUpdatedIntent);
-
 
 
     }
 
     public void Pause() {
-
-
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             playpauseButton.setImageResource(R.drawable.play);
@@ -188,7 +187,6 @@ public class PlayerService extends Service {
             mediaPlayer.start();
             playpauseButton.setImageResource(R.drawable.pause);
         }
-
     }
 
     public void SkipForward() {

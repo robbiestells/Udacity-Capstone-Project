@@ -21,6 +21,7 @@ import layout.EpisodePage;
 import layout.ShowGrid;
 import layout.ShowPage;
 
+import static android.R.attr.x;
 import static android.view.View.GONE;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     PlayerService playerService;
     BottomSheetBehavior bottomSheetBehavior;
 
-   // Toolbar mToolbar;
+    // Toolbar mToolbar;
 
     TextView playerEpisodeName;
 
@@ -75,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         Rss rss = new Rss(this);
         rss.execute(shows);
 
-       playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
-       playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
+        playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
+        playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
 
         bottomSheet = findViewById(R.id.bottom_sheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         transaction.addToBackStack(null);
 
         transaction.commit();
-    //    mToolbar.setVisibility(GONE);
+        //    mToolbar.setVisibility(GONE);
     }
 
     //when episode is selected, load fragment with selected episode information
@@ -193,10 +194,10 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         });
         playerService.LoadUrl(selectedItem, MainActivity.this);
 
-        if (playPauseButton.getVisibility() == GONE){
+        if (playPauseButton.getVisibility() == GONE) {
             playPauseButton.setVisibility(View.VISIBLE);
         }
-        if (bottomSheetBehavior.getPeekHeight() == 0){
+        if (bottomSheetBehavior.getPeekHeight() == 0) {
             bottomSheetBehavior.setPeekHeight(350);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }

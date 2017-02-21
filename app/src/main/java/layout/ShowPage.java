@@ -131,6 +131,7 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         int dateColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_DATE);
         int lengthColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_LENGTH);
         int audioColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_AUDIO);
+        int showColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_SHOW_NAME);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -141,6 +142,7 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
             item.setPubDate(cursor.getString(dateColumnIndex));
             item.setLength(cursor.getString(lengthColumnIndex));
             item.setAudioUrl(cursor.getString(audioColumnIndex));
+            item.setShow(cursor.getString(showColumnIndex));
             feedItems.add(item);
             cursor.moveToNext();
         }
