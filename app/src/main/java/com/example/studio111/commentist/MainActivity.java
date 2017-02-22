@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
         if (savedInstanceState != null) {
             //get PlayerService,  logo image, player fragment
-
-
         } else {
             playerService = new PlayerService();
             Intent startPlayer = new Intent(this, PlayerService.class);
@@ -85,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 
         playPauseButton.setVisibility(GONE);
-
     }
 
     @Override
@@ -201,5 +198,11 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
             bottomSheetBehavior.setPeekHeight(350);
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //TODO: send Intent to set widget back to default
     }
 }

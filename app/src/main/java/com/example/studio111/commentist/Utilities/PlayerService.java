@@ -41,6 +41,8 @@ public class PlayerService extends Service {
     ImageButton backButton;
 
     public static final String ACTION_DATA_UPDATED = "com.example.studio111.commentist.ACTION_DATA_UPDATED";
+    public static final String ACTION_PAUSE = "com.example.studio111.commentist.ACTION_PAUSE";
+    Activity mainActivity;
 
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
@@ -85,7 +87,7 @@ public class PlayerService extends Service {
         mediaPlayer.start();
         mediaPlayer.setOnCompletionListener(mCompletionListener);
 
-        Activity mainActivity = activity;
+        mainActivity = activity;
 
         mSeekBar = (SeekBar) activity.findViewById(seekBar);
         mSeekBar.setMax(100);
@@ -122,12 +124,10 @@ public class PlayerService extends Service {
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
@@ -174,8 +174,8 @@ public class PlayerService extends Service {
         Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
         dataUpdatedIntent.putExtra("showTitle", feedItem.getTitle());
         dataUpdatedIntent.putExtra("show", feedItem.getShow());
+        dataUpdatedIntent.putExtra("player", PlayerService.class);
         activity.sendBroadcast(dataUpdatedIntent);
-
 
     }
 
@@ -183,6 +183,9 @@ public class PlayerService extends Service {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             playpauseButton.setImageResource(R.drawable.play);
+
+//            Intent dataUpdatedIntent = new Intent(ACTION_PAUSE);
+//            mainActivity.sendBroadcast(dataUpdatedIntent);
         } else {
             mediaPlayer.start();
             playpauseButton.setImageResource(R.drawable.pause);
@@ -243,6 +246,8 @@ public class PlayerService extends Service {
             mediaPlayer.pause();
             mediaPlayer.seekTo(0);
             playpauseButton.setImageResource(R.drawable.play);
+
+            //TODO: send intent to change widget back to default
 
         }
     }
