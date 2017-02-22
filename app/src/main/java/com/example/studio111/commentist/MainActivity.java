@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         if (savedInstanceState != null) {
             //get PlayerService,  logo image, player fragment
         } else {
@@ -163,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
                 transaction.commit();
             }
         });
+        playerService = PlayerService.get();
         playerService.LoadUrl(selectedItem, MainActivity.this);
 
         playPauseButton.setVisibility(View.VISIBLE);

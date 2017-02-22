@@ -36,6 +36,11 @@ import static com.example.studio111.commentist.R.id.seekBar;
 
 public class PlayerService extends Service {
 
+    private static PlayerService sInstance;
+    public static PlayerService get(){
+        return sInstance;
+    }
+
     MediaPlayer mediaPlayer = null;
     SeekBar mSeekBar;
     Handler mHandler = new Handler();
@@ -59,6 +64,7 @@ public class PlayerService extends Service {
 
     public void onCreate() {
         super.onCreate();
+        sInstance = this;
     }
 
     @Nullable
@@ -69,11 +75,12 @@ public class PlayerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-if (startId != 1) {
+        if (startId != 1) {
 //    if (intent.getAction().equalsIgnoreCase(ACTION_PAUSE)) {
-        Pause();
-   // }
-}
+            Pause();
+            // }
+        } else {
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -225,7 +232,6 @@ if (startId != 1) {
             Intent dataUpdatedIntent = new Intent(ACTION_DATA_UPDATED);
             dataUpdatedIntent.putExtra("showTitle", feedItem.getTitle());
             dataUpdatedIntent.putExtra("show", feedItem.getShow());
-            dataUpdatedIntent.putExtra("player", PlayerService.class);
             activity.sendBroadcast(dataUpdatedIntent);
 
         }
