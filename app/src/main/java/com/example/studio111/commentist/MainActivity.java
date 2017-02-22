@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     // Toolbar mToolbar;
 
     TextView playerEpisodeName;
+    ImageView playerShowLogo;
 
     FloatingActionButton playPauseButton;
 
@@ -81,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         bottomSheetBehavior.setPeekHeight(0);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        playerShowLogo = (ImageView) findViewById(R.id.playerShowLogo);
 
         playPauseButton.setVisibility(GONE);
     }
@@ -164,6 +168,25 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         playPauseButton.setVisibility(View.VISIBLE);
         bottomSheetBehavior.setPeekHeight(350);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+        int showLogo;
+        switch (selectedItem.getShow()){
+            case "The Bearded Vegans":
+                showLogo = R.drawable.vegans;
+                break;
+            case "Roll to Hit (5th Ed. Dungeons and Dragons)":
+                showLogo = R.drawable.rth;
+                break;
+            case "The Unwind (Tech, Games, Gadgets, and Geek Culture)":
+                showLogo = R.drawable.unwind;
+                break;
+            case "Sky on Fire: A Star Wars RPG":
+                showLogo = R.drawable.sky;
+                break;
+            default:
+                showLogo = R.drawable.unwind;
+        }
+        playerShowLogo.setImageResource(showLogo);
     }
 
     @Override

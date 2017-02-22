@@ -168,6 +168,13 @@
                     android:layout_margin="16dp"
                     android:id="@+id/playerEpisodeDesc"
                     android:text="test text to see how this will show up"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:id="@+id/playerShowLogo"
+                    android:scaleType="centerCrop"
+                    />
             </LinearLayout>
 
         </LinearLayout>
