@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     PlayerService playerService;
     BottomSheetBehavior bottomSheetBehavior;
 
-    // Toolbar mToolbar;
-
     TextView playerEpisodeName;
     ImageView playerShowLogo;
 
@@ -55,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         if (savedInstanceState != null) {
             //get PlayerService,  logo image, player fragment
         } else {
-            playerService = new PlayerService();
             Intent startPlayer = new Intent(this, PlayerService.class);
             startService(startPlayer);
 
@@ -97,9 +94,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     @Override
     public void OnShowSelected(Show show) {
 
-//        logoImage.setImageResource(show.getImage());
-//        logoImage.setMinimumHeight(400);
-//        logoImage.setVisibility(View.VISIBLE);
         //replace fragment and send Show object
         ShowPage showFragment = new ShowPage();
         Bundle args = new Bundle();
@@ -113,7 +107,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         transaction.addToBackStack(null);
 
         transaction.commit();
-        //    mToolbar.setVisibility(GONE);
     }
 
     //when episode is selected, load fragment with selected episode information
@@ -212,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
                 transaction.commit();
             }
         });
+        playerService = PlayerService.get();
         playerService.LoadUrl(selectedItem, MainActivity.this);
 
         if (playPauseButton.getVisibility() == GONE) {

@@ -19,8 +19,6 @@ import static android.R.attr.id;
  */
 
 public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvider {
-    private static final int REQUEST_CODE = 0;
-    private static final int INTENT_FLAGS = 0;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget_layout);
@@ -62,15 +60,11 @@ public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvide
             ComponentName myappWidget = new ComponentName(context.getPackageName(), CommentistWidgetProvider.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(myappWidget);
 
-
-            //   onUpdate(context, appWidgetManager, appWidgetIds);
             for (int appWidgetId : appWidgetIds) {
                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget_layout);
                 views.setTextViewText(R.id.widgetEpisodeName, showTitle);
                 views.setImageViewResource(R.id.widgetLogo, showLogo);
                 appWidgetManager.updateAppWidget(appWidgetId, views);
-
-                //TODO: get widget play button to work
 
                 Intent playButtonIntent = new Intent(PlayerService.ACTION_PAUSE);
                 PendingIntent pendingIntent = PendingIntent.getService(context, 0, playButtonIntent, 0);

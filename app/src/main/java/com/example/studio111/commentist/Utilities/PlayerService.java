@@ -241,9 +241,6 @@ public class PlayerService extends Service {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             playpauseButton.setImageResource(R.drawable.play);
-
-//            Intent dataUpdatedIntent = new Intent(ACTION_PAUSE);
-//            mainActivity.sendBroadcast(dataUpdatedIntent);
         } else {
             mediaPlayer.start();
             playpauseButton.setImageResource(R.drawable.pause);
