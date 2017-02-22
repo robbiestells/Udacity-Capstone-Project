@@ -83,7 +83,6 @@ public class ShowGrid extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null){
-
         }
     }
 

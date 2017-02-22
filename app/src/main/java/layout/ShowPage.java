@@ -27,6 +27,8 @@ import com.example.studio111.commentist.Objects.FeedItem;
 import com.example.studio111.commentist.Objects.Host;
 import com.example.studio111.commentist.Objects.Show;
 
+import static com.example.studio111.commentist.R.id.showLogo;
+
 
 /**
  * Created by rsteller on 1/17/2017.
@@ -73,28 +75,38 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         hostGrid = (GridView) myFragmentView.findViewById(R.id.hostGrid);
 
         ArrayList<Host> hosts = new ArrayList<Host>();
-        if (selectedShow.getName() == getResources().getString(R.string.UnwindName)) {
-            hosts.add(new Host(getResources().getString(R.string.rob), R.drawable.rob));
-            hosts.add(new Host(getResources().getString(R.string.shawn), R.drawable.shawn));
-            hosts.add(new Host(getResources().getString(R.string.josiah), R.drawable.josiah));
-        } else if (selectedShow.getName() == getResources().getString(R.string.BVName)) {
-            hosts.add(new Host(getResources().getString(R.string.andy), R.drawable.andy));
-            hosts.add(new Host(getResources().getString(R.string.paul), R.drawable.paul));
-        } else if (selectedShow.getName() == getResources().getString(R.string.RollName)) {
-            hosts.add(new Host(getResources().getString(R.string.rob), R.drawable.rob));
-            hosts.add(new Host(getResources().getString(R.string.shawn), R.drawable.shawn));
-            hosts.add(new Host(getResources().getString(R.string.paul), R.drawable.paul));
-            hosts.add(new Host(getResources().getString(R.string.josiah), R.drawable.josiah));
-            hosts.add(new Host(getResources().getString(R.string.david), R.drawable.david));
-        } else {
-            hosts.add(new Host(getResources().getString(R.string.wren), R.drawable.wren));
-            hosts.add(new Host(getResources().getString(R.string.zem), R.drawable.zem));
-            hosts.add(new Host(getResources().getString(R.string.scrapper), R.drawable.scrapper));
-            hosts.add(new Host(getResources().getString(R.string.hulo), R.drawable.hulo));
-            hosts.add(new Host(getResources().getString(R.string.dewethar), R.drawable.dewie));
-            hosts.add(new Host(getResources().getString(R.string.afagella), R.drawable.afagella));
-            hosts.add(new Host(getResources().getString(R.string.sollar), R.drawable.sollar));
+        switch (selectedShow.getName()){
+            case "The Bearded Vegans":
+                hosts.add(new Host(getResources().getString(R.string.andy), R.drawable.andy));
+                hosts.add(new Host(getResources().getString(R.string.paul), R.drawable.paul));
+                break;
+            case "Roll to Hit (5th Ed. Dungeons and Dragons)":
+                hosts.add(new Host(getResources().getString(R.string.rob), R.drawable.rob));
+                hosts.add(new Host(getResources().getString(R.string.shawn), R.drawable.shawn));
+                hosts.add(new Host(getResources().getString(R.string.paul), R.drawable.paul));
+                hosts.add(new Host(getResources().getString(R.string.josiah), R.drawable.josiah));
+                hosts.add(new Host(getResources().getString(R.string.david), R.drawable.david));
+                break;
+            case "The Unwind (Tech, Games, Gadgets, and Geek Culture)":
+                hosts.add(new Host(getResources().getString(R.string.rob), R.drawable.rob));
+                hosts.add(new Host(getResources().getString(R.string.shawn), R.drawable.shawn));
+                hosts.add(new Host(getResources().getString(R.string.josiah), R.drawable.josiah));
+                break;
+            case "Sky on Fire: A Star Wars RPG":
+                hosts.add(new Host(getResources().getString(R.string.wren), R.drawable.wren));
+                hosts.add(new Host(getResources().getString(R.string.zem), R.drawable.zem));
+                hosts.add(new Host(getResources().getString(R.string.scrapper), R.drawable.scrapper));
+                hosts.add(new Host(getResources().getString(R.string.hulo), R.drawable.hulo));
+                hosts.add(new Host(getResources().getString(R.string.dewethar), R.drawable.dewie));
+                hosts.add(new Host(getResources().getString(R.string.afagella), R.drawable.afagella));
+                hosts.add(new Host(getResources().getString(R.string.sollar), R.drawable.sollar));
+                break;
+            default:
+                hosts.add(new Host(getResources().getString(R.string.rob), R.drawable.rob));
+                hosts.add(new Host(getResources().getString(R.string.shawn), R.drawable.shawn));
+                hosts.add(new Host(getResources().getString(R.string.josiah), R.drawable.josiah));
         }
+
         //put shows in grid adapter
         HostAdapter adapter = new HostAdapter(this.getActivity(), hosts);
         hostGrid.setAdapter(adapter);

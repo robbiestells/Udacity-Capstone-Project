@@ -56,7 +56,7 @@ public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvide
             ComponentName myappWidget = new ComponentName(context.getPackageName(), CommentistWidgetProvider.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(myappWidget);
 
-            PlayerService playerService = extras.getParcelable("player");
+            //PlayerService playerService = extras.getParcelable("player");
 
             //   onUpdate(context, appWidgetManager, appWidgetIds);
             for (int appWidgetId : appWidgetIds) {
