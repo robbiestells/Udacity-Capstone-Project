@@ -2,6 +2,7 @@ package com.example.studio111.commentist.Utilities;
 
 import android.app.Activity;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -24,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.example.studio111.commentist.Objects.FeedItem;
 
+import static android.R.attr.name;
 import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
 import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
 import static com.example.studio111.commentist.R.id.seekBar;
@@ -65,6 +67,15 @@ public class PlayerService extends Service {
         return null;
     }
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+if (startId != 1) {
+//    if (intent.getAction().equalsIgnoreCase(ACTION_PAUSE)) {
+        Pause();
+   // }
+}
+        return super.onStartCommand(intent, flags, startId);
+    }
 
     //public void LoadUrl(String url, final SeekBar seekBar, Activity activity) {
     public void LoadUrl(FeedItem feedItem, Activity activity) {
@@ -75,9 +86,8 @@ public class PlayerService extends Service {
                 if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
                     // Permanent loss of audio focus
                     // Pause playback immediately
-                    Pause();
-                }
-                else if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT) {
+                    //  Pause();
+                } else if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT) {
                     // Pause playback
                     if (mediaPlayer.isPlaying()) {
                         Pause();

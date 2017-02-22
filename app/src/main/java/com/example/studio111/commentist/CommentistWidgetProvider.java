@@ -62,7 +62,6 @@ public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvide
             ComponentName myappWidget = new ComponentName(context.getPackageName(), CommentistWidgetProvider.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(myappWidget);
 
-            //PlayerService playerService = extras.getParcelable("player");
 
             //   onUpdate(context, appWidgetManager, appWidgetIds);
             for (int appWidgetId : appWidgetIds) {
@@ -73,20 +72,11 @@ public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvide
 
                 //TODO: get widget play button to work
 
-//                Intent playButtonIntent = new Intent(context, PlayerService.class);
-//                PendingIntent playIntent = PendingIntent.getService(context, REQUEST_CODE, playButtonIntent, INTENT_FLAGS);
-//                // playerService.Pause();
-//                views.setOnClickPendingIntent(R.id.widgetPlayButton, playIntent);
-//
-//                //change image
-//                views.setImageViewResource(R.id.widgetPlayButton, R.drawable.pause);
+                Intent playButtonIntent = new Intent(PlayerService.ACTION_PAUSE);
+                PendingIntent pendingIntent = PendingIntent.getService(context, 0, playButtonIntent, 0);
+                views.setOnClickPendingIntent(R.id.widgetPlayButton, pendingIntent);
+
             }
-        } else if (PlayerService.ACTION_PAUSE.equals(intent.getAction())) {
-           RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget_layout);
-
-            //change image
-            views.setImageViewResource(R.id.widgetPlayButton, R.drawable.pause);
-
         }
     }
 
