@@ -24,6 +24,12 @@ public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvide
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget_layout);
+
+        Intent intent = new Intent(context, PlayerService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(context, 0, intent, 0);
+
+        // Get the layout for the App Widget and attach an on-click listener to the button
+        views.setOnClickPendingIntent(R.id.widgetPlayButton, pendingIntent);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
@@ -66,13 +72,14 @@ public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvide
                 appWidgetManager.updateAppWidget(appWidgetId, views);
 
                 //TODO: get widget play button to work
-                Intent playButtonIntent = new Intent(context, PlayerService.class);
-                PendingIntent playIntent = PendingIntent.getService(context, REQUEST_CODE, playButtonIntent, INTENT_FLAGS);
-                // playerService.Pause();
-                views.setOnClickPendingIntent(R.id.widgetPlayButton, playIntent);
 
-                //change image
-                views.setImageViewResource(R.id.widgetPlayButton, R.drawable.pause);
+//                Intent playButtonIntent = new Intent(context, PlayerService.class);
+//                PendingIntent playIntent = PendingIntent.getService(context, REQUEST_CODE, playButtonIntent, INTENT_FLAGS);
+//                // playerService.Pause();
+//                views.setOnClickPendingIntent(R.id.widgetPlayButton, playIntent);
+//
+//                //change image
+//                views.setImageViewResource(R.id.widgetPlayButton, R.drawable.pause);
             }
         } else if (PlayerService.ACTION_PAUSE.equals(intent.getAction())) {
            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget_layout);
