@@ -37,7 +37,8 @@ import static com.example.studio111.commentist.R.id.seekBar;
 public class PlayerService extends Service {
 
     private static PlayerService sInstance;
-    public static PlayerService get(){
+
+    public static PlayerService get() {
         return sInstance;
     }
 
@@ -238,12 +239,14 @@ public class PlayerService extends Service {
     }
 
     public void Pause() {
-        if (mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-            playpauseButton.setImageResource(R.drawable.play);
-        } else {
-            mediaPlayer.start();
-            playpauseButton.setImageResource(R.drawable.pause);
+        if (mediaPlayer != null) {
+            if (mediaPlayer.isPlaying()) {
+                mediaPlayer.pause();
+                playpauseButton.setImageResource(R.drawable.play);
+            } else {
+                mediaPlayer.start();
+                playpauseButton.setImageResource(R.drawable.pause);
+            }
         }
     }
 

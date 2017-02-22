@@ -1,5 +1,7 @@
 package com.example.studio111.commentist;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 
@@ -24,6 +27,7 @@ import layout.ShowPage;
 
 import static android.R.attr.x;
 import static android.view.View.GONE;
+import static com.example.studio111.commentist.R.id.showLogo;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/
@@ -221,5 +225,15 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     protected void onDestroy() {
         super.onDestroy();
         //TODO: send Intent to set widget back to default
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        ComponentName myappWidget = new ComponentName(this.getPackageName(), CommentistWidgetProvider.class.getName());
+
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(myappWidget);
+        for (int appWidgetId : appWidgetIds) {
+            RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.appwidget_layout);
+            views.setTextViewText(R.id.widgetEpisodeName, "Play an episode to display here");
+            views.setImageViewResource(R.id.widgetLogo, R.drawable.rob);
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
     }
 }
