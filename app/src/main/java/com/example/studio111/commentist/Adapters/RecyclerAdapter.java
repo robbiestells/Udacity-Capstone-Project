@@ -55,13 +55,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         //YoYo.with(Techniques.FadeIn).playOn(holder.cardView);
         final FeedItem current=feedItems.get(position);
         holder.Title.setText(current.getTitle());
-        holder.Description.setText(current.getDescription());
         holder.Date.setText(current.getPubDate());
-        //holder.Length.setText(current.getLength());
-       // holder.Url.setText(current.getAudioUrl());
-        //holder.Link.setText(current.getLink());
-
-        //Picasso.with(context).load(current.getThumbnailUrl()).into(holder.Thumbnail);
+        holder.Length.setText(current.getLength());
 
         holder.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +66,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             }
         });
-
     }
 
     @Override
@@ -80,8 +74,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView Title,Description,Date,Length,Url,Link;
-        ImageView Thumbnail;
+        TextView Title,Date,Length;
         ImageButton playButton;
         CardView cardView;
         public MyViewHolder(View itemView) {
@@ -90,7 +83,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             itemView.setOnClickListener(this);
 
             Title= (TextView) itemView.findViewById(R.id.episodeName);
-            Description= (TextView) itemView.findViewById(R.id.episodeDescription);
+            Length = (TextView) itemView.findViewById(R.id.episodeLength);
             Date= (TextView) itemView.findViewById(R.id.episodeDate);
             playButton = (ImageButton) itemView.findViewById(playEpisode);
             cardView= (CardView) itemView.findViewById(R.id.episodeCard);

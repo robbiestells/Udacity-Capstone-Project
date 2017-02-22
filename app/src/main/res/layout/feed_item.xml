@@ -23,39 +23,43 @@
                 android:id="@+id/episodeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="32sp" />
+                android:layout_marginBottom="6dp"
+                android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/episodeDescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16dp"
-                android:visibility="gone"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/episodeDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="8dp" />
+                <TextView
+                    android:id="@+id/episodeDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:text="test"
+                    android:textSize="12sp" />
 
-            <TextView
-                android:id="@+id/episodeLength"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="8dp" />
+                <TextView
+                    android:id="@+id/episodeLength"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:text="test"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
         </LinearLayout>
 
         <ImageButton
+            android:id="@+id/playEpisode"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/play"
-            android:scaleType="fitCenter"
-            android:id="@+id/playEpisode"
             android:clickable="true"
             android:onClick="playEpisodeClick"
-            />
+            android:scaleType="fitCenter"
+            android:src="@drawable/play"
+            android:background="@android:color/transparent"/>
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

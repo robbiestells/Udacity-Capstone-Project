@@ -171,6 +171,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
+                    android:maxWidth="350dp"
                     android:layout_height="350dp"
                     android:id="@+id/playerShowLogo"
                     android:scaleType="centerCrop"
