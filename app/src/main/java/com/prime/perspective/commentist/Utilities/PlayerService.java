@@ -74,10 +74,7 @@ public class PlayerService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (startId != 1) {
-//    if (intent.getAction().equalsIgnoreCase(ACTION_PAUSE)) {
             Pause();
-            // }
-        } else {
         }
         return super.onStartCommand(intent, flags, startId);
     }
@@ -91,7 +88,9 @@ public class PlayerService extends Service {
                 if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
                     // Permanent loss of audio focus
                     // Pause playback immediately
-                    //  Pause();
+                    if (mediaPlayer.isPlaying()) {
+                        Pause();
+                    }
                 } else if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT) {
                     // Pause playback
                     if (mediaPlayer.isPlaying()) {
@@ -99,14 +98,15 @@ public class PlayerService extends Service {
                     }
                 } else if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
                     // Lower the volume, keep playing
-                    if (mediaPlayer.isPlaying()) {
-                        Pause();
-                    }
+                   if (mediaPlayer.isPlaying()){
+                       mediaPlayer.setVolume(0.2f, 0.2f);
+                   }
                 } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                     // Your app has been granted audio focus again
                     // Raise volume to normal, restart playback if necessary
                     if (!mediaPlayer.isPlaying()) {
                         Pause();
+                        mediaPlayer.setVolume(1.0f, 1.0f);
                     }
                 }
             }
@@ -123,7 +123,6 @@ public class PlayerService extends Service {
             if (mediaPlayer != null) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
-
             }
             mediaPlayer = new MediaPlayer();
 
@@ -300,7 +299,7 @@ public class PlayerService extends Service {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
             mediaPlayer.seekTo(0);
-            playpauseButton.setImageResource(R.mipmap.the_commentist);
+            playpauseButton.setImageResource(R.drawable.play);
         }
     }
 
