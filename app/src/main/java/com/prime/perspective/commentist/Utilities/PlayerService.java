@@ -49,8 +49,8 @@ public class PlayerService extends Service {
     ImageButton forwardButton;
     ImageButton backButton;
 
-    public static final String ACTION_DATA_UPDATED = "com.prime.perspective.commentist_logo.ACTION_DATA_UPDATED";
-    public static final String ACTION_PAUSE = "com.prime.perspective.commentist_logo.ACTION_PAUSE";
+    public static final String ACTION_DATA_UPDATED = "com.prime.perspective.commentist.ACTION_DATA_UPDATED";
+    public static final String ACTION_PAUSE = "com.prime.perspective.commentist.ACTION_PAUSE";
     Activity mainActivity;
 
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
