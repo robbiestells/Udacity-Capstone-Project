@@ -1,4 +1,4 @@
-package com.example.studio111.commentist;
+package com.prime.perspective.commentist;
 
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
@@ -16,18 +16,16 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import com.example.studio111.commentist.Objects.FeedItem;
-import com.example.studio111.commentist.Objects.Show;
-import com.example.studio111.commentist.Utilities.PlayerService;
-import com.example.studio111.commentist.Utilities.Rss;
+import com.prime.perspective.commentist.Objects.FeedItem;
+import com.prime.perspective.commentist.Objects.Show;
+import com.prime.perspective.commentist.Utilities.PlayerService;
+import com.prime.perspective.commentist.Utilities.Rss;
 
 import layout.EpisodePage;
 import layout.ShowGrid;
 import layout.ShowPage;
 
-import static android.R.attr.x;
 import static android.view.View.GONE;
-import static com.example.studio111.commentist.R.id.showLogo;
 
 //tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
 //xml feed http://thecommentist.com/feed/rolltohitshow/

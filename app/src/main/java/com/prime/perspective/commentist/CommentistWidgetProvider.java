@@ -1,18 +1,14 @@
-package com.example.studio111.commentist;
+package com.prime.perspective.commentist;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.widget.ImageButton;
 import android.widget.RemoteViews;
 
-import com.example.studio111.commentist.Utilities.PlayerService;
-
-import static android.R.attr.id;
+import com.prime.perspective.commentist.Utilities.PlayerService;
 
 /**
  * Created by robbi on 2/19/2017.

@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.example.studio111.commentist.R;
+import com.prime.perspective.commentist.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 
-import com.example.studio111.commentist.Adapters.ShowAdapter;
-import com.example.studio111.commentist.Objects.Show;
+import com.prime.perspective.commentist.Adapters.ShowAdapter;
+import com.prime.perspective.commentist.Objects.Show;
 
 public class ShowGrid extends Fragment {
     GridView gridView;

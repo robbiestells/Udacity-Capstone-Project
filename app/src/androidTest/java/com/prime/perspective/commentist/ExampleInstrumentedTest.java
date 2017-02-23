@@ -1,4 +1,4 @@
-package com.example.studio111.commentist;
+package com.prime.perspective.commentist;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

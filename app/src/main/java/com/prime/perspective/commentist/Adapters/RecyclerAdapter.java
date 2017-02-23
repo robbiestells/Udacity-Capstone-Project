@@ -1,4 +1,4 @@
-package com.example.studio111.commentist.Adapters;
+package com.prime.perspective.commentist.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -7,16 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.studio111.commentist.R;
+import com.prime.perspective.commentist.R;
 
 import java.util.ArrayList;
 
-import com.example.studio111.commentist.Objects.FeedItem;
+import com.prime.perspective.commentist.Objects.FeedItem;
 
-import static com.example.studio111.commentist.R.id.playEpisode;
+import static com.prime.perspective.commentist.R.id.playEpisode;
 
 /**
  * Created by robbi on 1/17/2017.

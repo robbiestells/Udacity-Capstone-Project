@@ -15,19 +15,17 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.studio111.commentist.R;
+import com.prime.perspective.commentist.R;
 
 import java.util.ArrayList;
 
-import com.example.studio111.commentist.Adapters.HostAdapter;
-import com.example.studio111.commentist.Adapters.RecyclerAdapter;
-import com.example.studio111.commentist.Data.FeedContract.FeedEntry;
-import com.example.studio111.commentist.Data.FeedDbHelper;
-import com.example.studio111.commentist.Objects.FeedItem;
-import com.example.studio111.commentist.Objects.Host;
-import com.example.studio111.commentist.Objects.Show;
-
-import static com.example.studio111.commentist.R.id.showLogo;
+import com.prime.perspective.commentist.Adapters.HostAdapter;
+import com.prime.perspective.commentist.Adapters.RecyclerAdapter;
+import com.prime.perspective.commentist.Data.FeedContract.FeedEntry;
+import com.prime.perspective.commentist.Data.FeedDbHelper;
+import com.prime.perspective.commentist.Objects.FeedItem;
+import com.prime.perspective.commentist.Objects.Host;
+import com.prime.perspective.commentist.Objects.Show;
 
 
 /**

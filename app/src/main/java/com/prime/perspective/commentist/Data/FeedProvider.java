@@ -1,4 +1,4 @@
-package com.example.studio111.commentist.Data;
+package com.prime.perspective.commentist.Data;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -10,7 +10,7 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.example.studio111.commentist.Data.FeedContract.FeedEntry;
+import com.prime.perspective.commentist.Data.FeedContract.FeedEntry;
 
 /**
  * Created by rsteller on 1/27/2017.

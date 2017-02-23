@@ -1,4 +1,4 @@
-package com.example.studio111.commentist.Objects;
+package com.prime.perspective.commentist.Objects;
 
 import android.os.Parcel;
 import android.os.Parcelable;

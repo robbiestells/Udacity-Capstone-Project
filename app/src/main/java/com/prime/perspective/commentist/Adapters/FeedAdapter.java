@@ -1,4 +1,4 @@
-package com.example.studio111.commentist.Adapters;
+package com.prime.perspective.commentist.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,11 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.example.studio111.commentist.R;
+import com.prime.perspective.commentist.R;
 
 import java.util.ArrayList;
 
-import com.example.studio111.commentist.Objects.FeedItem;
+import com.prime.perspective.commentist.Objects.FeedItem;
 
 /**
  * Created by robbi on 1/11/2017.

@@ -1,8 +1,7 @@
-package com.example.studio111.commentist.Utilities;
+package com.prime.perspective.commentist.Utilities;
 
 import android.app.Activity;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -16,19 +15,17 @@ import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.studio111.commentist.R;
+import com.prime.perspective.commentist.R;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.concurrent.TimeUnit;
 
-import com.example.studio111.commentist.Objects.FeedItem;
+import com.prime.perspective.commentist.Objects.FeedItem;
 
-import static android.R.attr.name;
 import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
 import static android.media.AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK;
-import static com.example.studio111.commentist.R.id.seekBar;
+import static com.prime.perspective.commentist.R.id.seekBar;
 
 /**
  * Created by rsteller on 1/20/2017.
@@ -52,8 +49,8 @@ public class PlayerService extends Service {
     ImageButton forwardButton;
     ImageButton backButton;
 
-    public static final String ACTION_DATA_UPDATED = "com.example.studio111.commentist.ACTION_DATA_UPDATED";
-    public static final String ACTION_PAUSE = "com.example.studio111.commentist.ACTION_PAUSE";
+    public static final String ACTION_DATA_UPDATED = "com.prime.perspective.commentist.ACTION_DATA_UPDATED";
+    public static final String ACTION_PAUSE = "com.prime.perspective.commentist.ACTION_PAUSE";
     Activity mainActivity;
 
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {

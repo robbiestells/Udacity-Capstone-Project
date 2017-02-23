@@ -1,4 +1,4 @@
-package com.example.studio111.commentist.Data;
+package com.prime.perspective.commentist.Data;
 
 import android.content.ContentResolver;
 import android.net.Uri;

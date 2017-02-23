@@ -1,4 +1,4 @@
-package com.example.studio111.commentist.Adapters;
+package com.prime.perspective.commentist.Adapters;
 
 /**
  * Created by rsteller on 1/23/2017.
@@ -12,11 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
-import com.example.studio111.commentist.R;
+import com.prime.perspective.commentist.R;
 
 import java.util.ArrayList;
 
-import com.example.studio111.commentist.Objects.Host;
+import com.prime.perspective.commentist.Objects.Host;
 
 import android.widget.TextView;
 

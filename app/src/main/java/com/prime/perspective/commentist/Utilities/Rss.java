@@ -1,4 +1,4 @@
-package com.example.studio111.commentist.Utilities;
+package com.prime.perspective.commentist.Utilities;
 
 /**
  * Created by rsteller on 1/27/2017.
@@ -25,10 +25,10 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import com.example.studio111.commentist.Data.FeedContract;
-import com.example.studio111.commentist.Data.FeedDbHelper;
-import com.example.studio111.commentist.Objects.FeedItem;
-import com.example.studio111.commentist.Objects.Show;
+import com.prime.perspective.commentist.Data.FeedContract;
+import com.prime.perspective.commentist.Data.FeedDbHelper;
+import com.prime.perspective.commentist.Objects.FeedItem;
+import com.prime.perspective.commentist.Objects.Show;
 
 
 /**

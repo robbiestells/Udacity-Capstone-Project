@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.studio111.commentist.R;
+import com.prime.perspective.commentist.R;
 
-import com.example.studio111.commentist.Objects.FeedItem;
+import com.prime.perspective.commentist.Objects.FeedItem;
 
 /**
  * Created by rsteller on 1/18/2017.

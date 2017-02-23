@@ -1,10 +1,10 @@
-package com.example.studio111.commentist.Data;
+package com.prime.perspective.commentist.Data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.studio111.commentist.Data.FeedContract.FeedEntry;
+import com.prime.perspective.commentist.Data.FeedContract.FeedEntry;
 
 /**
  * Created by rsteller on 1/27/2017.
