@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //TODO: send Intent to set widget back to default
+
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         ComponentName myappWidget = new ComponentName(this.getPackageName(), CommentistWidgetProvider.class.getName());
 
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         for (int appWidgetId : appWidgetIds) {
             RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.appwidget_layout);
             views.setTextViewText(R.id.widgetEpisodeName, "Play an episode to display here");
-            views.setImageViewResource(R.id.widgetLogo, R.drawable.rob);
+            views.setImageViewResource(R.id.widgetLogo, R.mipmap.the_commentist);
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }

@@ -49,8 +49,8 @@ public class PlayerService extends Service {
     ImageButton forwardButton;
     ImageButton backButton;
 
-    public static final String ACTION_DATA_UPDATED = "com.prime.perspective.commentist.ACTION_DATA_UPDATED";
-    public static final String ACTION_PAUSE = "com.prime.perspective.commentist.ACTION_PAUSE";
+    public static final String ACTION_DATA_UPDATED = "com.prime.perspective.commentist_logo.ACTION_DATA_UPDATED";
+    public static final String ACTION_PAUSE = "com.prime.perspective.commentist_logo.ACTION_PAUSE";
     Activity mainActivity;
 
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
@@ -300,10 +300,7 @@ public class PlayerService extends Service {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
             mediaPlayer.seekTo(0);
-            playpauseButton.setImageResource(R.drawable.play);
-
-            //TODO: send intent to change widget back to default
-
+            playpauseButton.setImageResource(R.mipmap.the_commentist);
         }
     }
 

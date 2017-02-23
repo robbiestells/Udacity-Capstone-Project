@@ -16,9 +16,13 @@
         <ImageView
             android:id="@+id/widgetLogo"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_weight="1"
-            android:src="@drawable/rth"
+            android:src="@mipmap/the_commentist"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
             />
         <LinearLayout
             android:layout_width="0dp"
