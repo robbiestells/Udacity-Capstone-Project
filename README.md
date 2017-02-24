@@ -6,7 +6,7 @@ This project was created as the Capstone Project for the Udacity Android Develop
 
 ## Known Bugs
 
-* None at the moment
+* None at present
 
 ## Submitting an Issue
 
