@@ -56,6 +56,8 @@ public class PlayerService extends Service {
     public static final String ACTION_DATA_UPDATED = "com.prime.perspective.commentist.ACTION_DATA_UPDATED";
     public static final String ACTION_PAUSE = "com.prime.perspective.commentist.ACTION_PAUSE";
     Activity mainActivity;
+    AudioManager am;
+    AudioManager.OnAudioFocusChangeListener afChangeListener;
 
     //set action when episode finishes
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
@@ -69,27 +71,8 @@ public class PlayerService extends Service {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-    }
-
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        //check if it's the first time initiated, if not, run Pause()
-        if (startId != 1) {
-            Pause();
-        }
-        return super.onStartCommand(intent, flags, startId);
-    }
-
-    public void LoadUrl(FeedItem feedItem, Activity activity) {
-
-        AudioManager am = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
-        AudioManager.OnAudioFocusChangeListener afChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        afChangeListener = new AudioManager.OnAudioFocusChangeListener() {
             @Override
             public void onAudioFocusChange(int focusChange) {
                 if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
@@ -115,6 +98,24 @@ public class PlayerService extends Service {
                 }
             }
         };
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        //check if it's the first time initiated, if not, run Pause()
+        if (startId != 1) {
+            Pause();
+        }
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    public void LoadUrl(FeedItem feedItem, Activity activity) {
 
         int result = am.requestAudioFocus(afChangeListener,
                 // Use the stream.
