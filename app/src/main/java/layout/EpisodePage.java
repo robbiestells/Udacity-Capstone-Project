@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.prime.perspective.commentist.MainActivity;
 import com.prime.perspective.commentist.R;
 
 import com.prime.perspective.commentist.Objects.FeedItem;
@@ -21,26 +22,6 @@ public class EpisodePage extends Fragment {
 
     View myFragmentView;
     FeedItem selectedEpisode;
-    OnEpisodePlayListener mCallback;
-
-    public interface OnEpisodePlayListener {
-        public void onEpisodeSelected(FeedItem feedItem);
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mCallback = (OnEpisodePlayListener) activity;
-        } catch (ClassCastException e){
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnEpisodePlayListener");
-        }
-    }
-
-    public void onEpisodeSelected(FeedItem feedItem){
-        mCallback.onEpisodeSelected(feedItem);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,7 +52,8 @@ public class EpisodePage extends Fragment {
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onEpisodeSelected(selectedEpisode);
+                MainActivity mainActivity = MainActivity.getInstance();
+                mainActivity.PlayEpisode(selectedEpisode);
             }
         });
 

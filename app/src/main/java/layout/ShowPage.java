@@ -1,7 +1,5 @@
 package layout;
 
-import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +18,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.prime.perspective.commentist.Adapters.FeedAdapter;
-import com.prime.perspective.commentist.MainActivity;
 import com.prime.perspective.commentist.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.prime.perspective.commentist.Adapters.HostAdapter;
-import com.prime.perspective.commentist.Adapters.RecyclerAdapter;
 import com.prime.perspective.commentist.Data.FeedContract.FeedEntry;
 import com.prime.perspective.commentist.Data.FeedDbHelper;
 import com.prime.perspective.commentist.Objects.FeedItem;
@@ -40,7 +34,7 @@ import com.prime.perspective.commentist.Objects.Show;
  * Created by rsteller on 1/17/2017.
  */
 
-public class ShowPage extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, RecyclerAdapter.AdapterCallback, RecyclerAdapter.EpisodeCallback {
+public class ShowPage extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     View myFragmentView;
     Show selectedShow;
     GridView hostGrid;
@@ -153,17 +147,6 @@ public class ShowPage extends Fragment implements LoaderManager.LoaderCallbacks<
         HostAdapter adapter = new HostAdapter(this.getActivity(), hosts);
         hostGrid.setAdapter(adapter);
 
-        // recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
-
-//        ArrayList<FeedItem> feedItems = new ArrayList<>();
-//        feedItems = getSavedFeed(selectedShow);
-//
-//        if (feedItems != null) {
-//            RecyclerAdapter feedAdapter = new RecyclerAdapter(getContext(), feedItems, ShowPage.this, ShowPage.this);
-//            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//            recyclerView.getLayoutManager().isSmoothScrolling();
-//            recyclerView.setAdapter(feedAdapter);
-//        }
         mCursorAdapter = new FeedAdapter(getContext(), null);
         ListView showList = (ListView) myFragmentView.findViewById(R.id.showListView);
         showList.setAdapter(mCursorAdapter);
@@ -206,31 +189,6 @@ public class ShowPage extends Fragment implements LoaderManager.LoaderCallbacks<
         cursor.close();
         db.close();
         return feedItems;
-    }
-
-
-    //passes episode to MainActivity
-    @Override
-    public void onItemClicked(FeedItem feedItem) {
-        episodeCallback.OnEpisodeSelected(feedItem);
-    }
-
-    //attaches callback to OnEpisodeSelected in MainActivity
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            episodeCallback = (OnEpisodeSelectedListener) activity;
-            playEpisodeCallback = (OnEpisodePlay) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnShowSelectedListener");
-        }
-    }
-
-    @Override
-    public void onEpisodePlay(FeedItem feedItem) {
-        playEpisodeCallback.OnEpisodePlay(feedItem);
     }
 
     @Override

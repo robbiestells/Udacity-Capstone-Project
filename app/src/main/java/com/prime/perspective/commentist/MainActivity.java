@@ -32,8 +32,7 @@ import layout.ShowPage;
 
 import static android.view.View.GONE;
 
-
-public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSelectedListener, ShowPage.OnEpisodeSelectedListener, ShowPage.OnEpisodePlay, EpisodePage.OnEpisodePlayListener {
+public class MainActivity extends AppCompatActivity {
 
     Show selectedShow;
     FeedItem selectedEpisode;
@@ -46,6 +45,11 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     FloatingActionButton playPauseButton;
 
     View bottomSheet;
+    private static MainActivity sMainActivty;
+
+    public static MainActivity getInstance() {
+        return sMainActivty;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         if (savedInstanceState != null) {
             //intentionally left blank
         } else {
+            //set instance of MainActivity
+            sMainActivty = this;
+
             //start PlayerService
             Intent startPlayer = new Intent(this, PlayerService.class);
             startService(startPlayer);
@@ -77,9 +84,9 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
-        //get feed
-        Rss rss = new Rss(this);
-        rss.execute(shows);
+            //get feed
+            Rss rss = new Rss(this);
+            rss.execute(shows);
         } else {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.no_rss), Toast.LENGTH_LONG).show();
         }
@@ -103,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     }
 
     //pass Show object and change fragment when show selected
-    @Override
     public void OnShowSelected(Show show) {
 
         //replace fragment and send Show object
@@ -123,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
     //when episode is selected, load fragment with selected episode information
     //From ShowPage
-    @Override
     public void OnEpisodeSelected(FeedItem feedItem) {
 
         //replace fragment
@@ -142,9 +147,24 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         transaction.commit();
     }
 
-    //when episode is selected, load fragment with selected episode information
+    //when app is closed, set the widget back to default view
     @Override
-    public void OnEpisodePlay(FeedItem feedItem) {
+    protected void onDestroy() {
+        super.onDestroy();
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        ComponentName myappWidget = new ComponentName(this.getPackageName(), CommentistWidgetProvider.class.getName());
+
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(myappWidget);
+        for (int appWidgetId : appWidgetIds) {
+            RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.appwidget_layout);
+            views.setTextViewText(R.id.widgetEpisodeName, getString(R.string.widget_play_episode));
+            views.setImageViewResource(R.id.widgetLogo, R.mipmap.the_commentist);
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
+    }
+
+    public void PlayEpisode(FeedItem feedItem) {
         ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
@@ -195,68 +215,8 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
                     showLogo = R.drawable.unwind;
             }
             playerShowLogo.setImageResource(showLogo);
-        } else{
+        } else {
             Toast.makeText(getApplicationContext(), getResources().getText(R.string.no_internet), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    //From EpisodePage
-    @Override
-    public void onEpisodeSelected(FeedItem feedItem) {
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        if (networkInfo != null && networkInfo.isConnected()) {
-            final FeedItem selectedItem = feedItem;
-            playerEpisodeName.setText(feedItem.getTitle());
-            playerEpisodeName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //replace fragment
-                    EpisodePage episodeFragment = new EpisodePage();
-                    Bundle args = new Bundle();
-                    args.putParcelable("episode", selectedItem);
-                    episodeFragment.setArguments(args);
-
-                    selectedEpisode = selectedItem;
-
-                    android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-                    transaction.replace(R.id.fragment_container, episodeFragment);
-                    transaction.addToBackStack(null);
-
-                    transaction.commit();
-                }
-            });
-            playerService = PlayerService.get();
-            playerService.LoadUrl(selectedItem, MainActivity.this);
-
-            if (playPauseButton.getVisibility() == GONE) {
-                playPauseButton.setVisibility(View.VISIBLE);
-            }
-            if (bottomSheetBehavior.getPeekHeight() == 0) {
-                bottomSheetBehavior.setPeekHeight(350);
-                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        } else{
-            Toast.makeText(getApplicationContext(), getResources().getText(R.string.no_internet), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    //when app is closed, set the widget back to default view
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-        ComponentName myappWidget = new ComponentName(this.getPackageName(), CommentistWidgetProvider.class.getName());
-
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(myappWidget);
-        for (int appWidgetId : appWidgetIds) {
-            RemoteViews views = new RemoteViews(this.getPackageName(), R.layout.appwidget_layout);
-            views.setTextViewText(R.id.widgetEpisodeName, getString(R.string.widget_play_episode));
-            views.setImageViewResource(R.id.widgetLogo, R.mipmap.the_commentist);
-            appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
 }

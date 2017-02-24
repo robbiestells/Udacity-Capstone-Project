@@ -12,11 +12,13 @@ import android.widget.TextView;
 
 import com.prime.perspective.commentist.Data.FeedContract;
 import com.prime.perspective.commentist.Data.FeedContract.FeedEntry;
+import com.prime.perspective.commentist.MainActivity;
 import com.prime.perspective.commentist.Objects.FeedItem;
 import com.prime.perspective.commentist.R;
 
 import java.util.ArrayList;
 
+import static android.R.attr.description;
 import static com.prime.perspective.commentist.R.drawable.play;
 
 /**
@@ -24,26 +26,6 @@ import static com.prime.perspective.commentist.R.drawable.play;
  */
 
 public class FeedAdapter extends CursorAdapter {
-
-//    ArrayList<FeedItem> feedItems;
-//    Context context;
-//    AdapterCallback callback;
-//    EpisodeCallback episodeCallback;
-//    //create interface to pass selected episode
-//    public interface AdapterCallback{
-//        void onItemClicked(FeedItem item);
-//    }
-//
-//    public interface EpisodeCallback{
-//        void onEpisodePlay(FeedItem feedItem);
-//    }
-//
-//    public FeedAdapter(Context context, ArrayList<FeedItem> feedItems, RecyclerAdapter.AdapterCallback callback, RecyclerAdapter.EpisodeCallback episodeCallback){
-//        this.feedItems=feedItems;
-//        this.context=context;
-//        this.callback = callback;
-//        this.episodeCallback = episodeCallback;
-//    }
 
     public FeedAdapter(Context context, Cursor c) {
         super(context, c, 0);
@@ -67,11 +49,20 @@ public class FeedAdapter extends CursorAdapter {
         int id_title = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_TITLE);
         int id_date = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_DATE);
         int id_length = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_LENGTH);
+        int id_show = cursor.getColumnIndex(FeedEntry.COLUMN_SHOW_NAME);
+        int id_link = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_LINK);
+        int id_audio = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_AUDIO);
+        int id_description = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_DESCRIPTION);
 
         //get values
-        String name = cursor.getString(id_title);
-        String date = cursor.getString(id_date);
-        String length = cursor.getString(id_length);
+        final String name = cursor.getString(id_title);
+        final String date = cursor.getString(id_date);
+        final String length = cursor.getString(id_length);
+        final String show = cursor.getString(id_show);
+        final String link = cursor.getString(id_link);
+        final String description = cursor.getString(id_description);
+        final String audio = cursor.getString(id_audio);
+
 
         //set views
         Title.setText(name);
@@ -81,7 +72,17 @@ public class FeedAdapter extends CursorAdapter {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                MainActivity mainActivity = MainActivity.getInstance();
+                FeedItem feedItem = new FeedItem(show, name, description, link, date, audio, length );
+                mainActivity.OnEpisodeSelected(feedItem);
+            }
+        });
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               MainActivity mainActivity = MainActivity.getInstance();
+                FeedItem feedItem = new FeedItem(show, name, description, link, date, audio, length );
+                mainActivity.PlayEpisode(feedItem);
             }
         });
     }
