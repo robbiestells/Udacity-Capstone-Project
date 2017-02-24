@@ -303,7 +303,7 @@ public class PlayerService extends Service {
         return buf.toString();
     }
 
-    //
+    //when episode is finished, seek to the start and pause the player
     private void episodeEnding() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
