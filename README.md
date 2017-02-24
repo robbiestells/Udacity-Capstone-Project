@@ -6,8 +6,7 @@ This project was created as the Capstone Project for the Udacity Android Develop
 
 ## Known Bugs
 
-* Widget doesn't update with playing episode information
-* Notification controls aren't implemented
+* None at the moment
 
 ## Submitting an Issue
 
