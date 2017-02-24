@@ -48,12 +48,12 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:layout_marginRight="60dp"
                     android:layout_marginEnd="60dp"
+                    android:layout_marginRight="60dp"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/seek_back"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/rotate_left"
-                    android:contentDescription="@string/seek_back"/>
+                    android:src="@drawable/rotate_left" />
 
                 <ImageButton
                     android:id="@+id/seekForwardButton"
@@ -62,9 +62,9 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="60dp"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/seek_forward"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/rotate_right"
-                    android:contentDescription="@string/seek_forward"/>
+                    android:src="@drawable/rotate_right" />
 
             </LinearLayout>
 
@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black" />
 
                     <SeekBar
                         android:id="@+id/seekBar"
@@ -103,13 +103,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginRight="16dp"
                         android:layout_marginEnd="16dp"
+                        android:layout_marginRight="16dp"
                         android:layout_weight="1"
-                        android:textColor="@android:color/black"/>
+                        android:textColor="@android:color/black" />
 
                 </LinearLayout>
-
 
                 <TextView
                     android:id="@+id/playerEpisodeName"
@@ -119,22 +118,22 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:gravity="center_horizontal"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
 
                 <TextView
                     android:id="@+id/playerEpisodeDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="@android:color/black" />
 
                 <ImageView
                     android:id="@+id/playerShowLogo"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
+                    android:contentDescription="@string/show_logo"
                     android:maxWidth="350dp"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/show_logo"/>
+                    android:scaleType="centerCrop" />
             </LinearLayout>
 
         </LinearLayout>
@@ -144,9 +143,9 @@
         android:id="@+id/playpause"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:contentDescription="@string/play_button"
         android:src="@drawable/play"
         app:layout_anchor="@id/bottom_sheet"
-        app:layout_anchorGravity="top|center_horizontal"
-        android:contentDescription="@string/play_button"/>
+        app:layout_anchorGravity="top|center_horizontal" />
 
 </android.support.design.widget.CoordinatorLayout>

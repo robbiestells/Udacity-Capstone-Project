@@ -23,7 +23,6 @@
                 android:contentDescription="@string/show_logo"
                 android:scaleType="centerCrop"
                 android:src="@drawable/rth" />
-
         </LinearLayout>
 
         <View

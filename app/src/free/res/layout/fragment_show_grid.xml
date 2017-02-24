@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="16dp"
+        android:contentDescription="@string/ad"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"
-        android:contentDescription="@string/ad"/>
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
     <GridView
         android:id="@+id/showGrid"

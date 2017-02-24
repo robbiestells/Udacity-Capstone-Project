@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@android:color/white"
-        android:elevation="6dp"
-        android:contentDescription="@string/commentist_logo">
+        android:contentDescription="@string/commentist_logo"
+        android:elevation="6dp">
 
         <ImageView
             android:layout_width="match_parent"
@@ -24,8 +24,8 @@
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:numColumns="2"
+        android:paddingBottom="200dp"
         android:verticalSpacing="16dp"
-        tools:context="layout.ShowGrid"
-        android:paddingBottom="200dp"/>
+        tools:context="layout.ShowGrid" />
 
 </LinearLayout>
