@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.prime.perspective.commentist.R;
 
@@ -84,7 +87,6 @@ public class PlayerService extends Service {
     }
 
     public void LoadUrl(FeedItem feedItem, Activity activity) {
-        //TODO check for internet connection
 
         AudioManager am = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
         AudioManager.OnAudioFocusChangeListener afChangeListener = new AudioManager.OnAudioFocusChangeListener() {
@@ -103,16 +105,13 @@ public class PlayerService extends Service {
                     }
                 } else if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
                     // Lower the volume, keep playing
-                   if (mediaPlayer.isPlaying()){
-                       mediaPlayer.setVolume(0.2f, 0.2f);
-                   }
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.setVolume(0.2f, 0.2f);
+                    }
                 } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                     // Your app has been granted audio focus again
                     // Raise volume to normal, restart playback if necessary
-                    if (!mediaPlayer.isPlaying()) {
-                        Pause();
-                        mediaPlayer.setVolume(1.0f, 1.0f);
-                    }
+                    mediaPlayer.setVolume(1.0f, 1.0f);
                 }
             }
         };
@@ -304,7 +303,7 @@ public class PlayerService extends Service {
         return buf.toString();
     }
 
-    //on episode ending, seek to beginning and pause
+    //
     private void episodeEnding() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();

@@ -2,7 +2,10 @@ package com.prime.perspective.commentist;
 
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -69,10 +73,16 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         shows.add(new Show(getString(R.string.UnwindName), getString(R.string.UnwindDes), R.drawable.unwind, getString(R.string.UnwindLink)));
         shows.add(new Show(getString(R.string.SkyName), getString(R.string.SkyDes), R.drawable.sky, getString(R.string.SkyLink)));
 
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
         //get feed
         Rss rss = new Rss(this);
         rss.execute(shows);
-
+        } else {
+            Toast.makeText(getApplicationContext(), getResources().getText(R.string.no_rss), Toast.LENGTH_LONG).show();
+        }
         //assign views
         playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
         playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
@@ -135,88 +145,101 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     //when episode is selected, load fragment with selected episode information
     @Override
     public void OnEpisodePlay(FeedItem feedItem) {
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        final FeedItem selectedItem = feedItem;
-        playerEpisodeName.setText(feedItem.getTitle());
-        playerEpisodeName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //replace fragment
-                EpisodePage episodeFragment = new EpisodePage();
-                Bundle args = new Bundle();
-                args.putParcelable("episode", selectedItem);
-                episodeFragment.setArguments(args);
+        if (networkInfo != null && networkInfo.isConnected()) {
+            final FeedItem selectedItem = feedItem;
+            playerEpisodeName.setText(feedItem.getTitle());
+            playerEpisodeName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //replace fragment
+                    EpisodePage episodeFragment = new EpisodePage();
+                    Bundle args = new Bundle();
+                    args.putParcelable("episode", selectedItem);
+                    episodeFragment.setArguments(args);
 
-                selectedEpisode = selectedItem;
+                    selectedEpisode = selectedItem;
 
-                android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-                transaction.replace(R.id.fragment_container, episodeFragment);
-                transaction.addToBackStack(null);
+                    transaction.replace(R.id.fragment_container, episodeFragment);
+                    transaction.addToBackStack(null);
 
-                transaction.commit();
+                    transaction.commit();
+                }
+            });
+            playerService = PlayerService.get();
+            playerService.LoadUrl(selectedItem, MainActivity.this);
+
+            playPauseButton.setVisibility(View.VISIBLE);
+            bottomSheetBehavior.setPeekHeight(350);
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+
+            int showLogo;
+            switch (selectedItem.getShow()) {
+                case "The Bearded Vegans":
+                    showLogo = R.drawable.vegans;
+                    break;
+                case "Roll to Hit (5th Ed. Dungeons and Dragons)":
+                    showLogo = R.drawable.rth;
+                    break;
+                case "The Unwind (Tech, Games, Gadgets, and Geek Culture)":
+                    showLogo = R.drawable.unwind;
+                    break;
+                case "Sky on Fire: A Star Wars RPG":
+                    showLogo = R.drawable.sky;
+                    break;
+                default:
+                    showLogo = R.drawable.unwind;
             }
-        });
-        playerService = PlayerService.get();
-        playerService.LoadUrl(selectedItem, MainActivity.this);
-
-        playPauseButton.setVisibility(View.VISIBLE);
-        bottomSheetBehavior.setPeekHeight(350);
-        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-
-        int showLogo;
-        switch (selectedItem.getShow()){
-            case "The Bearded Vegans":
-                showLogo = R.drawable.vegans;
-                break;
-            case "Roll to Hit (5th Ed. Dungeons and Dragons)":
-                showLogo = R.drawable.rth;
-                break;
-            case "The Unwind (Tech, Games, Gadgets, and Geek Culture)":
-                showLogo = R.drawable.unwind;
-                break;
-            case "Sky on Fire: A Star Wars RPG":
-                showLogo = R.drawable.sky;
-                break;
-            default:
-                showLogo = R.drawable.unwind;
+            playerShowLogo.setImageResource(showLogo);
+        } else{
+            Toast.makeText(getApplicationContext(), getResources().getText(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
-        playerShowLogo.setImageResource(showLogo);
     }
 
     //From EpisodePage
     @Override
     public void onEpisodeSelected(FeedItem feedItem) {
-        final FeedItem selectedItem = feedItem;
-        playerEpisodeName.setText(feedItem.getTitle());
-        playerEpisodeName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //replace fragment
-                EpisodePage episodeFragment = new EpisodePage();
-                Bundle args = new Bundle();
-                args.putParcelable("episode", selectedItem);
-                episodeFragment.setArguments(args);
+        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-                selectedEpisode = selectedItem;
+        if (networkInfo != null && networkInfo.isConnected()) {
+            final FeedItem selectedItem = feedItem;
+            playerEpisodeName.setText(feedItem.getTitle());
+            playerEpisodeName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //replace fragment
+                    EpisodePage episodeFragment = new EpisodePage();
+                    Bundle args = new Bundle();
+                    args.putParcelable("episode", selectedItem);
+                    episodeFragment.setArguments(args);
 
-                android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    selectedEpisode = selectedItem;
 
-                transaction.replace(R.id.fragment_container, episodeFragment);
-                transaction.addToBackStack(null);
+                    android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-                transaction.commit();
+                    transaction.replace(R.id.fragment_container, episodeFragment);
+                    transaction.addToBackStack(null);
+
+                    transaction.commit();
+                }
+            });
+            playerService = PlayerService.get();
+            playerService.LoadUrl(selectedItem, MainActivity.this);
+
+            if (playPauseButton.getVisibility() == GONE) {
+                playPauseButton.setVisibility(View.VISIBLE);
             }
-        });
-        playerService = PlayerService.get();
-        playerService.LoadUrl(selectedItem, MainActivity.this);
-
-        if (playPauseButton.getVisibility() == GONE) {
-            playPauseButton.setVisibility(View.VISIBLE);
-        }
-        if (bottomSheetBehavior.getPeekHeight() == 0) {
-            bottomSheetBehavior.setPeekHeight(350);
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            if (bottomSheetBehavior.getPeekHeight() == 0) {
+                bottomSheetBehavior.setPeekHeight(350);
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            }
+        } else{
+            Toast.makeText(getApplicationContext(), getResources().getText(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
     }
 

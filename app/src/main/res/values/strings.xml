@@ -40,4 +40,6 @@
     <string name="commentist_logo">commentist logo</string>
     <string name="ad">banner ad</string>
     <string name="host_image">host image</string>
+    <string name="no_internet">No internet connection. Please connect and try again.</string>
+    <string name="no_rss">No internet connection. Please connect and relaunch app to get new feed items.</string>
 </resources>
