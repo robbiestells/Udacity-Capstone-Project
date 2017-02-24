@@ -45,4 +45,6 @@
     <string name="host_image">host image</string>
     <string name="no_internet">No internet connection. Please connect and try again.</string>
     <string name="no_rss">No internet connection. Please connect and relaunch app to get new feed items.</string>
+    <string name="widget_play_episode">Play an episode to display here</string>
+    <string name="get_episodes">Looking for new episodes...</string>
 </resources>

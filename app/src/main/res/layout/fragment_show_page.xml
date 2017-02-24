@@ -30,14 +30,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textSize="20sp" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/showListView"
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:focusable="true"
-            android:numColumns="1" />
+            android:layout_height="500dp"
+            android:id="@+id/showListView"/>
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/showListView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_margin="16dp"-->
+            <!--android:focusable="true"-->
+            <!--android:numColumns="1" />-->
 
     </LinearLayout>
 </ScrollView>

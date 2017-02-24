@@ -32,7 +32,6 @@ public class FeedDbHelper extends SQLiteOpenHelper {
                 FeedEntry.COLUMN_EPIOSDE_LENGTH + " TEXT, " +
                 FeedEntry.COLUMN_EPIOSDE_AUDIO + " TEXT);";
 
-
         sqLiteDatabase.execSQL(SQL_CREATE_FEED_TABLE);
     }
 

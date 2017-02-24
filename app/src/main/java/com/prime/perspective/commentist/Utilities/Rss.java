@@ -29,6 +29,7 @@ import com.prime.perspective.commentist.Data.FeedContract;
 import com.prime.perspective.commentist.Data.FeedDbHelper;
 import com.prime.perspective.commentist.Objects.FeedItem;
 import com.prime.perspective.commentist.Objects.Show;
+import com.prime.perspective.commentist.R;
 
 
 /**
@@ -57,7 +58,7 @@ public class Rss extends AsyncTask<ArrayList<Show>, Void, Void> {
         //Set the progress dialog to display spinner
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         //Set the dialog title to 'Looking...'
-        progressDialog.setTitle("Looking for new episodes...");
+        progressDialog.setTitle(R.string.get_episodes);
         //This dialog can't be canceled by pressing the back key
         progressDialog.setCancelable(false);
         progressDialog.show();
