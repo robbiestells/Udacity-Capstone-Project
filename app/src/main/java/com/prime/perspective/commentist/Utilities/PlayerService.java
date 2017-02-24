@@ -35,6 +35,7 @@ public class PlayerService extends Service {
 
     private static PlayerService sInstance;
 
+    //allow outside calls to get the instance of PlayerService
     public static PlayerService get() {
         return sInstance;
     }
@@ -53,6 +54,7 @@ public class PlayerService extends Service {
     public static final String ACTION_PAUSE = "com.prime.perspective.commentist.ACTION_PAUSE";
     Activity mainActivity;
 
+    //set action when episode finishes
     MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
@@ -60,6 +62,7 @@ public class PlayerService extends Service {
         }
     };
 
+    //capture instance when created
     public void onCreate() {
         super.onCreate();
         sInstance = this;
@@ -73,14 +76,16 @@ public class PlayerService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        //check if it's the first time initiated, if not, run Pause()
         if (startId != 1) {
             Pause();
         }
         return super.onStartCommand(intent, flags, startId);
     }
 
-    //public void LoadUrl(String url, final SeekBar seekBar, Activity activity) {
     public void LoadUrl(FeedItem feedItem, Activity activity) {
+        //TODO check for internet connection
+
         AudioManager am = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
         AudioManager.OnAudioFocusChangeListener afChangeListener = new AudioManager.OnAudioFocusChangeListener() {
             @Override
@@ -113,19 +118,18 @@ public class PlayerService extends Service {
         };
 
         int result = am.requestAudioFocus(afChangeListener,
-                // Use the music stream.
+                // Use the stream.
                 AudioManager.STREAM_MUSIC,
                 // Request permanent focus.
                 AudioManager.AUDIOFOCUS_GAIN);
 
         if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-
+            //if audiofocus is granted, release any existing mediaplayer and start a new one
             if (mediaPlayer != null) {
                 mediaPlayer.stop();
                 mediaPlayer.release();
             }
             mediaPlayer = new MediaPlayer();
-
 
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             try {
@@ -176,6 +180,7 @@ public class PlayerService extends Service {
                 }
             });
 
+            //look for changes to seekbar progress
             mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -200,6 +205,7 @@ public class PlayerService extends Service {
                 }
             });
 
+            //set up play, seek forward and seek backward button
             playpauseButton = (FloatingActionButton) activity.findViewById(R.id.playpause);
             playpauseButton.setImageResource(R.drawable.pause);
             playpauseButton.setOnClickListener(new View.OnClickListener() {
@@ -230,10 +236,10 @@ public class PlayerService extends Service {
             dataUpdatedIntent.putExtra("showTitle", feedItem.getTitle());
             dataUpdatedIntent.putExtra("show", feedItem.getShow());
             activity.sendBroadcast(dataUpdatedIntent);
-
         }
     }
 
+    //pause if media player is playing, play if mediaplayer is paused
     public void Pause() {
         if (mediaPlayer != null) {
             if (mediaPlayer.isPlaying()) {
@@ -246,6 +252,7 @@ public class PlayerService extends Service {
         }
     }
 
+    //seek forward 30 seconds
     public void SkipForward() {
         if (mediaPlayer != null) {
             //find current position
@@ -259,6 +266,7 @@ public class PlayerService extends Service {
         }
     }
 
+    //seek backwards 10 seconds
     public void SkipBack() {
         if (mediaPlayer != null) {
             //find current position
@@ -272,6 +280,7 @@ public class PlayerService extends Service {
         }
     }
 
+    //calculate time from millis
     private String getTimeString(long millis) {
         StringBuffer buf = new StringBuffer();
 
@@ -295,6 +304,7 @@ public class PlayerService extends Service {
         return buf.toString();
     }
 
+    //on episode ending, seek to beginning and pause
     private void episodeEnding() {
         if (mediaPlayer != null) {
             mediaPlayer.pause();

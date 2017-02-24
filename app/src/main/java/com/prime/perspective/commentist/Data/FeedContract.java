@@ -12,7 +12,7 @@ public class FeedContract {
 
     private FeedContract(){}
 
-    public static final String CONTENT_AUTHORITY = "com.example.studio111.commentist_logo";
+    public static final String CONTENT_AUTHORITY = "com.prime.perspective.commentist";
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
@@ -41,7 +41,5 @@ public class FeedContract {
         public static final String COLUMN_EPISODE_DATE = "episode_date";
         public static final String COLUMN_EPIOSDE_AUDIO = "episode_audio";
         public static final String COLUMN_EPIOSDE_LENGTH = "episode_length";
-
     }
-
 }

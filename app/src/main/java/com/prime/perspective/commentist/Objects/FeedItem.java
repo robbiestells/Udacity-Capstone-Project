@@ -85,9 +85,9 @@ public class FeedItem implements Parcelable {
         out.writeString(audioUrl);
         out.writeString(length);
     }
-    public FeedItem(){
-//
-    }
+
+    public FeedItem(){}
+
     public FeedItem(String show, String title, String description, String link, String pubDate, String audioUrl, String length){
         this.show = show;
         this.title = title;
@@ -97,6 +97,7 @@ public class FeedItem implements Parcelable {
         this.audioUrl = audioUrl;
         this.length = length;
     }
+
     private FeedItem(Parcel in){
         show = in.readString();
         title = in.readString();

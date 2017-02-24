@@ -51,7 +51,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        //YoYo.with(Techniques.FadeIn).playOn(holder.cardView);
+        //set feed item data
         final FeedItem current=feedItems.get(position);
         holder.Title.setText(current.getTitle());
         holder.Date.setText(current.getPubDate());
@@ -81,6 +81,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
             itemView.setOnClickListener(this);
 
+            //get views
             Title= (TextView) itemView.findViewById(R.id.episodeName);
             Length = (TextView) itemView.findViewById(R.id.episodeLength);
             Date= (TextView) itemView.findViewById(R.id.episodeDate);

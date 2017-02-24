@@ -51,12 +51,7 @@ public class EpisodePage extends Fragment {
         Bundle bundle = this.getArguments();
         selectedEpisode = bundle.getParcelable("episode");
 
-//        ImageView imageView = (ImageView) myFragmentView.findViewById(R.id.logo);
-//       // imageView.setTransitionName("test");
-//         imageView.setImageResource(selectedShow.getImage());
-
         //set description
-
         TextView showDescription = (TextView) myFragmentView.findViewById(R.id.episodeDescription);
         showDescription.setText(selectedEpisode.getDescription());
 
@@ -82,8 +77,6 @@ public class EpisodePage extends Fragment {
 
         return myFragmentView;
     }
-
-
 
     @Override
     public void onSaveInstanceState(Bundle outState) {

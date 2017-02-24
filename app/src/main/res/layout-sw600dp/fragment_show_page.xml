@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--xmlns:tools="http://schemas.android.com/tools"--><!--xmlns:spp="http://schemas.android.com/apk/res-auto"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--tools:context="com.example.studio111.commentist.MainActivity">-->
+<?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,50 +14,52 @@
             android:layout_height="wrap_content"
             android:elevation="4dp"
             android:orientation="vertical">
+
             <com.fmsirvent.ParallaxEverywhere.PEWImageView
+                android:id="@+id/logo"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:layout_gravity="center"
+                android:contentDescription="@string/show_logo"
                 android:scaleType="centerCrop"
-                android:src="@drawable/rth"
-                android:id="@+id/logo"
-                />
+                android:src="@drawable/rth" />
 
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cardview_dark_background"/>
+            android:background="@color/cardview_dark_background" />
 
     </LinearLayout>
-        <android.support.v7.widget.CardView
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="400dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="400dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginRight="60dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/showDescription"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/showDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:textSize="20sp" />
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:textSize="20sp" />
 
             <GridView
                 android:id="@+id/hostGrid"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_gravity="center"
+                android:layout_margin="16dp"
                 android:columnWidth="100dp"
-                android:numColumns="auto_fit"
-                android:layout_margin="16dp"/>
+                android:numColumns="auto_fit" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/showListView"
@@ -68,8 +69,6 @@
                 android:focusable="true"
                 android:numColumns="1" />
 
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </android.support.design.widget.CoordinatorLayout>

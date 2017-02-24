@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@android:color/white"
-        android:elevation="6dp">
+        android:elevation="6dp"
+        android:contentDescription="@string/commentist_logo">
 
         <ImageView
             android:layout_width="match_parent"

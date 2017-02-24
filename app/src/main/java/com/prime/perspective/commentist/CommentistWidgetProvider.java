@@ -36,6 +36,7 @@ public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvide
             String showTitle = extras.getString("showTitle");
             String show = extras.getString("show");
             int showLogo;
+            //find show and get logo
             switch (show) {
                 case "The Bearded Vegans":
                     showLogo = R.drawable.vegans;
@@ -56,6 +57,7 @@ public class CommentistWidgetProvider extends android.appwidget.AppWidgetProvide
             ComponentName myappWidget = new ComponentName(context.getPackageName(), CommentistWidgetProvider.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(myappWidget);
 
+            //update widgets with show logo and title
             for (int appWidgetId : appWidgetIds) {
                 RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget_layout);
                 views.setTextViewText(R.id.widgetEpisodeName, showTitle);

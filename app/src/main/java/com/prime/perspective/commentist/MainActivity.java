@@ -28,13 +28,8 @@ import layout.ShowPage;
 
 import static android.view.View.GONE;
 
-//tutorial https://www.youtube.com/watch?v=YuKtpnHT3j8&list=PLOvzGCa-rsH-9QjlFBVHfBNUzPGHGzj-5&index=5
-//xml feed http://thecommentist.com/feed/rolltohitshow/
 
 public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSelectedListener, ShowPage.OnEpisodeSelectedListener, ShowPage.OnEpisodePlay, EpisodePage.OnEpisodePlayListener {
-
-//    @BindView(R.id.logo)
-//    ImageView logoImage;
 
     Show selectedShow;
     FeedItem selectedEpisode;
@@ -48,14 +43,15 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
 
     View bottomSheet;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //check to see if this has already been started
         if (savedInstanceState != null) {
-            //get PlayerService,  logo image, player fragment
+            //intentionally left blank
         } else {
+            //start PlayerService
             Intent startPlayer = new Intent(this, PlayerService.class);
             startService(startPlayer);
 
@@ -65,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
                     .add(R.id.fragment_container, fragment).commit();
         }
 
+        //get show list
         final ArrayList<Show> shows = new ArrayList<Show>();
 
         shows.add(new Show(getString(R.string.RollName), getString(R.string.RollDes), R.drawable.rth, getString(R.string.RollLink)));
@@ -72,9 +69,11 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         shows.add(new Show(getString(R.string.UnwindName), getString(R.string.UnwindDes), R.drawable.unwind, getString(R.string.UnwindLink)));
         shows.add(new Show(getString(R.string.SkyName), getString(R.string.SkyDes), R.drawable.sky, getString(R.string.SkyLink)));
 
+        //get feed
         Rss rss = new Rss(this);
         rss.execute(shows);
 
+        //assign views
         playPauseButton = (FloatingActionButton) findViewById(R.id.playpause);
         playerEpisodeName = (TextView) findViewById(R.id.playerEpisodeName);
 
@@ -113,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
     }
 
     //when episode is selected, load fragment with selected episode information
+    //From ShowPage
     @Override
     public void OnEpisodeSelected(FeedItem feedItem) {
 
@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         transaction.addToBackStack(null);
 
         transaction.commit();
-
     }
 
     //when episode is selected, load fragment with selected episode information
@@ -185,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         playerShowLogo.setImageResource(showLogo);
     }
 
+    //From EpisodePage
     @Override
     public void onEpisodeSelected(FeedItem feedItem) {
         final FeedItem selectedItem = feedItem;
@@ -220,6 +220,7 @@ public class MainActivity extends AppCompatActivity implements ShowGrid.OnShowSe
         }
     }
 
+    //when app is closed, set the widget back to default view
     @Override
     protected void onDestroy() {
         super.onDestroy();

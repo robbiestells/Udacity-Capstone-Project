@@ -5,54 +5,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
- <com.fmsirvent.ParallaxEverywhere.PEWImageView
-        android:layout_width="match_parent"
-        android:layout_height="370dp"
-        android:layout_gravity="center"
-        android:scaleType="centerCrop"
-        android:src="@drawable/rth"
-     android:id="@+id/logo"
-        />
-    <!--<ImageView-->
-    <!--android:id="@+id/logo"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="370dp"-->
-    <!--android:scaleType="centerCrop"-->
-    <!--android:transitionName="logoImage"-->
-    <!--app:layout_collapseMode="parallax"-->
-    <!--app:layout_collapseParallaxMultiplier="0.7" />-->
 
-    <GridView
-        android:id="@+id/hostGrid"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:numColumns="auto_fit"
-        android:columnWidth="100dp"
-        android:layout_gravity="center"
-        />
-
-    <TextView
-        android:id="@+id/showDescription"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Roll to hit is a weekly show about "
-        android:textSize="20sp" />
+        android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/showListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:focusable="true"
-        android:numColumns="1" />
+        <com.fmsirvent.ParallaxEverywhere.PEWImageView
+            android:id="@+id/logo"
+            android:layout_width="match_parent"
+            android:layout_height="370dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/show_logo"
+            android:scaleType="centerCrop"/>
 
-</LinearLayout>
+        <GridView
+            android:id="@+id/hostGrid"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_gravity="center"
+            android:columnWidth="100dp"
+            android:numColumns="auto_fit" />
+
+        <TextView
+            android:id="@+id/showDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textSize="20sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/showListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:focusable="true"
+            android:numColumns="1" />
+
+    </LinearLayout>
 </ScrollView>

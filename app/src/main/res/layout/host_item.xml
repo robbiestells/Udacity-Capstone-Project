@@ -12,12 +12,11 @@
             android:id="@+id/hostImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/rob"/>
+            android:contentDescription="@string/host_image"/>
         <TextView
             android:id="@+id/hostName"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Rob Steller"
             android:background="@android:color/white"
             android:textColor="@android:color/black"
             android:gravity="center_horizontal"/>

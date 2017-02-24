@@ -11,5 +11,6 @@
         android:layout_gravity="center"
         android:src="@drawable/white_logo"
         android:id="@+id/imageView"
-        android:layout_margin="50dp"/>
+        android:layout_margin="50dp"
+        android:contentDescription="@string/commentist_logo"/>
 </LinearLayout>

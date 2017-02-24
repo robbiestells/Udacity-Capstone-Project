@@ -50,12 +50,13 @@ public class Rss extends AsyncTask<ArrayList<Show>, Void, Void> {
     protected void onPreExecute() {
         super.onPreExecute();
 
-        //start loading dialog
+        //TODO check for internet connection
+
         //display loading screen
         progressDialog = new ProgressDialog(context);
-        //Set the progress dialog to display a horizontal progress bar
+        //Set the progress dialog to display spinner
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        //Set the dialog title to 'Loading...'
+        //Set the dialog title to 'Looking...'
         progressDialog.setTitle("Looking for new episodes...");
         //This dialog can't be canceled by pressing the back key
         progressDialog.setCancelable(false);
@@ -66,7 +67,7 @@ public class Rss extends AsyncTask<ArrayList<Show>, Void, Void> {
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
 
-        //kill loading dialog
+        //dismiss loading dialog
         progressDialog.dismiss();
     }
 
@@ -99,26 +100,41 @@ public class Rss extends AsyncTask<ArrayList<Show>, Void, Void> {
                     NodeList itemchilds = currentChild.getChildNodes();
                     for (int j=0; j<itemchilds.getLength(); j++){
                         Node current = itemchilds.item(j);
+
+                        //set show title
                         item.setShow(showTitle);
                         if (current.getNodeName().equalsIgnoreCase("title")){
+
+                            //set episode title
                             item.setTitle(current.getTextContent());
                         } else if (current.getNodeName().equalsIgnoreCase("itunes:summary")){
+
+                            //set description
                             item.setDescription(current.getTextContent());
                         } else if (current.getNodeName().equalsIgnoreCase("pubDate")){
+
+                            //set date
                             item.setPubDate(current.getTextContent());
                         } else if (current.getNodeName().equalsIgnoreCase("link")){
+
+                            //set url
                             item.setLink(current.getTextContent());
                         } else if (current.getNodeName().equalsIgnoreCase("enclosure")){
+
+                            //set audio link
                             String url = current.getAttributes().item(0).getTextContent();
                             item.setAudioUrl(url);
                         } else if (current.getNodeName().equalsIgnoreCase("itunes:duration")){
-                            //String url = current.getAttributes().item(1).getTextContent();
+
+                            //get length
                             item.setLength(current.getTextContent());
                         }
                     }
+                    //add to list
                     feedItems.add(item);
                 }
             }
+            //save list
             saveFeedItems(feedItems);
         }
     }

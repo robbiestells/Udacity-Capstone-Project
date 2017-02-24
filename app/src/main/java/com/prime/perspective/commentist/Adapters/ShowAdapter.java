@@ -39,9 +39,7 @@ public class ShowAdapter extends ArrayAdapter<Show> {
         Show currentShow = getItem(position);
 
         ImageView showImage = (ImageView) listItemView.findViewById(R.id.showLogo);
-
         showImage.setImageResource(currentShow.getImage());
-        showImage.setTransitionName("test");
 
         return listItemView;
     }

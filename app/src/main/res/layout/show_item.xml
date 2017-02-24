@@ -5,7 +5,7 @@
     android:layout_height="180dp"
     android:layout_marginBottom="16dp"
     android:background="@android:color/white"
-    android:elevation="8dp"
+    android:elevation="4dp"
     android:foreground="?selectableItemBackground"
     android:orientation="vertical">
 
@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:src="@drawable/rth"
-        android:transitionName="logoImage" />
+        android:contentDescription="@string/show_logo" />
 
 </android.support.v7.widget.CardView>

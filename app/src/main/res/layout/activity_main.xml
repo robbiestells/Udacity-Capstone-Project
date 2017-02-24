@@ -40,39 +40,37 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_marginTop="6dp"
-                android:elevation="16dp"
                 android:gravity="center_horizontal">
 
                 <ImageButton
                     android:id="@+id/seekBackButton"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
                     android:layout_marginRight="60dp"
+                    android:layout_marginEnd="60dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/rotate_left" />
+                    android:src="@drawable/rotate_left"
+                    android:contentDescription="@string/seek_back"/>
 
                 <ImageButton
                     android:id="@+id/seekForwardButton"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_alignParentBottom="true"
                     android:layout_gravity="center"
                     android:layout_marginLeft="60dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/rotate_right" />
+                    android:src="@drawable/rotate_right"
+                    android:contentDescription="@string/seek_forward"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_marginTop="6dp"
                 android:background="@android:color/white"
                 android:gravity="bottom"
@@ -83,6 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="2dp"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -91,16 +90,13 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:text="1:04:05"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"/>
 
                     <SeekBar
                         android:id="@+id/seekBar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="5"
-
-                        />
+                        android:layout_weight="5" />
 
                     <TextView
                         android:id="@+id/totalTime"
@@ -108,9 +104,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="16dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_weight="1"
-                        android:text="1:04:05"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"/>
 
                 </LinearLayout>
 
@@ -123,23 +119,22 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:gravity="center_horizontal"
-                    android:text="Text for the episode title will go here"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"/>
 
                 <TextView
                     android:id="@+id/playerEpisodeDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:text="test text to see how this will show up"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"/>
 
                 <ImageView
                     android:id="@+id/playerShowLogo"
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
                     android:maxWidth="350dp"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/show_logo"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -151,6 +146,7 @@
         android:layout_height="80dp"
         android:src="@drawable/play"
         app:layout_anchor="@id/bottom_sheet"
-        app:layout_anchorGravity="top|center_horizontal" />
+        app:layout_anchorGravity="top|center_horizontal"
+        android:contentDescription="@string/play_button"/>
 
 </android.support.design.widget.CoordinatorLayout>

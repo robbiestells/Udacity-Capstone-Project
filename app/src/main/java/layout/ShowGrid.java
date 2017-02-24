@@ -76,7 +76,6 @@ public class ShowGrid extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnShowSelectedListener");
         }
-
     }
 
     @Override

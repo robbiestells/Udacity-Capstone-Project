@@ -51,7 +51,6 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         public void OnEpisodePlay(FeedItem feedItem);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,7 +63,6 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         selectedShow = bundle.getParcelable("show");
 
         imageView = (ImageView) myFragmentView.findViewById(R.id.logo);
-       // imageView.setTransitionName("test");
          imageView.setImageResource(selectedShow.getImage());
 
         TextView showDescription = (TextView) myFragmentView.findViewById(R.id.showDescription);
@@ -108,7 +106,6 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
         //put shows in grid adapter
         HostAdapter adapter = new HostAdapter(this.getActivity(), hosts);
         hostGrid.setAdapter(adapter);
-
 
         recyclerView = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
 
@@ -190,7 +187,6 @@ public class ShowPage extends Fragment implements RecyclerAdapter.AdapterCallbac
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-
         }
     }
 
