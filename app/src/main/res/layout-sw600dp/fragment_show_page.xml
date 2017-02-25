@@ -64,13 +64,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/showListView"/>
-            <!--<android.support.v7.widget.RecyclerView-->
-                <!--android:id="@+id/showListView"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_margin="16dp"-->
-                <!--android:focusable="true"-->
-                <!--android:numColumns="1" />-->
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

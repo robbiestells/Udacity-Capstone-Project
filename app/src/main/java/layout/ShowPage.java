@@ -38,9 +38,6 @@ public class ShowPage extends Fragment implements LoaderManager.LoaderCallbacks<
     View myFragmentView;
     Show selectedShow;
     GridView hostGrid;
-    RecyclerView recyclerView;
-    OnEpisodeSelectedListener episodeCallback;
-    OnEpisodePlay playEpisodeCallback;
     ImageView imageView;
 
     private static final int LOADER = 0;
