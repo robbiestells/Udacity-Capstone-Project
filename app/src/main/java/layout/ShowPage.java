@@ -1,30 +1,28 @@
 package layout;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.prime.perspective.commentist.Adapters.FeedAdapter;
+import com.prime.perspective.commentist.Adapters.RecyclerAdapter;
 import com.prime.perspective.commentist.R;
 
 import java.util.ArrayList;
 
 import com.prime.perspective.commentist.Adapters.HostAdapter;
 import com.prime.perspective.commentist.Data.FeedContract.FeedEntry;
-import com.prime.perspective.commentist.Data.FeedDbHelper;
 import com.prime.perspective.commentist.Objects.FeedItem;
 import com.prime.perspective.commentist.Objects.Host;
 import com.prime.perspective.commentist.Objects.Show;
@@ -39,9 +37,10 @@ public class ShowPage extends Fragment implements LoaderManager.LoaderCallbacks<
     Show selectedShow;
     GridView hostGrid;
     ImageView imageView;
+    ArrayList<FeedItem> items;
+    RecyclerView showList;
 
     private static final int LOADER = 0;
-    FeedAdapter mCursorAdapter;
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -69,23 +68,40 @@ public class ShowPage extends Fragment implements LoaderManager.LoaderCallbacks<
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        mCursorAdapter.swapCursor(data);
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        //create list from Cursor
+        items = new ArrayList<>();
+        int nameColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_TITLE);
+        int linkColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_LINK);
+        int descColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_DESCRIPTION);
+        int dateColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_DATE);
+        int lengthColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_LENGTH);
+        int audioColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_AUDIO);
+        int showColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_SHOW_NAME);
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            FeedItem item = new FeedItem();
+            item.setTitle(cursor.getString(nameColumnIndex));
+            item.setLink(cursor.getString(linkColumnIndex));
+            item.setDescription(cursor.getString(descColumnIndex));
+            item.setPubDate(cursor.getString(dateColumnIndex));
+            item.setLength(cursor.getString(lengthColumnIndex));
+            item.setAudioUrl(cursor.getString(audioColumnIndex));
+            item.setShow(cursor.getString(showColumnIndex));
+            items.add(item);
+            cursor.moveToNext();
+        }
+
+        //send to recycler view
+        RecyclerAdapter feedAdapter = new RecyclerAdapter(getContext(), items);
+        showList.setLayoutManager(new LinearLayoutManager(getContext()));
+        showList.getLayoutManager().isSmoothScrolling();
+        showList.setAdapter(feedAdapter);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        mCursorAdapter.swapCursor(null);
-    }
-
-    // connects fragment to MainPage to pass selected episode
-    public interface OnEpisodeSelectedListener {
-        public void OnEpisodeSelected(FeedItem feedItem);
-    }
-
-    // connects fragment to MainPage to play selected episode
-    public interface OnEpisodePlay {
-        public void OnEpisodePlay(FeedItem feedItem);
     }
 
     @Override
@@ -144,48 +160,11 @@ public class ShowPage extends Fragment implements LoaderManager.LoaderCallbacks<
         HostAdapter adapter = new HostAdapter(this.getActivity(), hosts);
         hostGrid.setAdapter(adapter);
 
-        mCursorAdapter = new FeedAdapter(getContext(), null);
-        ListView showList = (ListView) myFragmentView.findViewById(R.id.showListView);
-        showList.setAdapter(mCursorAdapter);
+        showList = (RecyclerView) myFragmentView.findViewById(R.id.showListView);
+
         getLoaderManager().initLoader(LOADER, null, this);
 
         return myFragmentView;
-    }
-
-    private ArrayList<FeedItem> getSavedFeed(Show selectedShow) {
-        FeedDbHelper mDbHelper = new FeedDbHelper(getContext());
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        ArrayList<FeedItem> feedItems = new ArrayList<>();
-
-        String query = "SELECT * FROM " + FeedEntry.TABLE_NAME + " WHERE " + FeedEntry.COLUMN_SHOW_NAME
-                + " =?";
-
-        Cursor cursor = db.rawQuery(query, new String[]{selectedShow.getName()});
-
-        int nameColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_TITLE);
-        int linkColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_LINK);
-        int descColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_DESCRIPTION);
-        int dateColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPISODE_DATE);
-        int lengthColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_LENGTH);
-        int audioColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_EPIOSDE_AUDIO);
-        int showColumnIndex = cursor.getColumnIndex(FeedEntry.COLUMN_SHOW_NAME);
-
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            FeedItem item = new FeedItem();
-            item.setTitle(cursor.getString(nameColumnIndex));
-            item.setLink(cursor.getString(linkColumnIndex));
-            item.setDescription(cursor.getString(descColumnIndex));
-            item.setPubDate(cursor.getString(dateColumnIndex));
-            item.setLength(cursor.getString(lengthColumnIndex));
-            item.setAudioUrl(cursor.getString(audioColumnIndex));
-            item.setShow(cursor.getString(showColumnIndex));
-            feedItems.add(item);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        db.close();
-        return feedItems;
     }
 
     @Override
